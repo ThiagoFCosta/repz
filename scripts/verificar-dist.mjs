@@ -25,6 +25,9 @@ const PERMITIDAS = [
   /^http:\/\/www\.xfa\.org\/schema\//,
   /^http:\/\/ns\.adobe\.com\/(xdp|xfdf|xmpmeta)\//,
   /^http:\/\/\$\{[a-z]\}$/,
+  // jsPDF: namespace padrão dos metadados XMP do documento (identificador, não requisição).
+  // A URL de CDN do pdfobject sai no build (plugin repz-jspdf-sem-cdn no vite.config.ts).
+  /^http:\/\/jspdf\.default\.namespaceuri\/$/,
 ];
 
 function arquivos(dir) {
