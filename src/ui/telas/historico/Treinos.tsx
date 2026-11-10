@@ -141,9 +141,10 @@ function LinhaSerie({
         <button
           type="button"
           class={`serie-feita numero${s.aquecimento ? ' serie-aquecimento' : ''}`}
-          aria-label={`Editar ${rotulo}`}
           onClick={() => setEditando(true)}
         >
+          {/* o nome acessível inclui o texto visível (WCAG 2.5.3) */}
+          <span class="oculto-visual">Editar {s.aquecimento ? 'aquecimento' : 'série'} </span>
           <span class="serie-n">{n}</span>
           <span>{formatarDecimal(s.kg)} kg</span>
           <span>

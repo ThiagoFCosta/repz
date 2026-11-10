@@ -49,7 +49,7 @@ export function Descanso({ a, etapa }: { a: TreinoAtivo; etapa: Extract<Etapa, {
         <div class="descanso-acoes">
           <Botao
             variante="secundario"
-            aria-label="Menos 15 segundos"
+            aria-label="−15 s: menos 15 segundos"
             onClick={() => void despachar({ tipo: 'AJUSTAR_DESCANSO', segundos: -15 })}
           >
             −15 s
@@ -59,7 +59,7 @@ export function Descanso({ a, etapa }: { a: TreinoAtivo; etapa: Extract<Etapa, {
           </Botao>
           <Botao
             variante="secundario"
-            aria-label="Mais 15 segundos"
+            aria-label="+15 s: mais 15 segundos"
             onClick={() => void despachar({ tipo: 'AJUSTAR_DESCANSO', segundos: 15 })}
           >
             +15 s

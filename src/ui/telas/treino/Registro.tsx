@@ -118,12 +118,9 @@ function LinhaSerie({ s, porTempo, n }: { s: SerieRealizada; porTempo: boolean; 
   if (!editando)
     return (
       <li>
-        <button
-          type="button"
-          class="serie-feita numero"
-          aria-label={`Editar série ${n}`}
-          onClick={() => setEditando(true)}
-        >
+        <button type="button" class="serie-feita numero" onClick={() => setEditando(true)}>
+          {/* o nome acessível inclui o texto visível (WCAG 2.5.3) */}
+          <span class="oculto-visual">Editar série </span>
           <span class="serie-n">{n}</span>
           <span>{formatarDecimal(s.kg)} kg</span>
           <span>

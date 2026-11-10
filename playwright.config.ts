@@ -11,6 +11,16 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORTA}/repz/`,
     trace: 'retain-on-failure',
+    // Boas-vindas de instalação já dispensadas; tests/e2e/instalacao.spec.ts começa sem isso
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: `http://localhost:${PORTA}`,
+          localStorage: [{ name: 'repz.boasVindas', value: 'dispensada' }],
+        },
+      ],
+    },
   },
   projects: [
     {

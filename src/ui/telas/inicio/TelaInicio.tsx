@@ -25,6 +25,12 @@ import {
   treinoEsquecido,
 } from '../../../app/controlador-treino';
 import { exportarBackup } from '../../../app/dados';
+import {
+  boasVindasAberta,
+  instalar,
+  mostrarLembreteInstalacao,
+  promptInstalacao,
+} from '../../../app/instalacao';
 import { navegar } from '../../../app/roteador';
 import { Botao, Cartao, Pilula } from '../../componentes/basicos';
 import { decorrido } from '../treino/formatos';
@@ -180,6 +186,25 @@ function LembreteBackup() {
   );
 }
 
+// Lembrete discreto depois de dispensar as boas-vindas, enquanto o app roda no navegador (BRIEFING 11)
+function LembreteInstalacao() {
+  if (!mostrarLembreteInstalacao.value) return null;
+  return (
+    <aside class="lembrete-instalacao pequeno" aria-label="Lembrete de instalação">
+      <span class="muted">Instale o app para usar offline e proteger seus dados.</span>
+      {promptInstalacao.value ? (
+        <Botao variante="texto" onClick={() => void instalar()}>
+          Instalar
+        </Botao>
+      ) : (
+        <Botao variante="texto" onClick={() => (boasVindasAberta.value = true)}>
+          Como instalar
+        </Botao>
+      )}
+    </aside>
+  );
+}
+
 export function TelaInicio() {
   const plano = planoAtivo.value;
   if (!plano) {
@@ -195,6 +220,7 @@ export function TelaInicio() {
         </Cartao>
         <CartaoCardio />
         <LembreteBackup />
+        <LembreteInstalacao />
       </section>
     );
   }
@@ -228,6 +254,7 @@ export function TelaInicio() {
         </Cartao>
       )}
       <LembreteBackup />
+      <LembreteInstalacao />
     </section>
   );
 }

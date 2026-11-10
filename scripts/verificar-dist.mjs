@@ -58,6 +58,12 @@ for (const f of texto) {
 const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
 const iniciais = [...html.matchAll(/(?:src|href)="([^"]+\.js)"/g)].map((m) => m[1]);
 const base = '/repz/';
+// pdf.js e jsPDF só na importação e na exportação (import() dinâmico), nunca no carregamento inicial
+const sobDemanda = iniciais.filter((u) => /\/(pdf|pdf\.worker|jspdf)[.-]/.test(u));
+if (sobDemanda.length) {
+  console.error(`pdf.js/jsPDF no JS inicial: ${sobDemanda.join(', ')}`);
+  falhou = true;
+}
 let total = 0;
 for (const url of iniciais) {
   const arquivo = path.join(DIST, url.startsWith(base) ? url.slice(base.length) : url);

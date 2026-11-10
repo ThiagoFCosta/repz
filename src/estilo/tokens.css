@@ -17,6 +17,8 @@
   --muted-2: #7d8590;
   --primary: #2ea043;
   --primary-texto: #58d68d;
+  /* fundo de botão com texto branco: #2ea043 dá 3,3:1, abaixo do AA (D28) */
+  --primary-fundo: #238636;
   --info: #58a6ff;
   --ss: #b392f0;
   --warn: #e3b341;

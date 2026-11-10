@@ -11,6 +11,7 @@ import {
   type TreinoAtivo,
 } from '../../../app/controlador-treino';
 import { navegar } from '../../../app/roteador';
+import { atualizacaoDisponivel } from '../../../app/pwa';
 import { Botao } from '../../componentes/basicos';
 import { duracaoTxt, ICONE_CARTAO, seriesTxt } from './formatos';
 
@@ -66,6 +67,12 @@ export function Resumo({ a }: { a: TreinoAtivo }) {
   return (
     <div class="resumo">
       <h1>Treino concluído</h1>
+      {/* A atualização espera o fim do treino (BRIEFING 11): o banner aparece no Início */}
+      {atualizacaoDisponivel.value && (
+        <p class="aviso-atualizacao pequeno" role="status">
+          Atualização disponível. Ela fica no Início depois que você fechar o treino.
+        </p>
+      )}
       <div class="kpis">
         <div class="kpi">
           <span class="kpi-valor numero">{duracaoTxt(fim - Date.parse(a.treino.inicio))}</span>
