@@ -456,3 +456,420 @@ select {
   justify-content: center;
   border-color: var(--primary);
 }
+
+/* ---- Folha inferior ---- */
+.folha-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  background: rgb(0 0 0 / 55%);
+}
+
+.folha {
+  width: 100%;
+  max-height: 85dvh;
+  overflow-y: auto;
+  padding: var(--espaco);
+  padding-bottom: calc(var(--espaco) + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--border-forte);
+  border-radius: var(--raio) var(--raio) 0 0;
+}
+
+.folha-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.folha-topo h2 {
+  margin: 0;
+}
+
+.folha-fechar {
+  width: var(--toque);
+  height: var(--toque);
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  color: var(--muted);
+}
+
+.lista-menu,
+.lista-ir,
+.lista-sessoes,
+.lista-resumo,
+.series-feitas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-menu button,
+.item-ir {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  text-align: left;
+  font-weight: 500;
+}
+
+.lista-menu button:disabled {
+  opacity: 0.45;
+}
+
+.lista-menu .perigo {
+  color: var(--error);
+}
+
+.item-ir[aria-current='true'] {
+  color: var(--primary-texto);
+}
+
+/* ---- Início: sessões ---- */
+.lista-sessoes {
+  display: grid;
+  gap: 12px;
+}
+
+.sessao-opcao {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sessao-opcao[aria-current='true'] {
+  border-color: var(--primary);
+}
+
+.sessao-opcao-nome {
+  font-size: 18px;
+  font-weight: 650;
+}
+
+/* ---- Treino: topo ---- */
+.treino-topo {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: calc(-1 * var(--espaco)) calc(-1 * var(--espaco)) 12px;
+  padding: calc(10px + env(safe-area-inset-top)) var(--espaco) 10px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.treino-topo-linha {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.treino-sessao {
+  flex: 1;
+  font-weight: 650;
+}
+
+.treino-tempo {
+  font-weight: 600;
+}
+
+.barra {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.barra > span {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.25s linear;
+}
+
+/* ---- Registro da série ---- */
+.ex-titulo {
+  margin: 4px 0 10px;
+  font-size: 22px;
+}
+
+.biset {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--ss) 45%, transparent);
+  border-radius: var(--raio-pequeno);
+  background: color-mix(in srgb, var(--ss) 8%, var(--surface));
+}
+
+.biset-membros {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.biset-membros [aria-current='step'] {
+  color: var(--ss);
+  font-weight: 650;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border-forte);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--info);
+  font-weight: 550;
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--info);
+  background: color-mix(in srgb, var(--info) 18%, transparent);
+  color: var(--text);
+}
+
+.meta {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--raio-pequeno);
+  background: var(--surface);
+  font-size: 14px;
+}
+
+.meta dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.meta dd {
+  margin: 2px 0 0;
+}
+
+.sugestao-aumentar dt {
+  color: var(--primary-texto);
+}
+
+.sugestao-reduzir dt {
+  color: var(--down);
+}
+
+.meta .alerta {
+  color: var(--warn);
+}
+
+.series-feitas {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.serie-feita {
+  display: grid;
+  grid-template-columns: 28px 1fr 1fr 1fr 24px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--raio-pequeno);
+  background: var(--surface);
+  color: var(--muted);
+  text-align: left;
+}
+
+.serie-ok {
+  color: var(--primary-texto);
+}
+
+.serie-edicao {
+  padding: 10px;
+  border: 1px solid var(--info);
+  border-radius: var(--raio-pequeno);
+}
+
+.serie-edicao-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.serie-edicao .rotulo {
+  margin-top: 0;
+}
+
+.serie-atual {
+  margin: 14px 0 0;
+}
+
+/* kg e reps lado a lado: o RIR e o Concluir cabem na tela sem rolar */
+.passos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.passo-linha {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 46px;
+  gap: 4px;
+}
+
+.passo-botao {
+  padding: 0;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.passo-grande .rotulo {
+  margin: 10px 0 4px;
+}
+
+.campo-grande {
+  height: 56px;
+  padding: 0 4px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.rir {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.rir-botao {
+  min-height: var(--toque);
+  border: 1px solid var(--border-forte);
+  border-radius: var(--raio-pequeno);
+  background: transparent;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.rir-botao[aria-pressed='true'] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.rodape-linha {
+  display: grid;
+  grid-template-columns: var(--toque) 1fr;
+  gap: 10px;
+}
+
+.botao-mais {
+  padding: 0;
+  font-size: 22px;
+}
+
+/* ---- Descanso ---- */
+/* ações no terço inferior, acima das abas */
+.descanso {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--altura-abas) - 120px - env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+.descanso .rodape-acao {
+  margin-top: auto;
+}
+
+.cronometro {
+  font-size: 84px;
+  font-weight: 750;
+  line-height: 1;
+  margin: 8px 0 16px;
+}
+
+.barra-descanso {
+  margin-bottom: 20px;
+}
+
+.barra-descanso > span {
+  background: var(--info);
+}
+
+.a-seguir {
+  text-align: left;
+}
+
+.a-seguir-nome {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.descanso-acoes {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 10px;
+}
+
+/* ---- Resumo ---- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.kpi {
+  display: grid;
+  gap: 2px;
+  padding: 12px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--raio-pequeno);
+  background: var(--surface);
+  text-align: center;
+}
+
+.kpi-valor {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.kpi-rotulo {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.lista-resumo li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.lista-resumo li:first-child {
+  border-top: 0;
+}

@@ -2,11 +2,11 @@ import { carregado, erroFatal } from '../app/estado';
 import { rota } from '../app/roteador';
 import { Cartao } from './componentes/basicos';
 import { AppShell } from './layout/AppShell';
-import { TelaInicio } from './telas/inicio/TelaInicio';
+import { AbaTreino } from './telas/treino/AbaTreino';
 import { TelaPlano } from './telas/plano/TelaPlano';
 import { TelaHistorico } from './telas/Telas';
 
-const TELAS = { treino: TelaInicio, historico: TelaHistorico, plano: TelaPlano };
+const TELAS = { treino: AbaTreino, historico: TelaHistorico, plano: TelaPlano };
 
 export function App() {
   if (erroFatal.value)
