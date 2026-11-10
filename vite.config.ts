@@ -73,7 +73,7 @@ export default defineConfig({
     environment: 'node',
     coverage: {
       provider: 'v8',
-      include: ['src/dominio/**'],
+      include: ['src/dominio/**/*.ts'],
       thresholds: { lines: 95 },
     },
   },

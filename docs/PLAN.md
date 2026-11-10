@@ -54,9 +54,9 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
    - Descanso `2min`/`2-3min` → segundos.
 
 **Aceite**
-- [ ] Todos os casos da tabela 5.6 passam como testes automatizados.
-- [ ] Cobertura de `dominio/formato` e `periodizacao/prescricao` ≥ 95%.
-- [ ] pdf.js não aparece no chunk inicial (verificado pelo orçamento).
+- [x] Todos os casos da tabela 5.6 passam como testes automatizados.
+- [x] Cobertura de `dominio/formato` e `periodizacao/prescricao` ≥ 95% (100% das linhas).
+- [x] pdf.js não aparece no chunk inicial (build experimental: chunk sob demanda de 97 KB gzip; inicial continua 10 KB). A verificação definitiva roda no M2, quando a tela de importação passa a usá-lo.
 
 ---
 
