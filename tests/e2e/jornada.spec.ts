@@ -129,6 +129,8 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
     await serie(page, '15');
     await pularDescanso(page);
     await serie(page);
+    // o descanso só aparece depois que a série e o estado foram gravados: aí pode recarregar
+    await expect(page.getByRole('timer', { name: 'Descanso restante' })).toBeVisible();
     await page.reload();
     await pularDescanso(page);
     await serie(page);
