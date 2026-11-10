@@ -179,7 +179,7 @@ test('sugestão ↑ no fim e carga pré-preenchida no treino seguinte do exercí
   await expect(page.getByLabel('reps', { exact: true })).toHaveValue('6');
 });
 
-test('botão Cardio do fim do treino conclui o treino e abre o cardio', async ({ page }) => {
+test('botão Cardio do fim do treino conclui o treino e registra o cardio', async ({ page }) => {
   await importarPlano(page);
   await page.goto('./#/treino');
   await page.getByRole('button', { name: 'Iniciar treino' }).click();
@@ -189,7 +189,9 @@ test('botão Cardio do fim do treino conclui o treino e abre o cardio', async ({
   await page.getByRole('button', { name: 'Encerrar treino' }).click();
   await page.getByRole('button', { name: 'Cardio' }).click();
   await titulo(page, 'Cardio');
-  await page.getByRole('button', { name: 'Voltar ao início' }).click();
-  // o treino entrou na rotação
+  await page.getByLabel('Duração (min)').fill('35');
+  await page.getByRole('button', { name: 'Registrar cardio' }).click();
+  // o treino entrou na rotação e o cardio conta na semana
   await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
+  await expect(page.getByText('1 de 2')).toBeVisible();
 });

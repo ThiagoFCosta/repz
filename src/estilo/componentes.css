@@ -947,3 +947,269 @@ select {
 .resumo .rodape-acao .acoes-lado {
   margin: 0;
 }
+
+/* ---- Cardio (9.7) ---- */
+.campos-cardio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 12px;
+}
+
+.esforco {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.esforco .rir-botao {
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.campo[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.comparacao {
+  display: block;
+  font-weight: 600;
+}
+
+.comparacao-dentro {
+  color: var(--primary-texto);
+}
+
+.comparacao-abaixo,
+.comparacao-acima {
+  color: var(--warn);
+}
+
+.cardio-progresso {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+
+.cardio-progresso strong {
+  font-size: 22px;
+}
+
+.ok {
+  color: var(--primary-texto);
+}
+
+.etiqueta-cardio {
+  color: var(--down);
+  background: color-mix(in srgb, var(--down) 14%, transparent);
+}
+
+/* ---- Histórico (9.8) ---- */
+.segmentos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--raio-pequeno);
+  background: var(--surface);
+}
+
+.segmentos a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.segmentos a[aria-current='page'] {
+  background: var(--border-forte);
+  color: var(--text);
+}
+
+.seletor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: var(--toque);
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-forte);
+  border-radius: var(--raio-pequeno);
+  background: var(--surface);
+  text-align: left;
+}
+
+.seletor-nome {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.seletor-acao {
+  color: var(--info);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lista-menu button[aria-current='true'] {
+  color: var(--primary-texto);
+}
+
+.kpis-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.kpi-variacao {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kpi-variacao.sobe {
+  color: var(--primary-texto);
+}
+
+.kpi-variacao.desce {
+  color: var(--down);
+}
+
+.grafico {
+  margin: 0 0 8px;
+  padding: 8px 8px 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--raio-pequeno);
+  background: var(--surface);
+}
+
+.grafico svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grafico-leitura {
+  min-height: 20px;
+  margin: 0 0 4px 4px;
+  font-size: 14px;
+}
+
+.grafico-grade {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.grafico-eixo {
+  fill: var(--muted-2);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.grafico-linha {
+  fill: none;
+  stroke: var(--primary-texto);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.grafico-alvo {
+  cursor: pointer;
+}
+
+.grafico-ponto {
+  fill: var(--primary-texto);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+
+.grafico-ponto-deload {
+  fill: var(--surface);
+  stroke: var(--warn);
+}
+
+.grafico-ponto-sel {
+  stroke: var(--text);
+}
+
+.grafico-faixa-deload {
+  fill: color-mix(in srgb, var(--warn) 14%, transparent);
+}
+
+.grafico-deload-txt {
+  color: var(--warn);
+}
+
+.grafico-legenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 4px 0;
+  color: var(--muted);
+}
+
+.grafico-legenda-deload {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--warn);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--warn) 14%, transparent);
+}
+
+.lista-treinos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-treinos a {
+  display: grid;
+  grid-template-columns: 48px 1fr 16px;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.lista-treinos-data {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lista-treinos-corpo {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.lista-treinos-seta {
+  color: var(--muted);
+  font-size: 20px;
+}
+
+.comparacao-curta.comparacao-dentro {
+  color: var(--primary-texto);
+}
+
+.comparacao-curta.comparacao-abaixo,
+.comparacao-curta.comparacao-acima {
+  color: var(--warn);
+}
+
+.serie-aquecimento {
+  border-style: dashed;
+}
+
+.botao-excluir-serie {
+  margin-top: 8px;
+  color: var(--error);
+}

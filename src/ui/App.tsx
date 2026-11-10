@@ -4,7 +4,7 @@ import { Cartao } from './componentes/basicos';
 import { AppShell } from './layout/AppShell';
 import { AbaTreino } from './telas/treino/AbaTreino';
 import { TelaPlano } from './telas/plano/TelaPlano';
-import { TelaHistorico } from './telas/Telas';
+import { TelaHistorico } from './telas/historico/TelaHistorico';
 
 const TELAS = { treino: AbaTreino, historico: TelaHistorico, plano: TelaPlano };
 

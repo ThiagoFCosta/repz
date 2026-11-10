@@ -1,8 +1,8 @@
-// Início (aba Treino, BRIEFING 9.3): pílula da semana, Próximo treino ou Continuar treino.
+// Início (aba Treino, BRIEFING 9.3): pílula da semana, Próximo treino ou Continuar treino, Cardio.
 
 import { useState } from 'preact/hooks';
 import { NOMES_DIAS } from '../../../dominio/datas';
-import { pilulaSemana, planoAtivo, semanaAtual, treinoAberto } from '../../../app/estado';
+import { pilulaSemana, planoAtivo, progressoCardio, semanaAtual, treinoAberto } from '../../../app/estado';
 import {
   duracaoDaSessao,
   encerrarTreinoAberto,
@@ -112,6 +112,33 @@ function CartaoProximoTreino() {
   );
 }
 
+// "X de Y nesta semana" (semana de segunda a domingo, pela frequência do plano)
+function CartaoCardio() {
+  const p = progressoCardio.value;
+  return (
+    <Cartao titulo="Cardio">
+      <p class="cardio-progresso">
+        {p.meta == null ? (
+          <>
+            <strong class="numero">{p.total}</strong> nesta semana
+            <span class="muted pequeno"> · sem meta semanal no plano</span>
+          </>
+        ) : (
+          <>
+            <strong class="numero">
+              {p.feitos} de {p.meta}
+            </strong>{' '}
+            nesta semana {p.feitos >= p.meta && <span class="ok">✓</span>}
+          </>
+        )}
+      </p>
+      <Botao bloco variante="secundario" onClick={() => navegar('treino/cardio')}>
+        Registrar cardio
+      </Botao>
+    </Cartao>
+  );
+}
+
 export function TelaInicio() {
   const plano = planoAtivo.value;
   if (!plano) {
@@ -125,6 +152,7 @@ export function TelaInicio() {
             Importar plano
           </Botao>
         </Cartao>
+        <CartaoCardio />
       </section>
     );
   }
@@ -144,6 +172,7 @@ export function TelaInicio() {
       {semana?.antesDoInicio && <p class="muted pequeno">O bloco ainda não começou.</p>}
 
       {treinoAberto.value ? <CartaoTreinoAberto /> : <CartaoProximoTreino />}
+      <CartaoCardio />
 
       {semana?.concluido && (
         <Cartao class="cartao-aviso" titulo="Bloco concluído">

@@ -1,15 +1,18 @@
 // Estado global da aplicação (signals) e as ações que o alteram, sempre passando por dados/.
 
 import { computed, signal } from '@preact/signals';
+import { progressoDaSemana } from '../dominio/cardio';
 import { hojeLocal } from '../dominio/datas';
 import { rotuloSemana, semanaDoBloco } from '../dominio/periodizacao/semana';
 import { RepzDb } from '../dados/db';
+import { listarCardio } from '../dados/repos/cardio';
 import { lerConfigs, type MapaConfig } from '../dados/repos/config';
 import { gravarMeta, lerMeta, lerPreferencias } from '../dados/repos/meta';
 import { listarPlanos, planoAtivo as lerPlanoAtivo } from '../dados/repos/planos';
 import { chavesComHistorico, treinoEmAndamento, ultimoConcluido } from '../dados/repos/treinos';
 import {
   PREFERENCIAS_PADRAO,
+  type CardioRealizado,
   type Persistencia,
   type Plano,
   type Preferencias,
@@ -28,11 +31,17 @@ export const chavesHistorico = signal<Map<string, string>>(new Map());
 export const treinoAberto = signal<Treino | null>(null);
 export const persistencia = signal<Persistencia>('indisponivel');
 export const preferencias = signal<Preferencias>(PREFERENCIAS_PADRAO);
+// Cardio registrado, do mais recente ao mais antigo (poucos registros: cabe na memória)
+export const cardios = signal<CardioRealizado[]>([]);
 // sessaoId do último treino concluído do plano ativo (rotação, 6.3)
 export const ultimaSessaoConcluida = signal<string | null>(null);
 
 export const semanaAtual = computed(() =>
   planoAtivo.value ? semanaDoBloco(planoAtivo.value, hoje.value) : null,
+);
+// Cartão Cardio do Início: "X de Y nesta semana" (9.3)
+export const progressoCardio = computed(() =>
+  progressoDaSemana(planoAtivo.value?.cardio ?? [], cardios.value, hoje.value),
 );
 export const pilulaSemana = computed(() =>
   planoAtivo.value && semanaAtual.value ? rotuloSemana(planoAtivo.value, semanaAtual.value) : null,
@@ -48,13 +57,14 @@ export function mostrarAviso(msg: string): void {
 }
 
 export async function recarregar(): Promise<void> {
-  const [p, todos, c, h, t, pref] = await Promise.all([
+  const [p, todos, c, h, t, pref, cs] = await Promise.all([
     lerPlanoAtivo(db),
     listarPlanos(db),
     lerConfigs(db),
     chavesComHistorico(db),
     treinoEmAndamento(db),
     lerPreferencias(db),
+    listarCardio(db),
   ]);
   planoAtivo.value = p;
   planos.value = todos;
@@ -62,6 +72,7 @@ export async function recarregar(): Promise<void> {
   chavesHistorico.value = h;
   treinoAberto.value = t;
   preferencias.value = pref;
+  cardios.value = cs;
   ultimaSessaoConcluida.value = p ? ((await ultimoConcluido(db, p.id))?.sessaoId ?? null) : null;
 }
 

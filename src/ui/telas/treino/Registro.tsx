@@ -29,7 +29,7 @@ function dadosValidos(kg: string, reps: string, rir: number | null): DadosSerie 
   return k == null || r == null ? null : { kg: k, reps: r, rir };
 }
 
-function BotoesRir({
+export function BotoesRir({
   valor,
   aoMudar,
   rotulo,
