@@ -1,0 +1,458 @@
+/* ---- Tipografia e utilitários ---- */
+h2 {
+  font-size: 18px;
+  font-weight: 650;
+  margin: 0 0 8px;
+}
+
+.secao {
+  margin: 24px 0 4px;
+}
+
+.pequeno {
+  font-size: 14px;
+}
+
+.oculto {
+  display: none;
+}
+
+.oculto-visual {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cartao + .cartao,
+.cartao + .acordeao,
+.acordeao + .cartao,
+.acordeao + .acordeao,
+.acoes-lado + .cartao,
+.pilha + .cartao {
+  margin-top: 12px;
+}
+
+.cartao-titulo {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.cartao p:first-of-type {
+  margin-top: 0;
+}
+
+.cartao p:last-child {
+  margin-bottom: 0;
+}
+
+.cartao-erro {
+  border-color: var(--error);
+  background: color-mix(in srgb, var(--error) 10%, var(--surface));
+}
+
+.cartao-aviso {
+  border-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 8%, var(--surface));
+}
+
+.plano-nome {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+/* ---- Cabeçalho ---- */
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cabecalho-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--toque);
+  height: var(--toque);
+  margin-left: -12px;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* ---- Botões ---- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--toque);
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: var(--raio-pequeno);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botao:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.botao-primario {
+  background: var(--primary);
+  color: #fff;
+}
+
+.botao-secundario {
+  background: transparent;
+  border-color: var(--border-forte);
+  color: var(--text);
+}
+
+.botao-texto {
+  background: transparent;
+  color: var(--info);
+  padding: 0 8px;
+}
+
+.botao-perigo {
+  background: transparent;
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.botao-bloco {
+  width: 100%;
+}
+
+.acoes-lado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.pilha {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+/* Ação principal no terço inferior, acima das abas */
+.rodape-acao {
+  position: sticky;
+  bottom: calc(var(--altura-abas) + env(safe-area-inset-bottom) + 8px);
+  margin-top: 20px;
+  padding-top: 8px;
+  background: linear-gradient(to bottom, transparent, var(--bg) 30%);
+}
+
+/* ---- Pílulas e etiquetas ---- */
+.pilula {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-forte);
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.pilula-aviso {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.pilula-ok {
+  border-color: var(--primary);
+  color: var(--primary-texto);
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  vertical-align: 1px;
+}
+
+.etiqueta-ss {
+  color: var(--ss);
+  background: color-mix(in srgb, var(--ss) 15%, transparent);
+}
+
+.etiqueta-variante {
+  color: var(--info);
+  background: color-mix(in srgb, var(--info) 14%, transparent);
+}
+
+.etiqueta-novo {
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
+}
+
+.etiqueta-historico {
+  color: var(--primary-texto);
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+/* ---- Checklist da importação ---- */
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.checklist-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.checklist-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.checklist-ok .checklist-icone {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
+  color: var(--primary-texto);
+}
+
+.checklist-aviso .checklist-icone {
+  background: color-mix(in srgb, var(--warn) 22%, transparent);
+  color: var(--warn);
+}
+
+.checklist-erro .checklist-icone {
+  background: color-mix(in srgb, var(--error) 22%, transparent);
+  color: var(--error);
+}
+
+.checklist-pendente .checklist-icone {
+  color: var(--muted);
+}
+
+.avisos summary {
+  cursor: pointer;
+  color: var(--warn);
+}
+
+.avisos ul,
+.lista-erros {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.lista-erros {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.lista-erros li + li {
+  margin-top: 8px;
+}
+
+.linha-codigo {
+  display: block;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 13px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* ---- Campos ---- */
+.rotulo {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.campo,
+.campo-texto,
+select {
+  width: 100%;
+  min-height: var(--toque);
+  padding: 10px 12px;
+  border: 1px solid var(--border-forte);
+  border-radius: var(--raio-pequeno);
+  background: var(--bg);
+  color: var(--text);
+  color-scheme: dark;
+}
+
+.campo-texto {
+  font-family: ui-monospace, 'Cascadia Mono', Menlo, monospace;
+  font-size: 13px;
+  margin-bottom: 12px;
+  resize: vertical;
+}
+
+.campo-numero {
+  width: 76px;
+  text-align: right;
+  font-size: 17px;
+}
+
+.interruptor {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--primary);
+}
+
+/* ---- Acordeão de sessões ---- */
+.acordeao {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--raio);
+}
+
+.acordeao summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 var(--espaco);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.acordeao summary::-webkit-details-marker {
+  display: none;
+}
+
+.acordeao summary > :first-child {
+  flex: 1;
+}
+
+.acordeao summary::after {
+  content: '▸';
+  color: var(--muted);
+}
+
+.acordeao[open] summary::after {
+  content: '▾';
+}
+
+.lista-ex {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--espaco) 8px;
+}
+
+.lista-ex > li {
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+.ex-revisao-topo {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ex-series {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.ex-variantes {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.vinculo {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.ex-config-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: var(--toque);
+  gap: 12px;
+}
+
+.campo-salto {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lista-simples {
+  margin: 8px 0;
+  padding-left: 18px;
+}
+
+.lista-simples li + li {
+  margin-top: 4px;
+}
+
+/* ---- Semana atual com −/+ ---- */
+.semana-ajuste {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.passo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.passo .botao {
+  width: var(--toque);
+  padding: 0;
+  font-size: 22px;
+}
+
+.passo-valor {
+  min-width: 28px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.arquivo-nome {
+  margin: 0 0 12px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.banner-aviso {
+  justify-content: center;
+  border-color: var(--primary);
+}

@@ -128,13 +128,3 @@ h1 {
   border-radius: var(--raio);
   padding: 12px var(--espaco);
 }
-
-.botao {
-  min-height: var(--toque);
-  padding: 0 20px;
-  border: 0;
-  border-radius: var(--raio-pequeno);
-  background: var(--primary);
-  color: #fff;
-  font-weight: 600;
-}

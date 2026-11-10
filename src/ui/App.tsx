@@ -1,11 +1,22 @@
+import { carregado, erroFatal } from '../app/estado';
 import { rota } from '../app/roteador';
+import { Cartao } from './componentes/basicos';
 import { AppShell } from './layout/AppShell';
-import { TelaHistorico, TelaPlano, TelaTreino } from './telas/Telas';
+import { TelaInicio } from './telas/inicio/TelaInicio';
+import { TelaPlano } from './telas/plano/TelaPlano';
+import { TelaHistorico } from './telas/Telas';
 
-const TELAS = { treino: TelaTreino, historico: TelaHistorico, plano: TelaPlano };
+const TELAS = { treino: TelaInicio, historico: TelaHistorico, plano: TelaPlano };
 
 export function App() {
-  const Tela = TELAS[rota.value];
+  if (erroFatal.value)
+    return (
+      <main class="shell-conteudo">
+        <Cartao class="cartao-erro">{erroFatal.value}</Cartao>
+      </main>
+    );
+  if (!carregado.value) return null;
+  const Tela = TELAS[rota.value.aba];
   return (
     <AppShell>
       <Tela />
