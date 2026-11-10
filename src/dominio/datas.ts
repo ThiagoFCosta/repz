@@ -54,3 +54,8 @@ export function dataBR(d: ISODate, curta = false): string {
 }
 
 export const NOMES_DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'] as const;
+
+// Segunda-feira da semana de `d` (semana de segunda a domingo: cardio 9.3 e gráfico 9.8)
+export function inicioDaSemana(d: ISODate): ISODate {
+  return somarDias(d, -((diaDaSemana(d) + 6) % 7));
+}
