@@ -2,7 +2,7 @@
   "name": "carga-treino",
   "private": true,
   "version": "0.0.0",
-  "description": "Carga · diário de treino. PWA offline para registrar treinos e sugerir cargas.",
+  "description": "REPZ · diário de treino. PWA offline para registrar treinos e sugerir cargas.",
   "type": "module",
   "scripts": {
     "dev": "vite",

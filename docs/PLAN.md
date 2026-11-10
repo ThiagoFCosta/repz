@@ -25,7 +25,7 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 3. Vite + Preact + TypeScript strict; `base` = `/<repo>/`.
 4. ESLint (flat) + Prettier + regra de dependência entre camadas (`dominio/` não importa UI/DB).
 5. Vitest (com cobertura) e Playwright (projeto `mobile-chromium` 390×844).
-6. `vite-plugin-pwa`: manifest (nome "Carga", standalone, portrait, cores do tema, ícones 192/512/maskable/apple-touch), precache, registro manual com prompt.
+6. `vite-plugin-pwa`: manifest (nome "REPZ", standalone, portrait, cores do tema, ícones 192/512/maskable/apple-touch), precache, registro manual com prompt.
 7. Tokens de design (`tokens.css`), Inter woff2 local, `AppShell` com as 3 abas vazias e hash router.
 8. CSP por `<meta>`; teste de privacidade sobre `dist/`; checagem de orçamento de bundle.
 9. GitHub Actions: lint → typecheck → unit → build → privacidade/bundle → E2E → deploy no Pages (só na `main`).

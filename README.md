@@ -1,4 +1,4 @@
-# Carga · diário de treino
+# REPZ · diário de treino
 
 App de celular (PWA) para registrar o treino durante a sessão e receber sugestões de carga.
 Funciona **offline**, sem conta e sem nuvem: os dados ficam só no seu celular.

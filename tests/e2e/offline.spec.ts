@@ -33,7 +33,7 @@ test('manifest instalável', async ({ page }) => {
   expect(href).toBeTruthy();
   const manifest = await (await page.request.get(new URL(href!, page.url()).toString())).json();
   expect(manifest).toMatchObject({
-    short_name: 'Carga',
+    short_name: 'REPZ',
     display: 'standalone',
     orientation: 'portrait',
     lang: 'pt-BR',

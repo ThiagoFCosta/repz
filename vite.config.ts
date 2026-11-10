@@ -22,7 +22,7 @@ const CSP = [
 
 function csp(): Plugin {
   return {
-    name: 'carga-csp',
+    name: 'repz-csp',
     apply: 'build',
     transformIndexHtml: (html) =>
       html.replace('<!--CSP-->', `<meta http-equiv="Content-Security-Policy" content="${CSP}" />`),
@@ -38,8 +38,8 @@ export default defineConfig({
       registerType: 'prompt',
       injectRegister: false,
       manifest: {
-        name: 'Carga · diário de treino',
-        short_name: 'Carga',
+        name: 'REPZ · diário de treino',
+        short_name: 'REPZ',
         description: 'Registre seu treino e receba sugestões de carga. Funciona offline.',
         lang: 'pt-BR',
         start_url: '.',

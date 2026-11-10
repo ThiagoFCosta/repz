@@ -450,7 +450,7 @@ Os scripts da referência viram testes com asserções (não só `console.log`).
 | Pergunta | Resposta | Efeito |
 |---|---|---|
 | Q1 Celulares | Os dois usam **Android** | E2E só em Chromium; pdf.js no build moderno; Wake Lock e vibração disponíveis. A limitação do iOS fica documentada, mas não é prioridade de teste |
-| Q2 Nome e repositório | Escolha minha: app **Carga** (nome curto na tela inicial), descrição "Carga · diário de treino"; repositório **`carga-treino`**. O Thiago tem conta no GitHub | `base` do Vite = `/carga-treino/`; URL `https://<usuario>.github.io/carga-treino/`. O GitHub Pages não exige conta à parte: é ativado nas configurações do repositório (no plano gratuito, o repositório precisa ser público) |
+| Q2 Nome e repositório | App **REPZ** (nome oficial definido pelo Thiago em 09/11), descrição "REPZ · diário de treino"; repositório **`carga-treino`**. O Thiago tem conta no GitHub | `base` do Vite = `/carga-treino/`; URL `https://<usuario>.github.io/carga-treino/`. O GitHub Pages não exige conta à parte: é ativado nas configurações do repositório (no plano gratuito, o repositório precisa ser público) |
 | Q3 Saudação | ainda aberta (não bloqueia até o M3) | — |
 | Q4 Descanso padrão | ainda aberta; uso o máximo da faixa, como recomendado | — |
 | Q5 PDF na v1 | **Sim** | jsPDF sob demanda (D5) |
