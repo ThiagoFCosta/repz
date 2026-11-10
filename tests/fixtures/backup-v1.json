@@ -1,0 +1,1064 @@
+{
+  "app": "app-treino",
+  "versaoSchema": 1,
+  "exportadoEm": "2026-11-10T21:00:00-03:00",
+  "planoAtivoId": "438a2201-ea27-4d88-9f81-bab10b078562",
+  "planos": [
+    {
+      "id": "438a2201-ea27-4d88-9f81-bab10b078562",
+      "nome": "Hipertrofia natural 5x",
+      "autor": "Raul",
+      "dataPlano": "2026-10-30",
+      "importadoEm": "2026-09-01T20:00:00-03:00",
+      "inicioBloco": "2026-09-07",
+      "ajusteSemana": 0,
+      "progressao": {
+        "tipo": "dupla",
+        "rir": {
+          "min": 1,
+          "max": 3
+        },
+        "carga": {
+          "min": 2,
+          "max": 5
+        },
+        "estagnado": 3
+      },
+      "bloco": {
+        "semanas": 12,
+        "fases": [
+          {
+            "de": 1,
+            "ate": 4,
+            "rir": {
+              "min": 2,
+              "max": 3
+            },
+            "rirIso": null,
+            "deload": false,
+            "volume": 1,
+            "series": null
+          },
+          {
+            "de": 5,
+            "ate": 8,
+            "rir": {
+              "min": 1,
+              "max": 2
+            },
+            "rirIso": null,
+            "deload": false,
+            "volume": 1,
+            "series": {
+              "delta": 1,
+              "alvo": "foco"
+            }
+          },
+          {
+            "de": 9,
+            "ate": 11,
+            "rir": {
+              "min": 1,
+              "max": 2
+            },
+            "rirIso": {
+              "min": 0,
+              "max": 1
+            },
+            "deload": false,
+            "volume": 1,
+            "series": null
+          },
+          {
+            "de": 12,
+            "ate": 12,
+            "rir": null,
+            "rirIso": null,
+            "deload": true,
+            "volume": 0.5,
+            "series": null
+          }
+        ]
+      },
+      "sessoes": [
+        {
+          "nome": "Push",
+          "dia": 1,
+          "itens": [
+            {
+              "nome": "Supino inclinado com halteres",
+              "variantes": [
+                "Supino inclinado com halteres"
+              ],
+              "chaves": [
+                "supino inclinado com halteres"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 6,
+                "max": 10
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 180
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "c4f0d807-ce9f-4ec4-aed6-de1bc8e58b0c"
+            },
+            {
+              "nome": "Supino reto",
+              "variantes": [
+                "Supino reto barra",
+                "Supino reto maquina"
+              ],
+              "chaves": [
+                "supino reto barra",
+                "supino reto maquina"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 6,
+                "max": 10
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 180
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "0672692e-4599-4a23-801f-ed370b93b651"
+            },
+            {
+              "nome": "Desenvolvimento com halteres sentado",
+              "variantes": [
+                "Desenvolvimento com halteres sentado"
+              ],
+              "chaves": [
+                "desenvolvimento com halteres sentado"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "d4de41a4-2b5c-4c17-b024-80aa09b5d98f"
+            },
+            {
+              "nome": "Elevacao lateral",
+              "variantes": [
+                "Elevacao lateral"
+              ],
+              "chaves": [
+                "elevacao lateral"
+              ],
+              "series": 4,
+              "reps": {
+                "min": 12,
+                "max": 20
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "6af1794a-c515-458f-b978-678a6bae5f45"
+            },
+            {
+              "nome": "Triceps na corda",
+              "variantes": [
+                "Triceps na corda"
+              ],
+              "chaves": [
+                "triceps na corda"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 10,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "b087294d-c9e8-486e-988b-dd26a224cd1a"
+            },
+            {
+              "nome": "Triceps",
+              "variantes": [
+                "Triceps frances",
+                "Triceps testa"
+              ],
+              "chaves": [
+                "triceps frances",
+                "triceps testa"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 90,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": null,
+              "id": "e9066f59-3763-418a-947b-73b4a633678c"
+            }
+          ],
+          "id": "c5d94980-9bd6-44e3-b57a-6c72d9f4a5e5"
+        },
+        {
+          "nome": "Pull",
+          "dia": 2,
+          "itens": [
+            {
+              "nome": "Barra fixa / Puxada",
+              "variantes": [
+                "Barra fixa",
+                "Puxada"
+              ],
+              "chaves": [
+                "barra fixa",
+                "puxada"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 6,
+                "max": 10
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 180
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "6fd5e69b-6129-4fd7-ae49-fff95d7acb5f"
+            },
+            {
+              "nome": "Remada",
+              "variantes": [
+                "Remada curvada",
+                "Remada cavalinho"
+              ],
+              "chaves": [
+                "remada curvada",
+                "remada cavalinho"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 10
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "27a86351-e9ac-4730-8bf3-b011a6b95518"
+            },
+            {
+              "nome": "Remada",
+              "variantes": [
+                "Remada no cabo",
+                "Remada unilateral"
+              ],
+              "chaves": [
+                "remada no cabo",
+                "remada unilateral"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 10,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 90,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "dbbeccd6-88c7-41d7-99f3-4616236e2261"
+            },
+            {
+              "nome": "Face pull",
+              "variantes": [
+                "Face pull"
+              ],
+              "chaves": [
+                "face pull"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 12,
+                "max": 20
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "4f16690c-ec8a-49f5-a917-fcc463c386b2"
+            },
+            {
+              "nome": "Rosca inclinada",
+              "variantes": [
+                "Rosca inclinada"
+              ],
+              "chaves": [
+                "rosca inclinada"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "9c433c49-ce37-416c-bcad-961fcb08d34c"
+            },
+            {
+              "nome": "Rosca martelo",
+              "variantes": [
+                "Rosca martelo"
+              ],
+              "chaves": [
+                "rosca martelo"
+              ],
+              "series": 2,
+              "reps": {
+                "min": 10,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 60
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": null,
+              "id": "cb343008-387d-442b-814e-7339468846cd"
+            }
+          ],
+          "id": "9884e9c5-65fd-467b-994d-6bb88891a5ff"
+        },
+        {
+          "nome": "Pernas quadriceps",
+          "dia": 3,
+          "itens": [
+            {
+              "nome": "Agachamento",
+              "variantes": [
+                "Agachamento"
+              ],
+              "chaves": [
+                "agachamento"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 5,
+                "max": 8
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 180,
+                "max": 180
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "ac2e3f2b-8206-45d3-ace2-a6d1509e547d"
+            },
+            {
+              "nome": "Stiff",
+              "variantes": [
+                "Stiff"
+              ],
+              "chaves": [
+                "stiff"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 10
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": {
+                "min": 3,
+                "max": 3
+              },
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "2e84a20f-bf2e-4337-ba86-ced4b39c4a27"
+            },
+            {
+              "nome": "Leg press",
+              "variantes": [
+                "Leg press"
+              ],
+              "chaves": [
+                "leg press"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 180
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "1051a242-b0cc-444a-8d61-413f84288e9e"
+            },
+            {
+              "nome": "Cadeira extensora",
+              "variantes": [
+                "Cadeira extensora"
+              ],
+              "chaves": [
+                "cadeira extensora"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 10,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 90,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": null,
+              "id": "53450881-0e97-40de-aaf6-c5d78fde5f69"
+            },
+            {
+              "nome": "Panturrilha",
+              "variantes": [
+                "Panturrilha em pe",
+                "Panturrilha no leg press"
+              ],
+              "chaves": [
+                "panturrilha em pe",
+                "panturrilha no leg press"
+              ],
+              "series": 4,
+              "reps": {
+                "min": 8,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": null,
+              "id": "6d114c08-4077-4239-87eb-ed93721cb779"
+            }
+          ],
+          "id": "d851b9a2-0928-4f2a-b0c7-4706366eb35e"
+        },
+        {
+          "nome": "Upper",
+          "dia": 4,
+          "itens": [
+            {
+              "nome": "Supino",
+              "variantes": [
+                "Supino maquina",
+                "Supino inclinado barra"
+              ],
+              "chaves": [
+                "supino maquina",
+                "supino inclinado barra"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "ffac35b2-9389-455e-b68e-62f5256ff720"
+            },
+            {
+              "nome": "Remada com peito apoiado",
+              "variantes": [
+                "Remada com peito apoiado"
+              ],
+              "chaves": [
+                "remada com peito apoiado"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "f96c5c26-dfcd-45e2-83b9-cec034c612b3"
+            },
+            {
+              "nome": "Puxada pegada neutra",
+              "variantes": [
+                "Puxada pegada neutra"
+              ],
+              "chaves": [
+                "puxada pegada neutra"
+              ],
+              "series": 2,
+              "reps": {
+                "min": 10,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 90,
+                "max": 90
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "cfded164-7999-49a9-8808-1790f995e94a"
+            },
+            {
+              "nome": "Crucifixo / Cross-over",
+              "variantes": [
+                "Crucifixo",
+                "Cross-over"
+              ],
+              "chaves": [
+                "crucifixo",
+                "crossover"
+              ],
+              "series": 2,
+              "reps": {
+                "min": 12,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "dd45bfe7-37eb-4b01-96d3-c7735ed161a3"
+            },
+            {
+              "nome": "Elevacao lateral",
+              "variantes": [
+                "Elevacao lateral"
+              ],
+              "chaves": [
+                "elevacao lateral"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 15,
+                "max": 20
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "92784118-7d9c-456f-8cd9-f6e67a54a380"
+            },
+            {
+              "nome": "Rosca direta",
+              "variantes": [
+                "Rosca direta"
+              ],
+              "chaves": [
+                "rosca direta"
+              ],
+              "series": 2,
+              "reps": {
+                "min": 10,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 2,
+              "id": "69971387-1b8d-4db6-a452-f0da31250daa"
+            },
+            {
+              "nome": "Triceps na corda",
+              "variantes": [
+                "Triceps na corda"
+              ],
+              "chaves": [
+                "triceps na corda"
+              ],
+              "series": 2,
+              "reps": {
+                "min": 10,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 2,
+              "id": "e68bf99e-88b8-4562-8fb6-157f1b167eae"
+            }
+          ],
+          "id": "426a9d55-d34a-4a0e-a75a-a0178683439e"
+        },
+        {
+          "nome": "Lower posterior",
+          "dia": 5,
+          "itens": [
+            {
+              "nome": "Stiff / Levantamento romeno",
+              "variantes": [
+                "Stiff",
+                "Levantamento romeno"
+              ],
+              "chaves": [
+                "stiff",
+                "levantamento romeno"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 6,
+                "max": 10
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 180
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "9dc876c2-99d1-4c39-ae7a-0b3601318de9"
+            },
+            {
+              "nome": "Hack squat / Afundo bulgaro",
+              "variantes": [
+                "Hack squat",
+                "Afundo bulgaro"
+              ],
+              "chaves": [
+                "hack squat",
+                "afundo bulgaro"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "c5e46a1f-d3b4-4b49-a206-3d4d1c40af21"
+            },
+            {
+              "nome": "Mesa flexora",
+              "variantes": [
+                "Mesa flexora"
+              ],
+              "chaves": [
+                "mesa flexora"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 10,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 90,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": null,
+              "id": "0b505e4b-ff9d-4d1d-b09e-4817cda11a75"
+            },
+            {
+              "nome": "Hip thrust",
+              "variantes": [
+                "Hip thrust"
+              ],
+              "chaves": [
+                "hip thrust"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 8,
+                "max": 12
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 120,
+                "max": 120
+              },
+              "rir": null,
+              "iso": false,
+              "foco": false,
+              "grupo": null,
+              "id": "e7b0e914-ebe2-4288-90d1-9ce275fca9c2"
+            },
+            {
+              "nome": "Panturrilha em pe",
+              "variantes": [
+                "Panturrilha em pe"
+              ],
+              "chaves": [
+                "panturrilha em pe"
+              ],
+              "series": 4,
+              "reps": {
+                "min": 10,
+                "max": 20
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "034a6aff-23d3-463d-8d78-09e74a24f014"
+            },
+            {
+              "nome": "Abdominal infra",
+              "variantes": [
+                "Abdominal infra"
+              ],
+              "chaves": [
+                "abdominal infra"
+              ],
+              "series": 3,
+              "reps": {
+                "min": 10,
+                "max": 15
+              },
+              "porTempo": false,
+              "descanso": {
+                "min": 60,
+                "max": 90
+              },
+              "rir": null,
+              "iso": true,
+              "foco": false,
+              "grupo": 1,
+              "id": "8b901801-b554-47ff-b4fa-46b8a36c1e5b"
+            }
+          ],
+          "id": "9e9b78e1-c7cd-4867-ac85-7b802efd3dea"
+        }
+      ],
+      "cardio": [
+        {
+          "tipos": [
+            "Bicicleta",
+            "Remo"
+          ],
+          "frequencia": "2x",
+          "minutos": {
+            "min": 30,
+            "max": 40
+          },
+          "fc": {
+            "min": 115,
+            "max": 135
+          },
+          "intensidade": "z2"
+        },
+        {
+          "tipos": [
+            "Bicicleta"
+          ],
+          "frequencia": "opcional",
+          "minutos": {
+            "min": 10,
+            "max": 15
+          },
+          "fc": null,
+          "intensidade": "leve"
+        }
+      ],
+      "textoOriginal": "#TREINO-INICIO v1\nPLANO: Hipertrofia natural 5x | Raul | 2026-10-30\nPROGRESSAO: dupla | rir 1-3 | carga +2-5% | estagnado 3\n\nBLOCO: 12\nFASE: 1-4 | rir 2-3\nFASE: 5-8 | rir 1-2 | series +1 foco\nFASE: 9-11 | rir 1-2 | rir_iso 0-1\nFASE: 12 | deload | volume 50%\n\nSESSAO: Push | seg\nEX: Supino inclinado com halteres | 3 | 6-10 | 120-180s\nEX: Supino reto [barra / maquina] | 3 | 6-10 | 120-180s\nEX: Desenvolvimento com halteres sentado | 3 | 8-12 | 120s\nSS1: Elevacao lateral | 4 | 12-20 | 60-90s | iso\nSS1: Triceps na corda | 3 | 10-15 | - | iso\nEX: Triceps [frances / testa] | 3 | 8-12 | 90s | iso\n\nSESSAO: Pull | ter\nEX: [Barra fixa / Puxada] | 3 | 6-10 | 120-180s\nEX: Remada [curvada / cavalinho] | 3 | 8-10 | 120s\nEX: Remada [no cabo / unilateral] | 3 | 10-12 | 90-120s\nSS1: Face pull | 3 | 12-20 | 60-90s | iso\nSS1: Rosca inclinada | 3 | 8-12 | - | iso\nEX: Rosca martelo | 2 | 10-12 | 60s | iso\n\nSESSAO: Pernas quadriceps | qua\nEX: Agachamento | 3 | 5-8 | 180s\nEX: Stiff | 3 | 8-10 | 120s | rir 3\nEX: Leg press | 3 | 8-12 | 120-180s\nEX: Cadeira extensora | 3 | 10-15 | 90s | iso\nEX: Panturrilha [em pe / no leg press] | 4 | 8-15 | 60-90s | iso\n\nSESSAO: Upper | qui\n# PDF dizia \"variacao diferente da de segunda\": resolvido aqui\nEX: Supino [maquina / inclinado barra] | 3 | 8-12 | 120s\nEX: Remada com peito apoiado | 3 | 8-12 | 120s\nEX: Puxada pegada neutra | 2 | 10-12 | 90s\nSS1: [Crucifixo / Cross-over] | 2 | 12-15 | 60-90s | iso\nSS1: Elevacao lateral | 3 | 15-20 | - | iso\nSS2: Rosca direta | 2 | 10-15 | 60-90s | iso\nSS2: Triceps na corda | 2 | 10-15 | - | iso\n\nSESSAO: Lower posterior | sex\nEX: [Stiff / Levantamento romeno] | 3 | 6-10 | 120-180s\nEX: [Hack squat / Afundo bulgaro] | 3 | 8-12 | 120s\nEX: Mesa flexora | 3 | 10-15 | 90s | iso\nEX: Hip thrust | 3 | 8-12 | 120s\nSS1: Panturrilha em pe | 4 | 10-20 | 60-90s | iso\nSS1: Abdominal infra | 3 | 10-15 | - | iso\n\nCARDIO: [Bicicleta / Remo] | 2x | 30-40min | z2 | fc 115-135\nCARDIO: Bicicleta | opcional | 10-15min | leve\n\nTOTAL: 5 sessoes | 30 exercicios\n#TREINO-FIM",
+      "arquivoNome": "plano-raul.pdf",
+      "avisosImportacao": []
+    }
+  ],
+  "treinos": [
+    {
+      "id": "t1",
+      "planoId": "438a2201-ea27-4d88-9f81-bab10b078562",
+      "sessaoId": "c5d94980-9bd6-44e3-b57a-6c72d9f4a5e5",
+      "sessaoNome": "Push",
+      "data": "2026-11-02",
+      "inicio": "2026-11-02T19:00:00-03:00",
+      "fim": "2026-11-02T20:05:00-03:00",
+      "semanaBloco": 9,
+      "status": "concluido",
+      "estadoUI": null,
+      "notas": {
+        "0672692e-4599-4a23-801f-ed370b93b651": "pegada; \"fechada\""
+      },
+      "atualizadoEm": "2026-11-02T20:05:00-03:00"
+    },
+    {
+      "id": "t2",
+      "planoId": "438a2201-ea27-4d88-9f81-bab10b078562",
+      "sessaoId": "c5d94980-9bd6-44e3-b57a-6c72d9f4a5e5",
+      "sessaoNome": "Push",
+      "data": "2026-11-05",
+      "inicio": "2026-11-05T19:00:00-03:00",
+      "fim": "2026-11-05T20:05:00-03:00",
+      "semanaBloco": 9,
+      "status": "concluido",
+      "estadoUI": null,
+      "notas": {},
+      "atualizadoEm": "2026-11-05T20:05:00-03:00"
+    },
+    {
+      "id": "tx",
+      "planoId": "438a2201-ea27-4d88-9f81-bab10b078562",
+      "sessaoId": "c5d94980-9bd6-44e3-b57a-6c72d9f4a5e5",
+      "sessaoNome": "Push",
+      "data": "2026-11-06",
+      "inicio": "2026-11-06T19:00:00-03:00",
+      "fim": "2026-11-06T20:05:00-03:00",
+      "semanaBloco": 9,
+      "status": "descartado",
+      "estadoUI": null,
+      "notas": {},
+      "atualizadoEm": "2026-11-06T20:05:00-03:00"
+    }
+  ],
+  "series": [
+    {
+      "id": "t1-s1",
+      "treinoId": "t1",
+      "exercicioPrescritoId": "0672692e-4599-4a23-801f-ed370b93b651",
+      "chave": "supino reto barra",
+      "variante": "Supino reto barra",
+      "ordem": 1,
+      "kg": 40,
+      "reps": 10,
+      "rir": null,
+      "aquecimento": true,
+      "feitaEm": "2026-11-02T19:11:00-03:00",
+      "sugestaoKg": null,
+      "sugestaoAceita": null
+    },
+    {
+      "id": "t1-s2",
+      "treinoId": "t1",
+      "exercicioPrescritoId": "0672692e-4599-4a23-801f-ed370b93b651",
+      "chave": "supino reto barra",
+      "variante": "Supino reto barra",
+      "ordem": 2,
+      "kg": 80,
+      "reps": 10,
+      "rir": 2,
+      "aquecimento": false,
+      "feitaEm": "2026-11-02T19:12:00-03:00",
+      "sugestaoKg": 80,
+      "sugestaoAceita": true
+    },
+    {
+      "id": "t1-s3",
+      "treinoId": "t1",
+      "exercicioPrescritoId": "0672692e-4599-4a23-801f-ed370b93b651",
+      "chave": "supino reto barra",
+      "variante": "Supino reto barra",
+      "ordem": 3,
+      "kg": 80,
+      "reps": 9,
+      "rir": null,
+      "aquecimento": false,
+      "feitaEm": "2026-11-02T19:13:00-03:00",
+      "sugestaoKg": null,
+      "sugestaoAceita": null
+    },
+    {
+      "id": "t2-s4",
+      "treinoId": "t2",
+      "exercicioPrescritoId": "0672692e-4599-4a23-801f-ed370b93b651",
+      "chave": "supino reto barra",
+      "variante": "Supino reto barra",
+      "ordem": 4,
+      "kg": 82.5,
+      "reps": 8,
+      "rir": 4,
+      "aquecimento": false,
+      "feitaEm": "2026-11-05T19:14:00-03:00",
+      "sugestaoKg": null,
+      "sugestaoAceita": null
+    },
+    {
+      "id": "tx-s5",
+      "treinoId": "tx",
+      "exercicioPrescritoId": "0672692e-4599-4a23-801f-ed370b93b651",
+      "chave": "supino reto barra",
+      "variante": "Supino reto barra",
+      "ordem": 5,
+      "kg": 200,
+      "reps": 10,
+      "rir": 2,
+      "aquecimento": false,
+      "feitaEm": "2026-11-06T19:15:00-03:00",
+      "sugestaoKg": null,
+      "sugestaoAceita": null
+    }
+  ],
+  "cardio": [
+    {
+      "id": "c1",
+      "data": "2026-11-03",
+      "tipo": "Remo",
+      "minutos": 35,
+      "fcMedia": 128,
+      "distanciaKm": 6.25,
+      "esforco": 6,
+      "feitoEm": "2026-11-03T07:30:00-03:00"
+    },
+    {
+      "id": "c2",
+      "data": "2026-11-04",
+      "tipo": "Outro: Corrida; leve",
+      "minutos": 20.5,
+      "fcMedia": null,
+      "distanciaKm": null,
+      "esforco": null,
+      "feitoEm": "2026-11-04T07:30:00-03:00"
+    }
+  ],
+  "configExercicios": [
+    {
+      "chave": "supino reto barra",
+      "incrementoKg": 1.25,
+      "foco": null,
+      "apelidoDe": null
+    },
+    {
+      "chave": "supino reto c barra",
+      "incrementoKg": null,
+      "foco": null,
+      "apelidoDe": "supino reto barra"
+    }
+  ],
+  "preferencias": {
+    "somDescanso": true,
+    "vibrar": false,
+    "manterTelaLigada": true,
+    "ultimoBackup": "2026-11-10T21:00:00-03:00",
+    "nomeExibicao": "Raul"
+  }
+}
