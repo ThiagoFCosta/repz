@@ -1,7 +1,7 @@
 // Registro da série (BRIEFING 9.4), o núcleo do app. Meta: 2 toques quando a sugestão está certa
 // (RIR + Concluir, D4): carga e reps chegam pré-preenchidas.
 
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { dataBR } from '../../../dominio/datas';
 import { formatarDecimal, lerDecimal } from '../../../dominio/numeros';
 import { concluido, membros, restantes, rodada, totalSeries } from '../../../dominio/treino/biset';
@@ -357,6 +357,13 @@ function FormSerie({
   const [reps, setReps] = useState(reps0);
   const [rir, setRir] = useState<number | null>(null);
   const [menu, setMenu] = useState<Menu>(null);
+  // Trocar a variante muda a sugestão; o que o usuário já digitou fica
+  const [mexeuKg, setMexeuKg] = useState(false);
+  const [mexeuReps, setMexeuReps] = useState(false);
+  useEffect(() => {
+    if (!mexeuKg) setKg(kg0);
+    if (!mexeuReps) setReps(reps0);
+  }, [kg0, reps0]);
   const semVariante = e.variante[item] == null;
   const dados = dadosValidos(kg, reps, rir);
   const n = (e.feitas[item] ?? 0) + 1;
@@ -372,7 +379,10 @@ function FormSerie({
         <Passo
           rotulo="kg"
           valor={kg}
-          aoMudar={setKg}
+          aoMudar={(x) => {
+            setMexeuKg(true);
+            setKg(x);
+          }}
           passo={salto}
           passoTxt={formatarDecimal(salto)}
           modo="decimal"
@@ -380,7 +390,10 @@ function FormSerie({
         <Passo
           rotulo={porTempo ? 'segundos' : 'reps'}
           valor={reps}
-          aoMudar={setReps}
+          aoMudar={(x) => {
+            setMexeuReps(true);
+            setReps(x);
+          }}
           passo={porTempo ? 5 : 1}
           passoTxt={porTempo ? '5' : '1'}
           modo="numeric"
@@ -502,7 +515,7 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
       )}
 
       <FormSerie
-        key={`${item}-${e.feitas[item]}-${v}-${feitasAqui.length}`}
+        key={`${item}-${e.feitas[item]}-${feitasAqui.length}`}
         a={a}
         item={item}
         kg0={kgTxt(pre.kg)}

@@ -74,6 +74,8 @@ test('treino Push completo com bi-set, recarregando no meio', async ({ page }) =
   await titulo(page, 'Elevacao lateral');
   await expect(page.getByText('Rodada 2 de 4')).toBeVisible();
   await serie(page);
+  // a série está gravada quando a tela passa ao tríceps
+  await titulo(page, 'Triceps na corda');
 
   // Fecha a aba no meio da rodada 2 e reabre
   await page.reload();
@@ -97,6 +99,7 @@ test('treino Push completo com bi-set, recarregando no meio', async ({ page }) =
   await serie(page, '15');
   await pularDescanso(page);
   await serie(page);
+  await expect(page.getByRole('timer')).toBeVisible();
 
   // Descanso em andamento sobrevive ao recarregar (o fim é um timestamp)
   await page.reload();
