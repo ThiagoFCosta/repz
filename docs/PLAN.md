@@ -31,10 +31,10 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 9. GitHub Actions: lint → typecheck → unit → build → privacidade/bundle → E2E → deploy no Pages (só na `main`).
 
 **Aceite**
-- [ ] URL pública do Pages abre o app com as 3 abas.
-- [ ] E2E: 1ª visita online → `setOffline(true)` → recarregar → app abre.
-- [ ] Teste de privacidade e de orçamento rodando no CI; CI verde.
-- [ ] Instala na tela inicial no Android e no iPhone (manual).
+- [x] URL pública do Pages abre o app com as 3 abas.
+- [x] E2E: 1ª visita online → `setOffline(true)` → recarregar → app abre.
+- [x] Teste de privacidade e de orçamento rodando no CI; CI verde.
+- [ ] Instala na tela inicial no Android (manual; ver `docs/VALIDACAO.md`, passos 1-3).
 
 ---
 
@@ -169,9 +169,18 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 6. Importar o PDF do Thiago (Q6) e corrigir o que aparecer.
 7. Rodada de uso real: Thiago e Raul instalam e fazem um treino completo offline; triagem das pendências.
 
+**Feito no M7**
+- [x] Onboarding de instalação (boas-vindas, botão Instalar com `beforeinstallprompt`, lembrete discreto) — D29.
+- [x] Aviso de atualização respeita o treino em andamento (aparece no resumo e no Início depois de fechar) — E2E `atualizacao.spec.ts`.
+- [x] Acessibilidade: axe sem violações nas telas principais e alvos ≥ 44 px (E2E `acessibilidade.spec.ts`); contraste AA dos botões — D28.
+- [x] Desempenho: Início interativo em **~320 ms** (mediana de 5, CPU 4× mais lenta, com cache; limite 2 s) — D31. JS inicial **74 KB gzip** (limite 200 KB), sem pdf.js e jsPDF.
+- [x] Os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga (E2E `jornada.spec.ts`).
+- [x] Preferências de treino editáveis (tela ligada, bipe, vibração) — D30.
+- [x] README completo e roteiro de validação em `docs/VALIDACAO.md`.
+
 **Aceite**
-- [ ] Checklist da seção 15 completo.
-- [ ] Definição de pronto da seção 19 completa.
+- [ ] Checklist da seção 15 completo. Tudo o que é automatizável está verde; falta a revisão em dispositivo real (`docs/VALIDACAO.md`).
+- [ ] Definição de pronto da seção 19 completa. Faltam: os dois usuários instalarem e fazerem um treino real offline; o PDF da IA do Thiago importar sem erro (Q6); backup e restauração num celular real.
 
 ---
 
