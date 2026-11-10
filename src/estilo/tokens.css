@@ -1,0 +1,32 @@
+/* Tokens do tema escuro (BRIEFING seção 12, mesmos valores dos mockups aprovados) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./fontes/inter-latin-wght.woff2') format('woff2');
+}
+
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #262c36;
+  --border-forte: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --muted-2: #7d8590;
+  --primary: #2ea043;
+  --primary-texto: #58d68d;
+  --info: #58a6ff;
+  --ss: #b392f0;
+  --warn: #e3b341;
+  --down: #f0883e;
+  --error: #f85149;
+
+  --fonte: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --raio: 12px;
+  --raio-pequeno: 8px;
+  --toque: 48px; /* alvo mínimo ≥ 44 px */
+  --espaco: 16px;
+  --altura-abas: 64px;
+}
