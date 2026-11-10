@@ -1,0 +1,9 @@
+dist
+coverage
+referencia
+playwright-report
+test-results
+tests/fixtures
+docs
+BRIEFING.md
+package-lock.json

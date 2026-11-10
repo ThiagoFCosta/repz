@@ -1,0 +1,45 @@
+{
+  "name": "carga-treino",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Carga · diário de treino. PWA offline para registrar treinos e sugerir cargas.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:cobertura": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "check:dist": "node scripts/verificar-dist.mjs"
+  },
+  "dependencies": {
+    "@preact/signals": "2.11.4",
+    "dexie": "4.4.7",
+    "preact": "10.29.8",
+    "workbox-window": "7.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.29.13",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.65.0",
+    "@preact/preset-vite": "2.10.6",
+    "@types/node": "26.6.6",
+    "@vitest/coverage-v8": "5.1.0",
+    "eslint": "10.14.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-node": "0.4.0",
+    "eslint-plugin-import-x": "4.18.1",
+    "fake-indexeddb": "6.2.8",
+    "globals": "17.14.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2",
+    "vite": "8.3.7",
+    "vite-plugin-pwa": "2.0.0",
+    "vitest": "5.1.0"
+  }
+}
