@@ -19,6 +19,7 @@
   "dependencies": {
     "@preact/signals": "2.11.4",
     "dexie": "4.4.7",
+    "pdfjs-dist": "4.10.38",
     "preact": "10.29.8",
     "workbox-window": "7.4.1"
   },
