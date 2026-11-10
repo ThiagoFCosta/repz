@@ -2,6 +2,7 @@
 
 import type { ISODate, ISODateTime } from '../dominio/datas';
 import type { CardioPrescrito, ExercicioImportado, Fase, Mensagem, Progressao } from '../dominio/tipos';
+import type { EstadoTreino } from '../dominio/treino/maquina';
 
 export interface ExercicioPrescrito extends ExercicioImportado {
   id: string;
@@ -43,7 +44,7 @@ export interface Treino {
   fim: ISODateTime | null;
   semanaBloco: number | null;
   status: StatusTreino;
-  estadoUI: unknown; // tipado pela máquina de estados no M3
+  estadoUI: EstadoTreino | null; // para retomar o treino depois de fechar o app
   notas: Record<string, string>;
   atualizadoEm: ISODateTime;
 }
