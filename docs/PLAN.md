@@ -125,17 +125,18 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 ## M5 · Cardio e histórico
 
 **Tarefas**
-1. `dominio/cardio.ts`: meta semanal pela frequência do plano (`2x` → 2; `diario` → 7; `opcional` → sem meta), dentro/fora da duração e da FC.
-2. Tela **Cardio**: chips de tipo (do plano + Outro), duração, FC média, distância, esforço 0-10, data; comparação com a meta; disponível sem treino de força.
-3. Cartão de cardio no Início: "X de Y nesta semana" (semana seg-dom), Registrar.
-4. `dominio/historico.ts`: e1RM por semana, variação em 8 semanas, melhor série.
-5. Tela **Histórico**: seletor com busca (inclui exercícios fora do plano ativo), KPIs, gráfico SVG com deload marcado, lista de treinos do exercício; toque abre o treino.
-6. Visão **Treinos**: lista cronológica de treinos e cardio; detalhe; editar e excluir com confirmação.
-7. Testes: meta de cardio, e1RM por semana com dados de teste (valores calculados à mão), edição/exclusão refletindo no histórico e no motor.
+1. ✅ `dominio/cardio.ts`: meta semanal pela frequência do plano (`2x` → 2; `diario` → 7; `opcional` → sem meta), dentro/fora da duração e da FC; linha do plano de cada registro (D18).
+2. ✅ Tela **Cardio** (`#/treino/cardio`, substitui o aviso provisório da D17): chips de tipo (do plano + Outro, com o nome livre), duração, FC média, distância, esforço 0-10, data (padrão hoje); comparação com a meta ao digitar; disponível sem treino de força.
+3. ✅ Cartão de cardio no Início: "X de Y nesta semana" (semana seg-dom), Registrar cardio; também sem plano.
+4. ✅ `dominio/historico.ts`: e1RM por semana com deload, variação em 8 semanas, melhor série (D19), usando `e1rm`/`umaCasa` do motor; `dados/historico-repo.ts` monta os treinos do exercício com o RIR padrão e o deload da prescrição do dia.
+5. ✅ Tela **Histórico**: seletor com busca (inclui exercícios fora do plano ativo), KPIs, gráfico SVG próprio com deload marcado (faixa e ponto vazado; tocar mostra o valor), lista de treinos do exercício; toque abre o treino.
+6. ✅ Visão **Treinos**: lista cronológica de treinos e cardio; detalhe do treino com edição e exclusão de séries; excluir treino e cardio com confirmação (D20).
+7. ✅ Testes: meta de cardio, e1RM por semana com valores calculados à mão, edição/exclusão refletindo no histórico e no motor (fake-indexeddb), E2E de cardio + Histórico com gráfico + edição.
 
 **Aceite**
-- [ ] Gráfico de e1RM correto com os dados de teste (comparado com valores calculados).
-- [ ] Editar uma série antiga muda o gráfico e a próxima sugestão.
+- [x] Gráfico de e1RM correto com os dados de teste (comparado com valores calculados). (`tests/unit/historico.test.ts` e `tests/dados/historico.test.ts`; conferido no navegador com viewport de celular e o build de produção.)
+- [x] Editar uma série antiga muda o gráfico e a próxima sugestão. (Teste de dados: editar → ponto do gráfico e sugestão ↑; E2E: editar a série muda o 1RM estimado.)
+- [ ] Revisão no celular: tela de cardio (teclado numérico, seletor de data), gráfico legível e toque nos pontos no Android. (Depende do aparelho.)
 
 ---
 
