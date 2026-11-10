@@ -53,3 +53,33 @@ export async function persistirTransicao(db: RepzDb, treinoId: string, t: Transi
     if (!(await db.treinos.update(treinoId, t.treino))) throw new Error(`Treino ${treinoId} não encontrado.`);
   });
 }
+
+// ---- Visão Treinos: edição e exclusão (9.8) ----
+
+// Treinos concluídos, do mais recente ao mais antigo
+export async function listarTreinosConcluidos(db: RepzDb): Promise<Treino[]> {
+  const ts = await db.treinos.where('status').equals('concluido').toArray();
+  return ts.sort((a, b) => b.inicio.localeCompare(a.inicio));
+}
+
+export async function editarSerieSalva(
+  db: RepzDb,
+  id: string,
+  dados: Pick<SerieRealizada, 'kg' | 'reps' | 'rir'>,
+): Promise<void> {
+  if (!(await db.series.update(id, dados))) throw new Error(`Série ${id} não encontrada.`);
+}
+
+export async function excluirSerie(db: RepzDb, id: string): Promise<void> {
+  await db.series.delete(id);
+}
+
+// Apaga o treino e as séries dele; o treino em andamento só sai pelo próprio treino
+export async function excluirTreino(db: RepzDb, id: string): Promise<void> {
+  await db.transaction('rw', [db.treinos, db.series], async () => {
+    const t = await db.treinos.get(id);
+    if (t?.status === 'em_andamento') throw new Error('Encerre o treino em andamento antes de excluí-lo.');
+    await db.series.where('treinoId').equals(id).delete();
+    await db.treinos.delete(id);
+  });
+}
