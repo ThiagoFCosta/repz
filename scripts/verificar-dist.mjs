@@ -50,7 +50,7 @@ for (const f of texto) {
 // JS inicial = scripts e modulepreloads referenciados pelo index.html
 const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
 const iniciais = [...html.matchAll(/(?:src|href)="([^"]+\.js)"/g)].map((m) => m[1]);
-const base = '/carga-treino/';
+const base = '/repz/';
 let total = 0;
 for (const url of iniciais) {
   const arquivo = path.join(DIST, url.startsWith(base) ? url.slice(base.length) : url);

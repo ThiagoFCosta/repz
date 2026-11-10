@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: `http://localhost:${PORTA}/carga-treino/`,
+    baseURL: `http://localhost:${PORTA}/repz/`,
     trace: 'retain-on-failure',
   },
   projects: [
@@ -21,7 +21,7 @@ export default defineConfig({
   // roda contra o build de produção, com o mesmo base do GitHub Pages
   webServer: {
     command: 'npm run build && npm run preview',
-    url: `http://localhost:${PORTA}/carga-treino/`,
+    url: `http://localhost:${PORTA}/repz/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },

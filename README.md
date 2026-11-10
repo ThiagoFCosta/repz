@@ -15,7 +15,7 @@ Requer Node 24.
 
 ```bash
 npm install
-npm run dev          # http://localhost:5173/carga-treino/
+npm run dev          # http://localhost:5173/repz/
 ```
 
 ## Testar
@@ -41,10 +41,10 @@ node teste/progressao.mjs
 
 ## Publicar (GitHub Pages)
 
-1. Crie o repositório `carga-treino` no GitHub e envie a branch `main`.
+1. Crie o repositório `repz` no GitHub e envie a branch `main`.
 2. No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
    O GitHub Pages não tem conta separada; ele é ativado por repositório. No plano gratuito o repositório precisa ser **público** (o código fica visível; os dados de treino nunca saem do celular).
-3. Cada push na `main` roda lint → testes → build → E2E e publica em `https://<seu-usuario>.github.io/carga-treino/`.
+3. Cada push na `main` roda lint → testes → build → E2E e publica em `https://<seu-usuario>.github.io/repz/`.
 
 Se o nome do repositório mudar, ajuste `BASE` em `vite.config.ts`, a `baseURL` em `playwright.config.ts` e o `base` em `scripts/verificar-dist.mjs`.
 

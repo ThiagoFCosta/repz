@@ -4,7 +4,7 @@ import preact from '@preact/preset-vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // GitHub Pages serve o app em /<repositório>/
-const BASE = '/carga-treino/';
+const BASE = '/repz/';
 
 // CSP só no build: o servidor de desenvolvimento usa scripts inline e websocket (HMR).
 const CSP = [

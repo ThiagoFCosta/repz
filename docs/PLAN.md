@@ -21,7 +21,7 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 
 **Tarefas**
 1. Organizar o repositório: mover `app-treino-kit/docs/*` → `docs/`, `app-treino-kit/referencia` → `referencia/`, `app-treino-kit/fixtures` → `tests/fixtures/`; `.gitignore` com `node_modules`, `dist`, `*.zip`.
-2. `git init`, repositório `carga-treino` no GitHub, branch `main` protegida pelo CI.
+2. `git init`, repositório `repz` no GitHub, branch `main` protegida pelo CI.
 3. Vite + Preact + TypeScript strict; `base` = `/<repo>/`.
 4. ESLint (flat) + Prettier + regra de dependência entre camadas (`dominio/` não importa UI/DB).
 5. Vitest (com cobertura) e Playwright (projeto `mobile-chromium` 390×844).
