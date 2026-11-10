@@ -143,17 +143,18 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 ## M6 · Dados
 
 **Tarefas**
-1. `dados/csv.ts`: séries e cardio com os cabeçalhos exatos da seção 10, UTF-8 com BOM, `;`, vírgula decimal, aspas quando preciso.
-2. `dados/backup.ts`: exportar `{ app, versaoSchema, exportadoEm, … }`; validar `app` e `versaoSchema`; migrar; restaurar **substituir tudo** ou **mesclar por id**, com confirmação; atualiza `ultimoBackup`.
-3. `dados/pdf-export.ts` : período, resumo por exercício (melhor série, e1RM inicial → atual), tabela de treinos e de cardio.
-4. `dados/compartilhar.ts`: Web Share com arquivos; fallback download; nomes `treino-backup-AAAA-MM-DD.json`, `treino-series-…csv`, `treino-cardio-…csv`, `treino-historico-…pdf`.
-5. Lembrete de backup no Início (> 30 dias).
-6. Testes: CSV byte a byte (BOM, separadores, decimal), backup → limpar → restaurar = mesmo estado (comparação profunda de todas as stores), mesclar sem duplicar, rejeitar JSON de outro app/versão futura, migração de backup antigo; E2E 5.
+1. ✅ `dados/csv.ts`: séries e cardio com os cabeçalhos exatos da seção 10, UTF-8 com BOM, `;`, vírgula decimal, aspas quando preciso, CRLF; só treinos não descartados (D25).
+2. ✅ `dados/backup.ts`: exportar `{ app, versaoSchema, exportadoEm, planoAtivoId, … }`; validar `app` e `versaoSchema` (recusa versão futura); `migrarBackup()` puro; restaurar **substituir tudo** ou **mesclar por id**, com confirmação em duas etapas; atualiza `ultimoBackup` (D21 a D24).
+3. ✅ `dados/pdf-export.ts`: período, resumo por exercício (melhor série, 1RM estimado inicial e atual), tabela de treinos e de cardio; jsPDF sob demanda, fora do JS inicial e no precache (D26).
+4. ✅ `dados/compartilhar.ts`: Web Share com arquivos; fallback download; nomes `treino-backup-AAAA-MM-DD.json`, `treino-series-…csv`, `treino-cardio-…csv`, `treino-historico-…pdf` (D27).
+5. ✅ Lembrete de backup no Início (> 30 dias, ou nunca com ≥ 1 treino), com "Fazer backup" direto.
+6. ✅ Testes: CSV byte a byte (BOM, separadores, decimal, aspas), backup → limpar → restaurar = mesmo estado (comparação profunda de todas as stores), mesclar sem duplicar, rejeitar JSON de outro app/versão futura, migração com `tests/fixtures/backup-v1.json`, texto e acentos do PDF; E2E 5.
 
 **Aceite**
-- [ ] Backup → limpar dados → restaurar com resultado idêntico (teste automatizado e no celular).
-- [ ] CSV abre certo no Excel em pt-BR (acentos, colunas, decimais).
-- [ ] E2E 5 verde.
+- [x] Backup → limpar dados → restaurar com resultado idêntico, no teste automatizado. (`tests/dados/backup.test.ts`; E2E 5 apaga o IndexedDB e restaura pelo arquivo baixado.)
+- [ ] O mesmo no celular: fazer backup, conferir o arquivo em Downloads, restaurar. (Depende do aparelho.)
+- [ ] CSV abre certo no Excel em pt-BR (acentos, colunas, decimais). (Bytes conferidos em `tests/dados/csv.test.ts`; abrir no Excel depende do Thiago.)
+- [x] E2E 5 verde. (`tests/e2e/dados.spec.ts`; PDF conferido com os acentos.)
 
 ---
 
