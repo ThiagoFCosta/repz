@@ -18,6 +18,7 @@ import {
   type Evento,
 } from '../dominio/treino/maquina';
 import { preencher, type Preenchimento } from '../dominio/treino/preenchimento';
+import { comTreinoAtual, recorde, type Recorde } from '../dominio/treino/resumo';
 import { novoId } from '../dados/db';
 import { historicoDaChave, treinosConcluidos, type HistoricoVariante } from '../dados/historico-repo';
 import { criarTreino, persistirTransicao, seriesDoTreino, type Transicao } from '../dados/repos/treinos';
@@ -109,9 +110,10 @@ export function sugestaoDoItem(
   a: TreinoAtivo,
   item: number,
   variante = a.estado.variante[item] ?? 0,
+  historico = a.itens[item]!.historico[variante]?.treinos ?? [],
 ): Sugestao {
   const ctx = a.itens[item]!;
-  return sugerir(ctx.historico[variante]?.treinos ?? [], ctx.presc, {
+  return sugerir(historico, ctx.presc, {
     hoje: hoje.value,
     incremento: ctx.incremento[variante],
     nome: ctx.ex.variantes[variante],
@@ -132,8 +134,39 @@ export function preenchimentoDoItem(a: TreinoAtivo, item: number): Preenchimento
   const v = a.estado.variante[item] ?? 0;
   const ctx = a.itens[item]!;
   const sugestao = sugestaoDoItem(a, item, v);
-  const p = preencher(sugestao, seriesDoItem(a, item, v), ctx.presc.reps, ctx.historico[v]?.treinos.at(-1));
+  const p = preencher(sugestao, seriesDoItem(a, item, v), ctx.presc, ctx.historico[v]?.treinos.at(-1));
   return { ...p, sugestao };
+}
+
+// ---- Fim do treino (9.6) ----
+
+export interface CartaoProximo {
+  item: number;
+  variante: number;
+  series: SerieRealizada[]; // de trabalho, neste treino
+  sugestao: Sugestao; // com este treino no histórico: o que vale para o próximo
+  recorde: Recorde | null;
+}
+
+// Um cartão por exercício feito (por variante, se o usuário trocou no meio), na ordem da sessão
+export function cartoesDoFim(a: TreinoAtivo): CartaoProximo[] {
+  return a.itens.flatMap((ctx, item) =>
+    ctx.ex.chaves.flatMap((_, variante) => {
+      const series = seriesDoItem(a, item, variante);
+      if (!series.length) return [];
+      const antes = ctx.historico[variante]?.treinos ?? [];
+      const hojeSeries = series.map((s) => ({ kg: s.kg, reps: s.reps, rir: s.rir }));
+      return [
+        {
+          item,
+          variante,
+          series,
+          sugestao: sugestaoDoItem(a, item, variante, comTreinoAtual(antes, a.treino.data, hojeSeries)),
+          recorde: recorde(hojeSeries, antes, ctx.presc),
+        },
+      ];
+    }),
+  );
 }
 
 // ---- Eventos ----

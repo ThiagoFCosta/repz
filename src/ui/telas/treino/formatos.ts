@@ -1,5 +1,6 @@
 import { formatarDecimal } from '../../../dominio/numeros';
 import type { Acao } from '../../../dominio/progressao/motor';
+import type { TipoCartao } from '../../../dominio/treino/resumo';
 
 const dois = (n: number) => String(n).padStart(2, '0');
 
@@ -38,3 +39,10 @@ export function seriesTxt(series: readonly { kg: number; reps: number }[], porTe
 export const ICONE_ACAO: Record<Acao, string> = { aumentar: '↑', manter: '=', reduzir: '↓', calibrar: '·' };
 
 export const rirTxt = (rir: number | null) => (rir == null ? '–' : rir >= 4 ? '4+' : String(rir));
+
+export const ICONE_CARTAO: Record<TipoCartao, string> = {
+  aumentar: '↑',
+  manter: '=',
+  reduzir: '↓',
+  alerta: '!',
+};
