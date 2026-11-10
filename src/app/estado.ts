@@ -5,10 +5,16 @@ import { hojeLocal } from '../dominio/datas';
 import { rotuloSemana, semanaDoBloco } from '../dominio/periodizacao/semana';
 import { RepzDb } from '../dados/db';
 import { lerConfigs, type MapaConfig } from '../dados/repos/config';
-import { gravarMeta, lerMeta } from '../dados/repos/meta';
+import { gravarMeta, lerMeta, lerPreferencias } from '../dados/repos/meta';
 import { listarPlanos, planoAtivo as lerPlanoAtivo } from '../dados/repos/planos';
-import { chavesComHistorico, treinoEmAndamento } from '../dados/repos/treinos';
-import type { Persistencia, Plano, Treino } from '../dados/tipos';
+import { chavesComHistorico, treinoEmAndamento, ultimoConcluido } from '../dados/repos/treinos';
+import {
+  PREFERENCIAS_PADRAO,
+  type Persistencia,
+  type Plano,
+  type Preferencias,
+  type Treino,
+} from '../dados/tipos';
 
 export const db = new RepzDb();
 
@@ -21,6 +27,9 @@ export const configs = signal<MapaConfig>(new Map());
 export const chavesHistorico = signal<Map<string, string>>(new Map());
 export const treinoAberto = signal<Treino | null>(null);
 export const persistencia = signal<Persistencia>('indisponivel');
+export const preferencias = signal<Preferencias>(PREFERENCIAS_PADRAO);
+// sessaoId do último treino concluído do plano ativo (rotação, 6.3)
+export const ultimaSessaoConcluida = signal<string | null>(null);
 
 export const semanaAtual = computed(() =>
   planoAtivo.value ? semanaDoBloco(planoAtivo.value, hoje.value) : null,
@@ -39,18 +48,21 @@ export function mostrarAviso(msg: string): void {
 }
 
 export async function recarregar(): Promise<void> {
-  const [p, todos, c, h, t] = await Promise.all([
+  const [p, todos, c, h, t, pref] = await Promise.all([
     lerPlanoAtivo(db),
     listarPlanos(db),
     lerConfigs(db),
     chavesComHistorico(db),
     treinoEmAndamento(db),
+    lerPreferencias(db),
   ]);
   planoAtivo.value = p;
   planos.value = todos;
   configs.value = c;
   chavesHistorico.value = h;
   treinoAberto.value = t;
+  preferencias.value = pref;
+  ultimaSessaoConcluida.value = p ? ((await ultimoConcluido(db, p.id))?.sessaoId ?? null) : null;
 }
 
 // Pede armazenamento persistente uma vez e guarda o resultado (BRIEFING seção 11)
@@ -68,10 +80,12 @@ async function garantirPersistencia(): Promise<void> {
   if (estado !== (await lerMeta(db, 'persistencia'))) await gravarMeta(db, 'persistencia', estado);
 }
 
-export async function iniciarEstado(): Promise<void> {
+// `aoCarregar` roda antes de a UI aparecer (ex.: retomar o treino em andamento)
+export async function iniciarEstado(aoCarregar?: () => Promise<void>): Promise<void> {
   try {
     await db.open();
     await recarregar();
+    await aoCarregar?.();
     carregado.value = true;
     void garantirPersistencia();
   } catch (e) {
