@@ -318,7 +318,7 @@ interface EstadoTreino {
   alvo: Record<number, number>;         // item → séries prescritas na semana (congela no início)
 }
 ```
-O estado "Exercicio(i): escolherVariante" do briefing vira **parte de `registrando`**: a variante já vem escolhida (última usada) e os chips só trocam. Exercício com variantes **sem histórico em nenhuma** exige escolha antes do primeiro "Concluir" (o botão fica desabilitado com o texto "Escolha a variante"). Isso preserva a meta de 2 toques.
+Implementado com listas por item e os campos `versao`, `semana` e `itens` (ver D10, D11). O estado "Exercicio(i): escolherVariante" do briefing vira **parte de `registrando`**: a variante já vem escolhida (última usada) e os chips só trocam. Exercício com variantes **sem histórico em nenhuma** exige escolha antes do primeiro "Concluir" (o botão fica desabilitado com o texto "Escolha a variante"). Isso preserva a meta de 2 toques.
 
 ### 7.2 Eventos e transições
 
@@ -442,6 +442,11 @@ Os scripts da referência viram testes com asserções (não só `console.log`).
 | **D7** | Datas pelo fuso **do aparelho**, não fixo em America/Sao_Paulo. | Os dois usam o celular no Brasil; fixar o fuso exigiria lib de fuso horário (peso) sem ganho. |
 | **D8** | Campos novos no modelo: `Plano.avisosImportacao`, `Treino.notas`, `Treino.atualizadoEm`, `SerieRealizada.sugestaoAceita`, `Preferencias.nomeExibicao`, `Sugestao.repsSugeridas`. | Cada um atende a um requisito do briefing que não tinha campo (notas 9.4, treino > 4 h 9.6, sugestão aceita 7.6, saudação 9.3). |
 | **D9** | Testes em `tests/` espelhando `src/` (como sugerido na seção 13), não ao lado do código. | Seguir a organização do briefing. |
+| **D10** (M3) | `EstadoTreino` usa listas por item (`feitas[i]`, `extras[i]`, `alvo[i]`, `variante[i]`) em vez de `Record`, e guarda `versao`, `semana` e `itens` (grupo e descanso de cada item, congelados no início). `variante[i] = null` é "ainda não escolhida" (D3). | O estado persistido fica autossuficiente: o reducer não precisa do plano, e o treino retoma igual mesmo que a config mude no meio. `versao` prepara a migração do `estadoUI` (R7). |
+| **D11** (M3) | A última série do treino vai direto ao resumo, sem descanso; `Etapa.descanso.proximo` é sempre um item. Novo evento `RETOMAR` (resumo → primeiro item pendente), com o botão "Voltar ao treino" no resumo. | Descansar antes do resumo não serve para nada; `RETOMAR` desfaz um "Encerrar treino" tocado por engano sem perder nada. |
+| **D12** (M3) | Pré-preenchimento: na 1ª série vale a sugestão do motor; da 2ª em diante, a carga da série anterior **deste treino** (o usuário pode ter mudado) e as reps de `repsSugeridas` daquela série. `repsSugeridas` fica limitada à faixa da prescrição quando a ação não é aumentar (ex.: 5·4·4 vira 6·6·6 depois de reduzir). | Seção 7.6 sem ambiguidade para a série 2+; pré-preencher reps abaixo da faixa depois de uma redução sugeriria repetir o erro. |
+| **D13** (M3) | Treino aberto há mais de 4 h (por `atualizadoEm`): "Encerrar treino" conclui com `fim = atualizadoEm` (última atividade); sem nenhuma série de trabalho, descarta. O resumo mede a duração até a última atividade. | Um treino esquecido aberto não deve inflar a duração nem entrar na rotação sem séries. |
+| **D14** (M3) | `dados/historico-repo.ts` (tarefa 2 do M4) foi antecipado na forma básica, porque o pré-preenchimento do M3 usa o motor. | O motor precisa do histórico agrupado por treino. |
 
 ---
 

@@ -95,18 +95,19 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 9. Testes: rotação, estimativa, bi-set 4+3, todas as transições do reducer, transação série+estado (falha no meio não grava metade), E2E 3 (Push completo com bi-set, fechar a aba no meio, reabrir, continuar).
 
 **Aceite**
-- [ ] Push completo no celular com no máximo 2 toques por série quando a carga e as reps sugeridas estão certas (RIR + Concluir).
-- [ ] Fechar o app (e reiniciar o celular) no meio do treino e continuar sem perder nenhuma série.
-- [ ] Cronômetro mostra o tempo certo depois de bloquear e desbloquear a tela.
-- [ ] E2E 3 verde.
+- [ ] Push completo no celular com no máximo 2 toques por série quando a carga e as reps sugeridas estão certas (RIR + Concluir). (No E2E e no navegador com viewport de celular, a 2ª série em diante sai com RIR + Concluir, e o RIR e o Concluir cabem na tela sem rolar; falta o aparelho real.)
+- [ ] Fechar o app (e reiniciar o celular) no meio do treino e continuar sem perder nenhuma série. (Recarregar a página no meio do bi-set e durante o descanso está coberto no E2E 3; falta o aparelho real e o reinício.)
+- [ ] Cronômetro mostra o tempo certo depois de bloquear e desbloquear a tela. (O tempo sai do timestamp `fimEm`; bipe e vibração com a tela bloqueada só dá para conferir no celular.)
+- [x] E2E 3 verde (mais: descartar treino com confirmação).
+- [x] Testes: rotação, estimativa, bi-set 4+3 (4 descansos, rodada 4 só com elevação), todas as transições do reducer, transação série + estado (falha no meio não grava metade). Cobertura de `src/dominio`: 100% das linhas.
 
 ---
 
 ## M4 · Inteligência
 
 **Tarefas**
-1. (M4.1, pode ser antecipado) `dominio/progressao/*`: porte do motor com `hoje` obrigatório, `CONFIG_PROGRESSAO` com os nomes da 7.3, `repsSugeridas`.
-2. `dados/historico-repo.ts`: histórico por chave canônica, sem aquecimento, só treinos concluídos (e o atual até o momento, para não contar duas vezes), agrupado por treino.
+1. ✅ (M4.1, feito no M3) `dominio/progressao/*`: porte do motor com `hoje` obrigatório, `CONFIG_PROGRESSAO` com os nomes da 7.3, `repsSugeridas`.
+2. (forma básica feita no M3, ver D14) `dados/historico-repo.ts`: histórico por chave canônica, sem aquecimento, só treinos concluídos (e o atual até o momento, para não contar duas vezes), agrupado por treino.
 3. Periodização aplicada no treino: séries alvo da semana, RIR alvo, deload; `foco` do usuário sobrepõe o do plano.
 4. Pré-preenchimento: carga sugerida em todas as séries, reps da última vez ou mínimo da faixa quando subiu; `sugestaoKg`/`sugestaoAceita` gravados.
 5. Tela **Fim do treino**: duração, nº de séries, volume, recordes; "Para o próximo treino" com cartões ↑ = ↓ ! (cores do design), motivo em uma linha; botões Cardio e Fechar.
@@ -114,7 +115,7 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 7. Testes: os 16 cenários da 7.5 com ação, carga, motivo e alertas exatos; `hoje` à noite; histórico com apelido; pré-preenchimento após ↑ usa o mínimo da faixa; E2E 4.
 
 **Aceite**
-- [ ] Todos os cenários da seção 7.5 como testes.
+- [x] Todos os cenários da seção 7.5 como testes (M4.1, antecipado no M3: ação, carga, motivo e alertas exatos).
 - [ ] Sugestão visível no fim e aplicada (pré-preenchida) no treino seguinte do exercício.
 - [ ] E2E 4 verde.
 
