@@ -107,17 +107,18 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 
 **Tarefas**
 1. ✅ (M4.1, feito no M3) `dominio/progressao/*`: porte do motor com `hoje` obrigatório, `CONFIG_PROGRESSAO` com os nomes da 7.3, `repsSugeridas`.
-2. (forma básica feita no M3, ver D14) `dados/historico-repo.ts`: histórico por chave canônica, sem aquecimento, só treinos concluídos (e o atual até o momento, para não contar duas vezes), agrupado por treino.
-3. Periodização aplicada no treino: séries alvo da semana, RIR alvo, deload; `foco` do usuário sobrepõe o do plano.
-4. Pré-preenchimento: carga sugerida em todas as séries, reps da última vez ou mínimo da faixa quando subiu; `sugestaoKg`/`sugestaoAceita` gravados.
-5. Tela **Fim do treino**: duração, nº de séries, volume, recordes; "Para o próximo treino" com cartões ↑ = ↓ ! (cores do design), motivo em uma linha; botões Cardio e Fechar.
-6. Exercício por tempo: campo "segundos" no lugar de reps; regras 0b.
-7. Testes: os 16 cenários da 7.5 com ação, carga, motivo e alertas exatos; `hoje` à noite; histórico com apelido; pré-preenchimento após ↑ usa o mínimo da faixa; E2E 4.
+2. ✅ `dados/historico-repo.ts`: histórico por chave canônica, sem aquecimento, só treinos concluídos, agrupado por treino; o treino atual entra uma vez só no fim (`comTreinoAtual`, D15).
+3. ✅ Periodização aplicada no treino: séries alvo da semana, RIR alvo, deload; `foco` do usuário sobrepõe o do plano; depois do bloco, D1.
+4. ✅ Pré-preenchimento: carga sugerida em todas as séries, reps da última vez ou mínimo da faixa quando subiu; `sugestaoKg`/`sugestaoAceita` gravados.
+5. ✅ Tela **Fim do treino**: duração, nº de séries, volume, recordes (D16); "Para o próximo treino" com cartões ↑ = ↓ ! (D15); botões Cardio (provisório até o M5, D17) e Fechar.
+6. ✅ Exercício por tempo: campo "segundos" no lugar de reps; regras 0b; 0 kg pré-preenchido na primeira vez (D16).
+7. ✅ Testes: os 16 cenários da 7.5 com ação, carga, motivo e alertas exatos; `hoje` à noite; histórico com apelido; deload e semana depois do bloco; pré-preenchimento após ↑ usa o mínimo da faixa; recordes; E2E 4.
 
 **Aceite**
 - [x] Todos os cenários da seção 7.5 como testes (M4.1, antecipado no M3: ação, carga, motivo e alertas exatos).
-- [ ] Sugestão visível no fim e aplicada (pré-preenchida) no treino seguinte do exercício.
-- [ ] E2E 4 verde.
+- [x] Sugestão visível no fim e aplicada (pré-preenchida) no treino seguinte do exercício. (E2E 4 e conferido no navegador com viewport de celular e o build de produção; falta ver no aparelho.)
+- [x] E2E 4 verde (mais: botão Cardio do fim conclui o treino).
+- [ ] Revisão no celular: tela de fim do treino legível e cartões com as cores certas no Android. (Depende do aparelho.)
 
 ---
 

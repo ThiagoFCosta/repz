@@ -96,7 +96,7 @@ App_Treino/
         maquina.ts                    # reducer puro da sessão de treino (seção 7)
         biset.ts                      # rodadas e próximo do grupo
         estimativa.ts                 # duração estimada da sessão
-        resumo.ts                     # volume, recordes, duração
+        resumo.ts                     # volume, recordes, treino atual no histórico, ícone do cartão
       historico.ts                    # e1RM por semana, KPIs, melhor série
       cardio.ts                       # meta semanal, dentro/fora da faixa
       similaridade.ts                 # Jaro-Winkler para sugerir vínculo de chaves
@@ -447,6 +447,9 @@ Os scripts da referência viram testes com asserções (não só `console.log`).
 | **D12** (M3) | Pré-preenchimento: na 1ª série vale a sugestão do motor; da 2ª em diante, a carga da série anterior **deste treino** (o usuário pode ter mudado) e as reps de `repsSugeridas` daquela série. `repsSugeridas` fica limitada à faixa da prescrição quando a ação não é aumentar (ex.: 5·4·4 vira 6·6·6 depois de reduzir). | Seção 7.6 sem ambiguidade para a série 2+; pré-preencher reps abaixo da faixa depois de uma redução sugeriria repetir o erro. |
 | **D13** (M3) | Treino aberto há mais de 4 h (por `atualizadoEm`): "Encerrar treino" conclui com `fim = atualizadoEm` (última atividade); sem nenhuma série de trabalho, descarta. O resumo mede a duração até a última atividade. | Um treino esquecido aberto não deve inflar a duração nem entrar na rotação sem séries. |
 | **D14** (M3) | `dados/historico-repo.ts` (tarefa 2 do M4) foi antecipado na forma básica, porque o pré-preenchimento do M3 usa o motor. | O motor precisa do histórico agrupado por treino. |
+| **D15** (M4) | Cartão "Para o próximo treino": ↑ e ↓ seguem a ação do motor; **!** aparece quando a carga se mantém **e** há alerta (queda isolada, estagnação); `=` sem alerta. Os alertas aparecem também como linha extra no cartão, inclusive com ↑/↓. A sugestão do cartão inclui o treino que acabou de terminar (`comTreinoAtual`), que ainda não está concluído no banco e por isso não está no histórico gravado: entra uma vez só. | A 7.6 lista os quatro ícones sem dizer quando o ! vence a seta; a seta de carga é a informação principal, e o ! sinaliza o que exige leitura quando a carga não muda. |
+| **D16** (M4) | Recordes (9.6) por variante, contra todo o histórico anterior (só treinos concluídos, com apelidos): primeiro o melhor e1RM (RIR ausente = ponto médio do alvo, como no motor); se não bateu, a maior carga já usada; por tempo, a maior duração. Primeira vez na variante não é recorde. Exercício por tempo sem histórico vem com 0 kg (peso do corpo) pré-preenchido. | "melhor e1RM ou melhor carga × reps" sem critério de desempate; e o campo de kg vazio travaria o "Concluir" de uma prancha. |
+| **D17** (M4) | O botão Cardio do fim conclui o treino (como Fechar) e abre `#/treino/cardio`, um aviso provisório até o M5. | A tela de cardio é do M5; o treino não pode ficar aberto. |
 
 ---
 
