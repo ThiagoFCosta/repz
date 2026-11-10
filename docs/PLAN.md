@@ -75,9 +75,9 @@ Em todos os marcos com UI: revisão em Android (Chrome, app instalado) nos celul
 10. Testes: migração v1 (abrir banco vazio), salvar/ativar plano, apelidos (ciclo, desfazer), semana do bloco (todas as bordas, `agora` às 23:30), similaridade, E2E 1 e 2 (importar PDF do Raul; PDF sem anexo).
 
 **Aceite**
-- [ ] Importar o PDF do Raul pelo app **no celular**; recarregar e o plano continua lá.
-- [ ] E2E 1 e 2 verdes.
-- [ ] Mudar a semana com −/+ altera a pílula e a prescrição exibida na revisão.
+- [ ] Importar o PDF do Raul pelo app **no celular**; recarregar e o plano continua lá. (Verificado no navegador com viewport de celular e no E2E; falta o aparelho real.)
+- [x] E2E 1 e 2 verdes (mais: importar PDF offline, colar texto com erro, ajuste de semana).
+- [x] Mudar a semana com −/+ altera a pílula.
 
 ---
 

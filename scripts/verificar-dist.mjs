@@ -16,6 +16,10 @@ const PERMITIDAS = [
   /^https?:\/\/github\.com\/(mozilla\/pdf\.js|parallax\/jsPDF|dexie\/Dexie\.js)/,
   // texto de uma mensagem de erro do Workbox (precache); nunca é requisitado
   /^https:\/\/bit\.ly\/wb-precache$/,
+  // textos de mensagens de erro do Dexie (PrematureCommit, MissingAPI); nunca são requisitados
+  /^http:\/\/bit\.ly\/2kdckMn$/,
+  /^https:\/\/tinyurl\.com\/y2uuvskb$/,
+  /^https:\/\/dexie\.org$/,
   // pdf.js: namespaces XML de formulários XFA/XMP e o prefixo que ele põe em links "www." de
   // anotações do PDF. São identificadores, não requisições.
   /^http:\/\/www\.xfa\.org\/schema\//,
