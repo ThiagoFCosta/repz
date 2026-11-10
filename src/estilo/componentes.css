@@ -1213,3 +1213,23 @@ select {
   margin-top: 8px;
   color: var(--error);
 }
+
+/* ---- Exportar e backup (9.9 e 10) ---- */
+.pilha-justa {
+  margin: 0 0 12px;
+}
+
+.erro-texto {
+  color: var(--error);
+}
+
+.lembrete-backup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 4px 4px 4px 12px;
+  border: 1px dashed var(--border-forte);
+  border-radius: var(--raio-pequeno);
+}

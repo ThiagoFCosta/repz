@@ -1,8 +1,18 @@
 // Início (aba Treino, BRIEFING 9.3): pílula da semana, Próximo treino ou Continuar treino, Cardio.
 
 import { useState } from 'preact/hooks';
-import { NOMES_DIAS } from '../../../dominio/datas';
-import { pilulaSemana, planoAtivo, progressoCardio, semanaAtual, treinoAberto } from '../../../app/estado';
+import { diasEntre, NOMES_DIAS } from '../../../dominio/datas';
+import {
+  hoje,
+  lembreteBackup,
+  mostrarAviso,
+  pilulaSemana,
+  planoAtivo,
+  preferencias,
+  progressoCardio,
+  semanaAtual,
+  treinoAberto,
+} from '../../../app/estado';
 import {
   duracaoDaSessao,
   encerrarTreinoAberto,
@@ -14,6 +24,7 @@ import {
   treinoAtivo,
   treinoEsquecido,
 } from '../../../app/controlador-treino';
+import { exportarBackup } from '../../../app/dados';
 import { navegar } from '../../../app/roteador';
 import { Botao, Cartao, Pilula } from '../../componentes/basicos';
 import { decorrido } from '../treino/formatos';
@@ -139,6 +150,36 @@ function CartaoCardio() {
   );
 }
 
+// Lembrete discreto (9.9): último backup há mais de 30 dias, ou nunca feito com treino registrado
+function LembreteBackup() {
+  const [ocupado, setOcupado] = useState(false);
+  if (!lembreteBackup.value) return null;
+  const fazer = async () => {
+    setOcupado(true);
+    try {
+      await exportarBackup();
+    } catch (e) {
+      console.error(e);
+      mostrarAviso('Não foi possível gerar o backup.');
+    } finally {
+      setOcupado(false);
+    }
+  };
+  const ultimo = preferencias.value.ultimoBackup;
+  return (
+    <aside class="lembrete-backup pequeno" aria-label="Lembrete de backup">
+      <span class="muted">
+        {ultimo
+          ? `Último backup há ${diasEntre(ultimo.slice(0, 10), hoje.value)} dias.`
+          : 'Você ainda não fez backup dos seus treinos.'}
+      </span>
+      <Botao variante="texto" disabled={ocupado} onClick={() => void fazer()}>
+        Fazer backup
+      </Botao>
+    </aside>
+  );
+}
+
 export function TelaInicio() {
   const plano = planoAtivo.value;
   if (!plano) {
@@ -153,6 +194,7 @@ export function TelaInicio() {
           </Botao>
         </Cartao>
         <CartaoCardio />
+        <LembreteBackup />
       </section>
     );
   }
@@ -185,6 +227,7 @@ export function TelaInicio() {
           </Botao>
         </Cartao>
       )}
+      <LembreteBackup />
     </section>
   );
 }

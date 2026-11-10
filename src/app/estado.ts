@@ -4,6 +4,7 @@ import { computed, signal } from '@preact/signals';
 import { progressoDaSemana } from '../dominio/cardio';
 import { hojeLocal } from '../dominio/datas';
 import { rotuloSemana, semanaDoBloco } from '../dominio/periodizacao/semana';
+import { precisaLembrete } from '../dados/backup';
 import { RepzDb } from '../dados/db';
 import { listarCardio } from '../dados/repos/cardio';
 import { lerConfigs, type MapaConfig } from '../dados/repos/config';
@@ -33,6 +34,8 @@ export const persistencia = signal<Persistencia>('indisponivel');
 export const preferencias = signal<Preferencias>(PREFERENCIAS_PADRAO);
 // Cardio registrado, do mais recente ao mais antigo (poucos registros: cabe na memória)
 export const cardios = signal<CardioRealizado[]>([]);
+// Treinos concluídos (lembrete de backup no Início, 9.9)
+export const totalTreinos = signal(0);
 // sessaoId do último treino concluído do plano ativo (rotação, 6.3)
 export const ultimaSessaoConcluida = signal<string | null>(null);
 
@@ -42,6 +45,9 @@ export const semanaAtual = computed(() =>
 // Cartão Cardio do Início: "X de Y nesta semana" (9.3)
 export const progressoCardio = computed(() =>
   progressoDaSemana(planoAtivo.value?.cardio ?? [], cardios.value, hoje.value),
+);
+export const lembreteBackup = computed(() =>
+  precisaLembrete(preferencias.value.ultimoBackup, totalTreinos.value, hoje.value),
 );
 export const pilulaSemana = computed(() =>
   planoAtivo.value && semanaAtual.value ? rotuloSemana(planoAtivo.value, semanaAtual.value) : null,
@@ -57,7 +63,7 @@ export function mostrarAviso(msg: string): void {
 }
 
 export async function recarregar(): Promise<void> {
-  const [p, todos, c, h, t, pref, cs] = await Promise.all([
+  const [p, todos, c, h, t, pref, cs, n] = await Promise.all([
     lerPlanoAtivo(db),
     listarPlanos(db),
     lerConfigs(db),
@@ -65,6 +71,7 @@ export async function recarregar(): Promise<void> {
     treinoEmAndamento(db),
     lerPreferencias(db),
     listarCardio(db),
+    db.treinos.where('status').equals('concluido').count(),
   ]);
   planoAtivo.value = p;
   planos.value = todos;
@@ -73,6 +80,7 @@ export async function recarregar(): Promise<void> {
   treinoAberto.value = t;
   preferencias.value = pref;
   cardios.value = cs;
+  totalTreinos.value = n;
   ultimaSessaoConcluida.value = p ? ((await ultimoConcluido(db, p.id))?.sessaoId ?? null) : null;
 }
 

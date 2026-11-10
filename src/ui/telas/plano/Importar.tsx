@@ -5,6 +5,7 @@ import type { ResultadoParse } from '../../../dominio/formato/parser';
 import { importacao, importarPdf, importarTexto, limparImportacao } from '../../../app/importacao';
 import { navegar } from '../../../app/roteador';
 import { Botao, Cabecalho, Cartao, ItemChecklist } from '../../componentes/basicos';
+import { CartaoRestaurar } from './Dados';
 
 const plural = (n: number, um: string, varios: string) => `${n} ${n === 1 ? um : varios}`;
 
@@ -153,6 +154,8 @@ export function TelaImportar({ voltar }: { voltar?: string }) {
       )}
 
       {r && r.erros.length > 0 && <CartaoErro r={r} />}
+
+      {!voltar && !imp && <CartaoRestaurar titulo="Já usou o REPZ? Restaurar backup" />}
 
       {r?.plano && (
         <div class="rodape-acao">

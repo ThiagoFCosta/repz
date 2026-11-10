@@ -1,4 +1,4 @@
-// Tela Plano e dados (BRIEFING 9.9). Exportação e backup chegam no M6.
+// Tela Plano e dados (BRIEFING 9.9): plano ativo, exercícios, exportar e restaurar backup.
 
 import { useState } from 'preact/hooks';
 import { dataBR, ehDataValida } from '../../../dominio/datas';
@@ -14,11 +14,13 @@ import {
   pilulaSemana,
   planoAtivo,
   planos,
+  preferencias,
   recarregar,
   semanaAtual,
 } from '../../../app/estado';
 import { navegar } from '../../../app/roteador';
 import { Botao, Cabecalho, Cartao, Etiqueta, Pilula } from '../../componentes/basicos';
+import { CartaoExportar, CartaoRestaurar } from './Dados';
 import { seriesReps } from './formatos';
 
 function CampoSalto({ chave, nome }: { chave: string; nome: string }) {
@@ -209,8 +211,14 @@ export function TelaPlanoDados() {
       <Cartao titulo="Seus dados">
         <p>Seus dados ficam só neste celular. Sem conta, sem internet, sem nuvem.</p>
         <p class="muted pequeno">{TEXTO_PERSISTENCIA[persistencia.value]}</p>
-        <p class="muted pequeno">Exportar em PDF/CSV e backup completo chegam numa próxima versão.</p>
+        <p class="muted pequeno">
+          {preferencias.value.ultimoBackup
+            ? `Último backup: ${dataBR(preferencias.value.ultimoBackup.slice(0, 10))}.`
+            : 'Nenhum backup feito ainda.'}
+        </p>
       </Cartao>
+      <CartaoExportar />
+      <CartaoRestaurar />
     </section>
   );
 }
