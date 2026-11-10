@@ -1,0 +1,3 @@
+{ "name": "app-treino-referencia", "private": true, "type": "module",
+  "description": "Implementação de referência (especificação executável) do parser TREINO v1 e do motor de carga",
+  "dependencies": { "pdfjs-dist": "^4" } }

@@ -1,0 +1,80 @@
+INSTRUÇÃO PERMANENTE – FORMATO TREINO v1
+
+Sempre que você gerar um plano de treino (em PDF ou em texto), inclua no FINAL do documento uma seção chamada "Anexo – código do treino". Esse anexo é lido automaticamente por um aplicativo; o resto do documento pode ter o formato que você quiser.
+
+REGRAS DE APRESENTAÇÃO
+- Comece o anexo em uma página nova.
+- Use fonte monoespaçada, tamanho 9 ou menor, uma instrução por linha.
+- Mantenha cada linha com no máximo 80 caracteres.
+- Não use tabelas, negrito, listas ou cores dentro do anexo.
+- O conteúdo do anexo deve ser idêntico ao plano descrito no documento.
+
+ESTRUTURA (nesta ordem)
+#TREINO-INICIO v1
+PLANO: nome do plano | nome da pessoa | AAAA-MM-DD
+PROGRESSAO: dupla | rir A-B | carga +X-Y% | estagnado N
+BLOCO: total de semanas                       (opcional, se houver periodização)
+FASE: semanas | rir A-B [| rir_iso A-B] [| series +N foco] [| deload | volume P%]
+SESSAO: nome da sessão [| seg/ter/qua/qui/sex/sab/dom]
+EX: nome | séries | reps | descanso [| rir N] [| iso] [| foco]
+SS1: nome | séries | reps | descanso [| iso]
+SS1: nome | séries | reps | - [| iso]
+CARDIO: tipo | frequência | duração | intensidade [| fc A-B]
+TOTAL: N sessoes | M exercicios
+#TREINO-FIM
+
+SIGNIFICADO DOS CAMPOS
+- Separador de campos: barra vertical "|".
+- séries: número inteiro (ex.: 3).
+- reps: "8-12", "10" ou, para exercícios por tempo, "30-45s".
+- descanso: sempre em segundos, com "s" (ex.: "90s", "120-180s"). Use "-" quando não houver.
+- EX: exercício normal.
+- SS1, SS2, ...: bi-set/tri-set. Linhas com o mesmo número formam um grupo
+  dentro da sessão. Informe o descanso do grupo em uma das linhas e "-" nas demais.
+- Variantes: escreva as opções entre colchetes, separadas por "/":
+  "Supino reto [barra / maquina]" ou "[Barra fixa / Puxada]".
+  Todas as variantes precisam usar o mesmo tipo de repetição (reps ou tempo).
+- iso: marque exercícios isoladores (monoarticulares).
+- foco: marque exercícios de grupos prioritários/pontos fracos.
+- rir N: só quando o exercício tiver um RIR fixo diferente do restante.
+- FASE: semanas "1-4" ou "12". As fases devem cobrir todas as semanas do BLOCO,
+  sem sobreposição. "rir_iso" vale só para exercícios marcados com iso.
+  "series +1 foco" adiciona séries aos exercícios marcados com foco.
+  "deload | volume 50%" reduz as séries à metade.
+- SESSAO: a ordem das sessões é a ordem da rotação. O dia da semana é opcional.
+- CARDIO: tipo pode ter variantes "[Bicicleta / Remo]"; frequência ex. "2x",
+  "diario" ou "opcional"; duração em minutos com "min" (ex.: "30-40min");
+  intensidade ex. "z2" ou "leve".
+- TOTAL: conte as sessões e todas as linhas EX e SS. Serve para conferência.
+- Linhas começando com "#" são comentários e são ignoradas.
+
+PROIBIDO NO ANEXO
+- Referências a outros dias ("mesma variação de segunda"): escreva o exercício.
+- Observações dentro do nome ("Stiff (carga moderada)"): use os campos.
+- Unidades diferentes das definidas (ex.: "2 min" ou "1,5 min" no descanso).
+- Instruções de execução e erros comuns: ficam só no corpo do documento.
+
+EXEMPLO
+#TREINO-INICIO v1
+PLANO: Hipertrofia 5x | Raul | 2026-10-30
+PROGRESSAO: dupla | rir 1-3 | carga +2-5% | estagnado 3
+BLOCO: 12
+FASE: 1-4 | rir 2-3
+FASE: 5-8 | rir 1-2 | series +1 foco
+FASE: 9-11 | rir 1-2 | rir_iso 0-1
+FASE: 12 | deload | volume 50%
+SESSAO: Push | seg
+EX: Supino inclinado com halteres | 3 | 6-10 | 120-180s
+EX: Supino reto [barra / maquina] | 3 | 6-10 | 120-180s
+SS1: Elevacao lateral | 4 | 12-20 | 60-90s | iso
+SS1: Triceps na corda | 3 | 10-15 | - | iso
+SESSAO: Pernas | qua
+EX: Agachamento | 3 | 5-8 | 180s
+EX: Stiff | 3 | 8-10 | 120s | rir 3
+EX: Prancha | 3 | 30-45s | 60s | iso
+CARDIO: [Bicicleta / Remo] | 2x | 30-40min | z2 | fc 115-135
+TOTAL: 2 sessoes | 7 exercicios
+#TREINO-FIM
+
+Antes de entregar, confira: marcadores presentes, todas as linhas no formato,
+fases cobrindo todas as semanas e TOTAL igual à contagem real.

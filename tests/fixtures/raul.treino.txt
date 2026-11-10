@@ -1,0 +1,56 @@
+#TREINO-INICIO v1
+PLANO: Hipertrofia natural 5x | Raul | 2026-10-30
+PROGRESSAO: dupla | rir 1-3 | carga +2-5% | estagnado 3
+
+BLOCO: 12
+FASE: 1-4 | rir 2-3
+FASE: 5-8 | rir 1-2 | series +1 foco
+FASE: 9-11 | rir 1-2 | rir_iso 0-1
+FASE: 12 | deload | volume 50%
+
+SESSAO: Push | seg
+EX: Supino inclinado com halteres | 3 | 6-10 | 120-180s
+EX: Supino reto [barra / maquina] | 3 | 6-10 | 120-180s
+EX: Desenvolvimento com halteres sentado | 3 | 8-12 | 120s
+SS1: Elevacao lateral | 4 | 12-20 | 60-90s | iso
+SS1: Triceps na corda | 3 | 10-15 | - | iso
+EX: Triceps [frances / testa] | 3 | 8-12 | 90s | iso
+
+SESSAO: Pull | ter
+EX: [Barra fixa / Puxada] | 3 | 6-10 | 120-180s
+EX: Remada [curvada / cavalinho] | 3 | 8-10 | 120s
+EX: Remada [no cabo / unilateral] | 3 | 10-12 | 90-120s
+SS1: Face pull | 3 | 12-20 | 60-90s | iso
+SS1: Rosca inclinada | 3 | 8-12 | - | iso
+EX: Rosca martelo | 2 | 10-12 | 60s | iso
+
+SESSAO: Pernas quadriceps | qua
+EX: Agachamento | 3 | 5-8 | 180s
+EX: Stiff | 3 | 8-10 | 120s | rir 3
+EX: Leg press | 3 | 8-12 | 120-180s
+EX: Cadeira extensora | 3 | 10-15 | 90s | iso
+EX: Panturrilha [em pe / no leg press] | 4 | 8-15 | 60-90s | iso
+
+SESSAO: Upper | qui
+# PDF dizia "variacao diferente da de segunda": resolvido aqui
+EX: Supino [maquina / inclinado barra] | 3 | 8-12 | 120s
+EX: Remada com peito apoiado | 3 | 8-12 | 120s
+EX: Puxada pegada neutra | 2 | 10-12 | 90s
+SS1: [Crucifixo / Cross-over] | 2 | 12-15 | 60-90s | iso
+SS1: Elevacao lateral | 3 | 15-20 | - | iso
+SS2: Rosca direta | 2 | 10-15 | 60-90s | iso
+SS2: Triceps na corda | 2 | 10-15 | - | iso
+
+SESSAO: Lower posterior | sex
+EX: [Stiff / Levantamento romeno] | 3 | 6-10 | 120-180s
+EX: [Hack squat / Afundo bulgaro] | 3 | 8-12 | 120s
+EX: Mesa flexora | 3 | 10-15 | 90s | iso
+EX: Hip thrust | 3 | 8-12 | 120s
+SS1: Panturrilha em pe | 4 | 10-20 | 60-90s | iso
+SS1: Abdominal infra | 3 | 10-15 | - | iso
+
+CARDIO: [Bicicleta / Remo] | 2x | 30-40min | z2 | fc 115-135
+CARDIO: Bicicleta | opcional | 10-15min | leve
+
+TOTAL: 5 sessoes | 30 exercicios
+#TREINO-FIM
