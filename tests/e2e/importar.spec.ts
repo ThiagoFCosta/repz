@@ -32,7 +32,7 @@ test('importa o PDF do Raul, revisa, salva e mantém após recarregar', async ({
 
   await page.getByRole('link', { name: 'Treino' }).click();
   await expect(page.getByText(/Semana \d+ de 12/)).toBeVisible();
-  await expect(page.getByText('Pernas quadriceps')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
 });
 
 // BRIEFING 15, E2E 2: PDF sem anexo → erro claro, nada salvo
