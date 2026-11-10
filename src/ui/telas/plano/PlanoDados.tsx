@@ -20,6 +20,8 @@ import {
 } from '../../../app/estado';
 import { navegar } from '../../../app/roteador';
 import { Botao, Cabecalho, Cartao, Etiqueta, Pilula } from '../../componentes/basicos';
+import { alterarPreferencias } from '../../../dados/repos/meta';
+import type { Preferencias } from '../../../dados/tipos';
 import { CartaoExportar, CartaoRestaurar } from './Dados';
 import { seriesReps } from './formatos';
 
@@ -103,6 +105,36 @@ function ListaExercicios({ plano }: { plano: Plano }) {
         </details>
       ))}
     </>
+  );
+}
+
+// Preferências do treino (BRIEFING 9.5: wake lock configurável; som e vibração do descanso)
+const OPCOES_TREINO: { chave: 'manterTelaLigada' | 'somDescanso' | 'vibrar'; rotulo: string }[] = [
+  { chave: 'manterTelaLigada', rotulo: 'Manter a tela ligada durante o treino' },
+  { chave: 'somDescanso', rotulo: 'Bipe no fim do descanso' },
+  { chave: 'vibrar', rotulo: 'Vibrar no fim do descanso' },
+];
+
+function CartaoPreferencias() {
+  const alternar = async (chave: keyof Preferencias, valor: boolean) => {
+    await alterarPreferencias(db, { [chave]: valor });
+    await recarregar();
+  };
+  return (
+    <Cartao titulo="Durante o treino">
+      {OPCOES_TREINO.map((o) => (
+        <label class="ex-config-linha" key={o.chave}>
+          <span>{o.rotulo}</span>
+          <input
+            type="checkbox"
+            class="interruptor"
+            checked={preferencias.value[o.chave]}
+            onChange={(e) => void alternar(o.chave, e.currentTarget.checked)}
+          />
+        </label>
+      ))}
+      <p class="muted pequeno">Vale a partir do próximo treino ou descanso.</p>
+    </Cartao>
   );
 }
 
@@ -207,6 +239,8 @@ export function TelaPlanoDados() {
           </ul>
         </Cartao>
       )}
+
+      <CartaoPreferencias />
 
       <Cartao titulo="Seus dados">
         <p>Seus dados ficam só neste celular. Sem conta, sem internet, sem nuvem.</p>

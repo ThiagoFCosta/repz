@@ -23,3 +23,9 @@ export async function gravarMeta<K extends keyof MetaValores>(
 export async function lerPreferencias(db: RepzDb): Promise<Preferencias> {
   return { ...PREFERENCIAS_PADRAO, ...(await lerMeta(db, 'preferencias')) };
 }
+
+export async function alterarPreferencias(db: RepzDb, mudanca: Partial<Preferencias>): Promise<void> {
+  await db.transaction('rw', db.meta, async () => {
+    await gravarMeta(db, 'preferencias', { ...(await lerPreferencias(db)), ...mudanca });
+  });
+}

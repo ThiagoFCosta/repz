@@ -22,7 +22,7 @@ import {
   vincular,
 } from '../../src/dados/repos/config';
 import { chavesComHistorico, treinoEmAndamento } from '../../src/dados/repos/treinos';
-import { lerMeta, lerPreferencias } from '../../src/dados/repos/meta';
+import { alterarPreferencias, lerMeta, lerPreferencias } from '../../src/dados/repos/meta';
 import type { SerieRealizada, Treino } from '../../src/dados/tipos';
 
 const texto = fs.readFileSync(new URL('../fixtures/raul.treino.txt', import.meta.url), 'utf8');
@@ -79,6 +79,18 @@ const serie = (chave: string, treinoId = 't1', aquecimento = false): SerieRealiz
   feitaEm: '2026-11-09T19:10:00-03:00',
   sugestaoKg: null,
   sugestaoAceita: null,
+});
+
+describe('preferências', () => {
+  it('alterar uma preferência mantém as outras', async () => {
+    await alterarPreferencias(db, { ultimoBackup: '2026-11-09T20:00:00-03:00' });
+    await alterarPreferencias(db, { manterTelaLigada: false });
+    expect(await lerPreferencias(db)).toMatchObject({
+      manterTelaLigada: false,
+      somDescanso: true,
+      ultimoBackup: '2026-11-09T20:00:00-03:00',
+    });
+  });
 });
 
 describe('banco vazio (schema v1)', () => {
