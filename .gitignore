@@ -6,3 +6,6 @@ test-results/
 *.zip
 *.log
 .DS_Store
+
+# Dados reais (PDF do NutriDiet, backups, prints): NUNCA versionar
+dados-reais/

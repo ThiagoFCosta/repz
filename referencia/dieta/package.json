@@ -1,0 +1,3 @@
+{ "name": "repz-referencia-dieta", "private": true, "type": "module",
+  "description": "Protótipo testado: leitura do PDF do NutriDiet, base TACO e substituições calculadas",
+  "dependencies": { "pdfjs-dist": "^4" } }
