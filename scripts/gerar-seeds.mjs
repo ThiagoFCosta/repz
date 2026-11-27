@@ -24,7 +24,13 @@ export function uuidv5(nome, ns = NAMESPACE) {
 }
 
 // "Tr" = traços = 0; "*", "NA" e vazio = sem dado
-const num = (v) => (typeof v === 'number' ? Math.round(v * 100) / 100 : v === 'Tr' ? 0 : null);
+// O SQL grava com 2 casas (as colunas da tabela); a base embutida do app guarda 4 (V6): arredondar a 2 casas muda
+// substituições na borda do degrau de 5 g. Os dois arredondam direto do valor da TACO.
+const valor = (v) => (typeof v === 'number' ? v : v === 'Tr' ? 0 : null);
+const casas = (n) => (v) => (typeof v === 'number' ? Math.round(v * 10 ** n) / 10 ** n : v);
+const num = valor;
+const dois = casas(2);
+const quatro = casas(4);
 const sql = (v) =>
   v == null ? 'null' : typeof v === 'number' ? String(v) : `'${String(v).replace(/'/g, "''")}'`;
 
@@ -60,7 +66,7 @@ const linhas = [
 
 const valores = linhas.map(
   (a) =>
-    `(${[a.id, a.nome, a.fonte, a.categoria, a.kcal, a.p, a.c, a.g, a.fibra, grupoDe(a.nome)].map(sql).join(', ')}, null)`,
+    `(${[a.id, a.nome, a.fonte, a.categoria, dois(a.kcal), dois(a.p), dois(a.c), dois(a.g), dois(a.fibra), grupoDe(a.nome)].map(sql).join(', ')}, null)`,
 );
 const texto = `-- GERADO por scripts/gerar-seeds.mjs: não edite à mão.
 -- Base global de alimentos (user_id nulo, somente leitura): ${taco.length} da TACO 4ª ed. (NEPA/UNICAMP, 2011;
@@ -69,6 +75,30 @@ insert into public.alimentos (id, nome, fonte, categoria, kcal, p, c, g, fibra, 
 ${valores.join(',\n')};
 `;
 writeFileSync(DESTINO, texto);
+
+// A mesma base embutida no domínio (V6): o app calcula totais e substituições offline e a Edge Function usa o
+// mesmo módulo. Compacta: [id, nome, fonte, kcal, p, c, g, grupo].
+const BASE_TS = new URL('../src/dominio/dieta/base.gerado.ts', import.meta.url);
+const tupla = (a) => [
+  a.id,
+  a.nome,
+  a.fonte,
+  quatro(a.kcal),
+  quatro(a.p),
+  quatro(a.c),
+  quatro(a.g),
+  grupoDe(a.nome),
+];
+writeFileSync(
+  BASE_TS,
+  `// GERADO por scripts/gerar-seeds.mjs: não edite à mão. Mesmos ids da tabela \`alimentos\` do Supabase.
+// TACO 4ª ed. (NEPA/UNICAMP, 2011; reprodução permitida com citação da fonte) + rótulos genéricos. Por 100 g.
+// [id, nome, fonte, kcal, proteína, carboidrato, gordura, grupo de substituição]; null = sem dado na fonte.
+export type LinhaBase = [string, string, 'taco' | 'rotulo', number | null, number | null, number | null, number | null, string | null];
+
+export const BASE_GERADA: readonly LinhaBase[] = ${JSON.stringify(linhas.map(tupla))};
+`,
+);
 console.log(
   `${linhas.length} alimentos (${linhas.filter((l) => grupoDe(l.nome)).length} com grupo) → ${DESTINO.pathname}`,
 );

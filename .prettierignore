@@ -12,3 +12,4 @@ design-system
 DESIGN.md
 supabase/migrations/*_v1_alimentos.sql
 supabase/migrations/*_v4_referencias.sql
+src/dominio/dieta/base.gerado.ts

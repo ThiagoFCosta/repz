@@ -1,0 +1,947 @@
+[
+ {
+  "pagina": 1,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 1,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 1,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 1,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 1,
+  "texto": "Dias de Exercício",
+  "x": 251.95
+ },
+ {
+  "pagina": 1,
+  "texto": "CAFÉ DA MANHÃ (07:30)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Ovo de galinha - Frito(a)\t2 unidades (100g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Queijo mussarela\t1 fatia (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "LANCHE DA MANHÃ (10:00)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Banana, prata, crua\t1 unidade média (90g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Castanha de caju\t4 unidades (12g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Castanha do Pará\t2 unidades (8g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "ALMOÇO (12:30)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 5 colheres de sopa cheias (125g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "LANCHE DA TARDE (15:30)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Queijo minas, frescal\t2 fatias médias (60g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Peito de peru\t1 fatia (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Banana, prata, crua\t1 unidade média (90g)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "PRÉ-TREINO (17:00)",
+  "x": 38
+ },
+ {
+  "pagina": 1,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 1,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 1,
+  "texto": "1",
+  "x": 294.16
+ },
+ {
+  "pagina": 2,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 2,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 2,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 2,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 2,
+  "texto": "Iogurte, natural, desnatado\t1 unidade (170g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Morango\t4 unidades médias (48g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Whey Protein\t1 medidor (30g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "JANTAR (20:00)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 3 colheres de sopa cheias (75g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "CEIA (23:00)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Leite de vaca desnatado\t1 copo (200mL)",
+  "x": 38
+ },
+ {
+  "pagina": 2,
+  "texto": "Em dias de treino de perna, incluir uma banana no pré-treino",
+  "x": 36
+ },
+ {
+  "pagina": 2,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 2,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 2,
+  "texto": "2",
+  "x": 294.16
+ },
+ {
+  "pagina": 3,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 3,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 3,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 3,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 3,
+  "texto": "Perna + Bike",
+  "x": 264.33
+ },
+ {
+  "pagina": 3,
+  "texto": "CAFÉ DA MANHÃ (07:30)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Ovo de galinha - Frito(a)\t2 unidades (100g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "LANCHE DA MANHÃ (10:00)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Banana, prata, crua\t1 unidade média (90g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Castanha de caju\t4 unidades (12g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "ALMOÇO (12:30)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 4 colheres de sopa cheias (100g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "LANCHE DA TARDE (15:30)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Queijo minas, frescal\t2 fatias médias (60g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Banana, prata, crua\t1 unidade média (90g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "PRÉ-TREINO (17:00)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Iogurte, natural, desnatado\t1 unidade (170g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Morango\t4 unidades médias (48g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "Aveia em flocos\t2 colheres de sopa cheias (30g)",
+  "x": 38
+ },
+ {
+  "pagina": 3,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 3,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 3,
+  "texto": "3",
+  "x": 294.16
+ },
+ {
+  "pagina": 4,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 4,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 4,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 4,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 4,
+  "texto": "JANTAR (20:00)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 3 colheres de sopa cheias (75g)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 4,
+  "texto": "Beber 4L de água",
+  "x": 36
+ },
+ {
+  "pagina": 4,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 4,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 4,
+  "texto": "4",
+  "x": 294.16
+ },
+ {
+  "pagina": 5,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 5,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 5,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 5,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 5,
+  "texto": "Descanso",
+  "x": 271.52
+ },
+ {
+  "pagina": 5,
+  "texto": "CAFÉ DA MANHÃ (07:30)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Ovo de galinha - Frito(a)\t2 unidades (100g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "LANCHE DA MANHÃ (10:00)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Castanha de caju\t4 unidades (12g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "ALMOÇO (12:30)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 3 colheres de sopa cheias (75g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "LANCHE DA TARDE (15:30)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Queijo minas, frescal\t2 fatias médias (60g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "PRÉ-TREINO (17:00)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Iogurte, natural, desnatado\t1 unidade (170g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Morango\t4 unidades médias (48g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "JANTAR (20:00)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 2 colheres de sopa cheias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 5,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 5,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 5,
+  "texto": "5",
+  "x": 294.16
+ },
+ {
+  "pagina": 6,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 6,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 6,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 6,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 6,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 6,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 6,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 6,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 6,
+  "texto": "CEIA (23:00)",
+  "x": 38
+ },
+ {
+  "pagina": 6,
+  "texto": "Leite de vaca desnatado\t1 copo (200mL)",
+  "x": 38
+ },
+ {
+  "pagina": 6,
+  "texto": "Beber 3L de água",
+  "x": 36
+ },
+ {
+  "pagina": 6,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 6,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 6,
+  "texto": "6",
+  "x": 294.16
+ },
+ {
+  "pagina": 7,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 7,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 7,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 7,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 7,
+  "texto": "Superiores + Bike",
+  "x": 250.88
+ },
+ {
+  "pagina": 7,
+  "texto": "CAFÉ DA MANHÃ (07:30)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Ovo de galinha - Frito(a)\t2 unidades (100g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "LANCHE DA MANHÃ (10:00)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Banana, prata, crua\t1 unidade média (90g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Castanha de caju\t4 unidades (12g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Castanha do Pará\tunidade",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "ALMOÇO (12:30)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 4 colheres de sopa cheias (100g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "LANCHE DA TARDE (15:30)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Pão de forma industrializado de qualquer marca\t2 fatias (50g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Queijo minas, frescal\t2 fatias médias (60g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Banana, prata, crua\tunidade média",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Café\t1 xícara média (130mL)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "PRÉ-TREINO (17:00)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Iogurte, natural, desnatado\t1 unidade (170g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "Morango\t4 unidades médias (48g)",
+  "x": 38
+ },
+ {
+  "pagina": 7,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 7,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 7,
+  "texto": "7",
+  "x": 294.16
+ },
+ {
+  "pagina": 8,
+  "texto": "Personalize alguma informação aqui",
+  "x": 345
+ },
+ {
+  "pagina": 8,
+  "texto": "Plano Alimentar",
+  "x": 251.82
+ },
+ {
+  "pagina": 8,
+  "texto": "Nome: Paciente Exemplo\tData da consulta: 01/01/2026",
+  "x": 40
+ },
+ {
+  "pagina": 8,
+  "texto": "Idade: 30 anos\tPeso: 80.0 kg\tAltura: 175.0 cm",
+  "x": 40
+ },
+ {
+  "pagina": 8,
+  "texto": "Aveia em flocos\t1 colher de sopa cheia (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "JANTAR (20:00)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "Arroz (branco, polido, parboilizado, agulha, agulhinha, 3 colheres de sopa cheias (75g)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "etc.)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "Filé de frango - Grelhado(a)/brasa/churrasco\t1.5 filés grandes (150g)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "Alface\t2 folhas médias (20g)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "Tomate\t1 fatia média (15g)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "Salada, de legumes, cozida no vapor\t4 colheres de sopa cheias (120g)",
+  "x": 38
+ },
+ {
+  "pagina": 8,
+  "texto": "Beber 3L de água",
+  "x": 36
+ },
+ {
+  "pagina": 8,
+  "texto": "-------------------------------------Escreva o seu rodapé personalizado -----------------------------------------",
+  "x": 42.61
+ },
+ {
+  "pagina": 8,
+  "texto": "-----------------------------------------------------------------------------",
+  "x": 143.65
+ },
+ {
+  "pagina": 8,
+  "texto": "8",
+  "x": 294.16
+ }
+]
