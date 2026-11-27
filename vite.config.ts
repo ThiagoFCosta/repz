@@ -97,7 +97,13 @@ export default defineConfig({
     sourcemap: false,
   },
   test: {
-    include: ['tests/unit/**/*.test.ts', 'tests/dados/**/*.test.ts', 'tests/pdf/**/*.test.ts'],
+    include: [
+      'tests/unit/**/*.test.ts',
+      'tests/dados/**/*.test.ts',
+      'tests/pdf/**/*.test.ts',
+      // contra o projeto real; pulado sem .env.local (tests/rls/rls.test.ts)
+      'tests/rls/**/*.test.ts',
+    ],
     environment: 'node',
     coverage: {
       provider: 'v8',

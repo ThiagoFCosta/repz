@@ -17,6 +17,7 @@
     "check:dist": "node scripts/verificar-dist.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "2.118.0",
     "dexie": "4.4.7",
     "jspdf": "4.2.1",
     "pdfjs-dist": "4.10.38",
@@ -44,6 +45,7 @@
     "fake-indexeddb": "6.2.8",
     "globals": "17.14.0",
     "prettier": "3.9.10",
+    "supabase": "2.122.0",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.2",

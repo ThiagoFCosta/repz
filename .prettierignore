@@ -10,3 +10,4 @@ package-lock.json
 BRIEFING-v2.md
 design-system
 DESIGN.md
+supabase/migrations/*_v1_alimentos.sql
