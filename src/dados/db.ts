@@ -1,6 +1,7 @@
 // Banco IndexedDB (Dexie). Cada versão de schema fica declarada aqui, com a migração em migracoes/.
 
 import Dexie, { type EntityTable } from 'dexie';
+import { middlewareSincronia, chaveMarca, STORES_SINCRONIZADAS, type MarcaSincronia } from './sincronia';
 import type { CardioRealizado, ConfigExercicio, Meta, Plano, SerieRealizada, Treino } from './tipos';
 
 export const NOME_DB = 'repz';
@@ -12,6 +13,7 @@ export class RepzDb extends Dexie {
   cardio!: EntityTable<CardioRealizado, 'id'>;
   configExercicios!: EntityTable<ConfigExercicio, 'chave'>;
   meta!: EntityTable<Meta, 'chave'>;
+  sincronia!: EntityTable<MarcaSincronia, 'chave'>;
 
   constructor(nome = NOME_DB) {
     super(nome);
@@ -25,9 +27,33 @@ export class RepzDb extends Dexie {
       configExercicios: 'chave, apelidoDe',
       meta: 'chave',
     });
+    // v2 (V2 · sincronização): marca de cada registro que precisa subir para o Supabase (src/dados/sincronia.ts).
+    // O que já existia no aparelho fica pendente: sobe na 1ª sincronização.
+    this.version(2)
+      .stores({ sincronia: 'chave, pendente, store' })
+      .upgrade(async (tx) => {
+        const agora = new Date().toISOString();
+        const marcas: MarcaSincronia[] = [];
+        for (const store of STORES_SINCRONIZADAS) {
+          const ids = (await tx.table(store).toCollection().primaryKeys()) as string[];
+          for (const id of ids)
+            if (store !== 'meta' || id === 'preferencias' || id === 'planoAtivoId')
+              marcas.push({
+                chave: chaveMarca(store, id),
+                store,
+                id,
+                pendente: 1,
+                excluido: false,
+                modificadoEm: agora,
+              });
+        }
+        await tx.table('sincronia').bulkPut(marcas);
+      });
+    this.use(middlewareSincronia);
   }
 }
 
+// Versão do formato dos dados de treino (backup). A store `sincronia` (Dexie v2) não entra no backup.
 export const VERSAO_SCHEMA = 1;
 
 export function novoId(): string {

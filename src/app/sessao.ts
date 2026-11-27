@@ -4,6 +4,7 @@
 import { ErroRemoto, remoto, type Usuario } from '../remoto';
 import { restaurarTreino } from './controlador-treino';
 import { iniciarEstado } from './estado';
+import { iniciarSincronizador } from './sincronizador';
 import { signal } from './sinal';
 
 const CHAVE = 'repz.usuario';
@@ -32,6 +33,7 @@ async function abrir(u: Usuario): Promise<void> {
   gravarMarca(u);
   usuarioAtual.value = u;
   await iniciarEstado(u.id, restaurarTreino);
+  iniciarSincronizador(u.id);
 }
 
 export async function iniciarSessao(): Promise<void> {

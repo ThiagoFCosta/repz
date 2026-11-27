@@ -3,7 +3,7 @@ import { SupabaseRemoto } from './supabase';
 import type { Remoto } from './tipos';
 
 export type { Remoto, Usuario } from './tipos';
-export { ErroRemoto } from './tipos';
+export { ErroRede, ErroRemoto } from './tipos';
 
 // VITE_REMOTO=memoria: E2E e desenvolvimento sem servidor
 export const remoto: Remoto =

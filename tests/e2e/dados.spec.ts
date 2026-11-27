@@ -99,10 +99,11 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
   await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
   await expect(lembrete).toBeHidden();
 
-  // Limpar os dados (como num celular novo)
+  // Limpar os dados (como num celular novo e uma conta sem nada no servidor: v2, D51)
   await page.evaluate(
     () =>
       new Promise<void>((ok, erro) => {
+        localStorage.removeItem('repz.memoria.banco');
         const r = indexedDB.deleteDatabase('repz-00000000-0000-4000-8000-00000000e2e0');
         r.onsuccess = () => ok();
         r.onerror = () => erro(r.error);

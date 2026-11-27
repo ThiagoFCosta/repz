@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Avatar, Button, Card } from '@ds';
 import { sair, usuarioAtual } from '../../../app/sessao';
 import { Cabecalho } from '../../componentes/basicos';
+import { CartaoSincronizacao } from './Sincronizacao';
 
 export function TelaPerfil() {
   const u = usuarioAtual.value;
@@ -21,9 +22,10 @@ export function TelaPerfil() {
           </div>
         </div>
       </Card>
+      <CartaoSincronizacao />
       <div className="pilha perfil-acoes">
         <p className="muted pequeno">
-          Ao sair, seus dados continuam neste celular e voltam quando você entrar de novo.
+          Ao sair, seus dados continuam neste celular. O que ainda não subiu sobe quando você entrar de novo.
         </p>
         <Button
           variant="secondary"

@@ -51,3 +51,41 @@ body,
 .perfil-acoes {
   margin-top: var(--space-4);
 }
+
+/* ---- Sincronização (V2) ---- */
+.selo-offline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1) var(--space-2-5);
+  border-radius: var(--radius-pill);
+  background: var(--surface-brand-soft);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sync-linha {
+  margin: 0;
+  font-weight: 600;
+}
+
+.sync-erros {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--surface-danger);
+  color: var(--text-danger-strong);
+}
+
+.sync-erros p {
+  margin: 0;
+}
+
+.perfil-acoes,
+.pr-card + .pr-card {
+  margin-top: var(--space-4);
+}

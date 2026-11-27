@@ -78,8 +78,18 @@ V0 Fase 0 ─► V1 Base ─► V2 Sync ─► V3 Treino+ ─► V4 Motor v2 ─
 6. Treino em andamento em outro aparelho: aviso.
 7. Testes: outbox atômica; reenvio idempotente; offline → online sem perda nem duplicidade (com `MemoriaRemoto`); conflito de dois aparelhos; 4xx não trava a fila; backup v1 do Thiago (anonimizado) → v2; E2E "treino completo offline → reconectar → dados no remoto"; o mesmo E2E contra o projeto real (`e2e:supabase`).
 
+**Feito no V2 (27/11/2026)**
+- Middleware de marcação na mesma transação (D51) e motor de envio/recebimento (`src/dados/sincronizar.ts`), com
+  last-write-wins, exclusões, plano ativo único, erros 4xx isolados e "Tentar de novo".
+- `app/sincronizador.ts`: ao abrir, ao voltar a rede e o app, 2 s depois de cada escrita, a cada 5 min; espera
+  exponencial sem rede. Selo "Offline · salvo no celular" e cartão Sincronização no Perfil.
+- Backup da v1 → v2 pelo fluxo de restauração existente (D52).
+- Testes: 7 do middleware, 7 do motor (offline → online, aparelho novo, conflito, exclusão, recusa, edição durante o
+  envio, plano ativo), 1 contra o Supabase real (dois "aparelhos"), E2E offline → online.
+- Ficou para depois: aviso de treino em andamento em outro aparelho (tarefa 6) e Configurações como tela própria.
+
 **Aceite**
-- [ ] Treino completo offline sincroniza depois **sem perda nem duplicidade** (E2E nos dois remotos).
+- [x] Treino completo offline sincroniza depois **sem perda nem duplicidade** (E2E com o remoto em memória e teste de integração com o Supabase real).
 - [ ] Desinstalar o app, instalar de novo e entrar: tudo volta do Supabase.
 - [ ] Thiago e irmão importam o backup da v1 na v2 e conferem histórico e sugestões (no celular). Depois disso, D47 (repo privado) pode ser executada.
 

@@ -15,6 +15,7 @@ import {
 import { aplicarAtualizacao, atualizacaoDisponivel } from '../../app/pwa';
 import { aviso, preferencias, treinoAberto } from '../../app/estado';
 import { navegar, rota, type Aba } from '../../app/roteador';
+import { SeloOffline } from '../componentes/SeloOffline';
 
 const BARRA: (BottomNavItem & { destino: string; aba: Aba })[] = [
   { id: 'inicio', label: 'Início', icon: 'house', destino: '', aba: 'inicio' },
@@ -69,7 +70,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           title={<Logo size={24} />}
           search={false}
           onMenuClick={() => setMenuAberto(true)}
-          mobileActions={<span />}
+          mobileActions={<SeloOffline />}
           desktopActions={<span />}
           user={{ name: nome }}
         />
