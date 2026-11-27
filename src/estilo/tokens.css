@@ -1,34 +1,31 @@
-/* Tokens do tema escuro (BRIEFING seção 12, mesmos valores dos mockups aprovados) */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('./fontes/inter-latin-wght.woff2') format('woff2');
-}
-
+/* Ponte v1 -> design system do Prisma (docs/v2/ARCHITECTURE.md, seção 6). Os nomes da v1 continuam valendo no
+   componentes.css, mas cada um aponta para um token semântico do Prisma: o tema claro/escuro vem dos tokens
+   (segue o sistema). Não declare cores, fontes, raios ou espaços literais aqui. */
 :root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --border: #262c36;
-  --border-forte: #30363d;
-  --text: #e6edf3;
-  --muted: #8b949e;
-  --muted-2: #7d8590;
-  --primary: #2ea043;
-  --primary-texto: #58d68d;
-  /* fundo de botão com texto branco: #2ea043 dá 3,3:1, abaixo do AA (D28) */
-  --primary-fundo: #238636;
-  --info: #58a6ff;
-  --ss: #b392f0;
-  --warn: #e3b341;
-  --down: #f0883e;
-  --error: #f85149;
+  --bg: var(--bg-page);
+  --surface: var(--surface-card);
+  --border: var(--border-default);
+  --border-forte: var(--border-strong);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --muted-2: var(--text-secondary);
+  /* realces: lime em superfície, texto de sucesso em texto */
+  --primary: var(--surface-brand);
+  --primary-texto: var(--text-success-strong);
+  /* ação principal: forest com texto claro (como no Prisma) */
+  --primary-fundo: var(--surface-inverse);
+  --primary-sobre: var(--text-on-inverse);
+  /* foco e links: nunca azul nem roxo (BRIEFING-v2, seção 12) */
+  --info: var(--text-link);
+  --ss: var(--text-accent);
+  --warn: var(--text-warning);
+  --down: var(--text-owe);
+  --error: var(--text-danger-strong);
 
-  --fonte: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --raio: 12px;
-  --raio-pequeno: 8px;
-  --toque: 48px; /* alvo mínimo ≥ 44 px */
-  --espaco: 16px;
-  --altura-abas: 64px;
+  --fonte: var(--font-body);
+  --raio: var(--radius-card);
+  --raio-pequeno: var(--radius-control);
+  --toque: var(--control-h-lg); /* alvo mínimo ≥ 44 px */
+  --espaco: var(--space-4);
+  --altura-abas: calc(var(--touch-target) + var(--space-5));
 }

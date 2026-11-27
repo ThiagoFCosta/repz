@@ -1,0 +1,9 @@
+/* Entrada única de estilos: Tailwind v4 + tokens do design system (design-system/tokens, fonte: DESIGN.md) e o
+   CSS das telas da v1, que só usa variáveis (src/estilo/tokens.css faz a ponte). */
+@layer theme, base, components, utilities;
+@import 'tailwindcss';
+@import '../../design-system/tokens/index.css';
+@import '../../design-system/tokens/tailwind.css';
+@import './tokens.css';
+@import './base.css';
+@import './componentes.css';

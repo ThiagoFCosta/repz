@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type Variante = 'primario' | 'secundario' | 'texto' | 'perigo';
@@ -72,9 +73,9 @@ export function Cabecalho({ titulo, voltar }: { titulo: string; voltar?: string 
   return (
     <header className="cabecalho">
       {voltar && (
-        <a className="cabecalho-voltar" href={voltar} aria-label="Voltar">
+        <Link className="cabecalho-voltar" to={voltar} aria-label="Voltar">
           ‹
-        </a>
+        </Link>
       )}
       <h1>{titulo}</h1>
     </header>

@@ -1,0 +1,10 @@
+/* Prisma — minimal element defaults so cards, kits and consumers start on-brand. */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font-sans);font-size:var(--text-base);line-height:var(--leading-normal);color:var(--text-primary);background:var(--bg-page);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-feature-settings:"ss01"}
+a{color:var(--text-link);text-decoration:underline;text-decoration-color:var(--lime-400);text-underline-offset:3px}
+a:hover{color:var(--text-link-hover);text-decoration-color:var(--border-inverse)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--border-inverse);outline-offset:2px}
+::selection{background:var(--lime-300);color:var(--forest-900)}
+.tabular{font-variant-numeric:tabular-nums}

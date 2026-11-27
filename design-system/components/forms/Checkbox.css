@@ -1,0 +1,12 @@
+@layer components {
+.pr-check{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font:400 var(--text-sm)/1.3 var(--font-sans);color:var(--text-primary);-webkit-tap-highlight-color:transparent}
+.pr-check--disabled{opacity:.5;cursor:not-allowed}
+.pr-check input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.pr-check__box{position:relative;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex-shrink:0;border-radius:5px;border:1.5px solid var(--control-border);background:var(--surface-card);color:var(--accent-on-inverse);transition:all var(--duration-fast) var(--ease-standard)}
+.pr-check:hover .pr-check__box{border-color:var(--control-border-hover)}
+.pr-check input:checked+.pr-check__box,.pr-check input:indeterminate+.pr-check__box{background:var(--surface-inverse);border-color:var(--surface-inverse);color:var(--accent-on-inverse)}
+.pr-check input:focus-visible+.pr-check__box{box-shadow:var(--shadow-focus)}
+.pr-check--error .pr-check__box{border-color:var(--border-danger)}
+.pr-check__box svg{opacity:0;transform:scale(.6);transition:all var(--duration-fast) var(--ease-out)}
+.pr-check input:checked+.pr-check__box svg,.pr-check input:indeterminate+.pr-check__box svg{opacity:1;transform:none}
+}

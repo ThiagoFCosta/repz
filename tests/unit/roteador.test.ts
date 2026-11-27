@@ -1,25 +1,28 @@
 import { describe, expect, it } from 'vitest';
-import { rotaDoHash } from '../../src/app/roteador';
+import { rotaDoCaminho } from '../../src/app/roteador';
 
-describe('rotaDoHash', () => {
-  it('lê as três abas', () => {
-    expect(rotaDoHash('#/treino')).toEqual({ aba: 'treino', caminho: [] });
-    expect(rotaDoHash('#/historico')).toEqual({ aba: 'historico', caminho: [] });
-    expect(rotaDoHash('#/plano')).toEqual({ aba: 'plano', caminho: [] });
+// v2: rotas por caminho (docs/v2/DECISOES.md, D33)
+describe('rotaDoCaminho', () => {
+  it('lê o Início, as abas da v1 e as telas novas', () => {
+    expect(rotaDoCaminho('/')).toEqual({ aba: 'inicio', caminho: [] });
+    expect(rotaDoCaminho('/treino')).toEqual({ aba: 'treino', caminho: [] });
+    expect(rotaDoCaminho('/historico')).toEqual({ aba: 'historico', caminho: [] });
+    expect(rotaDoCaminho('/plano')).toEqual({ aba: 'plano', caminho: [] });
+    expect(rotaDoCaminho('/corpo')).toEqual({ aba: 'corpo', caminho: [] });
   });
 
   it('lê subcaminhos e ignora parâmetros', () => {
-    expect(rotaDoHash('#/plano/revisar')).toEqual({ aba: 'plano', caminho: ['revisar'] });
-    expect(rotaDoHash('#/historico/supino%20reto/2026')).toEqual({
+    expect(rotaDoCaminho('/plano/revisar')).toEqual({ aba: 'plano', caminho: ['revisar'] });
+    expect(rotaDoCaminho('/historico/supino%20reto/2026')).toEqual({
       aba: 'historico',
       caminho: ['supino reto', '2026'],
     });
-    expect(rotaDoHash('#/plano/importar?x=1')).toEqual({ aba: 'plano', caminho: ['importar'] });
+    expect(rotaDoCaminho('/plano/importar?x=1')).toEqual({ aba: 'plano', caminho: ['importar'] });
   });
 
-  it('cai em treino quando o hash é vazio ou desconhecido', () => {
-    expect(rotaDoHash('')).toEqual({ aba: 'treino', caminho: [] });
-    expect(rotaDoHash('#/')).toEqual({ aba: 'treino', caminho: [] });
-    expect(rotaDoHash('#/qualquer/coisa')).toEqual({ aba: 'treino', caminho: [] });
+  it('cai no Início quando o caminho é vazio ou desconhecido', () => {
+    expect(rotaDoCaminho('')).toEqual({ aba: 'inicio', caminho: [] });
+    expect(rotaDoCaminho('/inicio')).toEqual({ aba: 'inicio', caminho: [] });
+    expect(rotaDoCaminho('/qualquer/coisa')).toEqual({ aba: 'inicio', caminho: [] });
   });
 });

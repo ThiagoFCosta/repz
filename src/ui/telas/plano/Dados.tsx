@@ -83,7 +83,7 @@ function FolhaRestaurar({ lido, aoFechar }: { lido: BackupLido; aoFechar: () => 
           ? 'Backup restaurado.'
           : `Dados mesclados: ${plural(a.treinos, 'treino novo', 'treinos novos')}, ${plural(a.cardio, 'cardio novo', 'cardios novos')}.`,
       );
-      navegar('treino');
+      navegar('');
     } catch (e) {
       console.error(e);
       setErro(mensagem(e));

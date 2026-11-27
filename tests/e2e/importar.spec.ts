@@ -1,3 +1,4 @@
+import { irPara } from './navegacao';
 import { fileURLToPath } from 'node:url';
 import { expect, test } from '@playwright/test';
 
@@ -5,7 +6,7 @@ const fixture = (nome: string) => fileURLToPath(new URL(`../fixtures/${nome}`, i
 
 // BRIEFING 15, E2E 1: importar o PDF do Raul → revisar → salvar → continua salvo depois de recarregar
 test('importa o PDF do Raul, revisa, salva e mantém após recarregar', async ({ page }) => {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await expect(page.getByRole('heading', { name: 'Importar plano' })).toBeVisible();
 
   await page.getByLabel('Arquivo PDF do plano').setInputFiles(fixture('raul-com-anexo-ok.pdf'));
@@ -30,14 +31,14 @@ test('importa o PDF do Raul, revisa, salva e mantém após recarregar', async ({
   await expect(page.getByText('Hipertrofia natural 5x')).toBeVisible();
   await expect(page.getByLabel('Início do bloco')).toHaveValue('2026-11-02');
 
-  await page.getByRole('link', { name: 'Treino' }).click();
+  await irPara(page, 'Início');
   await expect(page.getByText(/Semana \d+ de 12/)).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
 });
 
 // BRIEFING 15, E2E 2: PDF sem anexo → erro claro, nada salvo
 test('PDF sem anexo mostra o erro e não salva nada', async ({ page }) => {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByLabel('Arquivo PDF do plano').setInputFiles(fixture('plano-original-raul.pdf'));
   await expect(page.getByText('Anexo TREINO v1 não encontrado')).toBeVisible();
   await expect(page.getByText('Marcador #TREINO-INICIO não encontrado')).toBeVisible();
@@ -49,7 +50,7 @@ test('PDF sem anexo mostra o erro e não salva nada', async ({ page }) => {
 });
 
 test('colar texto com erro aponta a linha', async ({ page }) => {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page
     .getByLabel('Cole o anexo do plano')
@@ -60,7 +61,7 @@ test('colar texto com erro aponta a linha', async ({ page }) => {
 });
 
 test('a semana pode ser ajustada com − e +', async ({ page }) => {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page
     .getByLabel('Cole o anexo do plano')

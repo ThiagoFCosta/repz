@@ -1,0 +1,11 @@
+/* Entrada única dos tokens para o app (o Vite/Tailwind inlina os @import).
+   Ordem importa: theme-dark vem depois de colors/shadows para sobrescrever a camada semântica. */
+@import './fonts.css';
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+@import './radii.css';
+@import './shadows.css';
+@import './motion.css';
+@import './theme-dark.css';
+@import './base.css' layer(base);

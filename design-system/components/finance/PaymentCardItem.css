@@ -1,0 +1,11 @@
+@layer components {
+.pr-pci{display:flex;align-items:center;gap:14px;width:100%;padding:12px 14px;border-radius:var(--radius-lg);background:var(--surface-card);box-shadow:inset 0 0 0 1px var(--border-default);cursor:pointer;text-align:left;border:0;transition:box-shadow var(--duration-fast),background var(--duration-fast);-webkit-tap-highlight-color:transparent;min-height:60px}
+.pr-pci:hover{box-shadow:inset 0 0 0 1px var(--border-strong)}
+.pr-pci:focus-visible{outline:none;box-shadow:inset 0 0 0 1px var(--border-strong),var(--shadow-focus)}
+.pr-pci--on,.pr-pci--on:hover{background:var(--surface-brand-soft);box-shadow:inset 0 0 0 1.5px var(--border-brand)}
+.pr-pci--disabled{opacity:.5;cursor:not-allowed}
+.pr-pci__radio{width:20px;height:20px;flex-shrink:0;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--control-border);background:var(--control-thumb);transition:all var(--duration-fast)}
+.pr-pci--on .pr-pci__radio{background:var(--lime-400);box-shadow:inset 0 0 0 4px var(--lime-400),inset 0 0 0 6px var(--control-thumb)}
+.pr-pci__name{display:block;font:500 var(--text-lg)/1.2 var(--font-sans);color:var(--text-primary)}
+.pr-pci__num{display:block;font:400 var(--text-sm)/1.2 var(--font-sans);color:var(--text-secondary);letter-spacing:var(--tracking-caps);margin-top:4px}
+}

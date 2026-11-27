@@ -1,3 +1,4 @@
+import { irPara } from './navegacao';
 import fs from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
@@ -49,7 +50,7 @@ test.describe('acessibilidade', () => {
     await expect(page.getByText('Comece pelo seu plano')).toBeVisible();
     await verificar(page, 'Início sem plano');
 
-    await page.goto('./#/plano');
+    await page.goto('./plano');
     await expect(page.getByRole('heading', { name: 'Importar plano' })).toBeVisible();
     await verificar(page, 'Importar');
     await page.getByRole('button', { name: 'Colar texto' }).click();
@@ -64,7 +65,7 @@ test.describe('acessibilidade', () => {
     await expect(page.getByRole('heading', { name: 'Plano e dados' })).toBeVisible();
     await verificar(page, 'Plano e dados');
 
-    await page.getByRole('link', { name: 'Treino' }).click();
+    await irPara(page, 'Início');
     await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
     await verificar(page, 'Início');
     await page.getByRole('button', { name: 'Trocar sessão' }).click();
@@ -96,7 +97,7 @@ test.describe('acessibilidade', () => {
     await page.getByRole('button', { name: 'Registrar cardio' }).click();
     await expect(page.getByText('1 de 2')).toBeVisible();
 
-    await page.getByRole('link', { name: 'Histórico' }).click();
+    await irPara(page, 'Histórico');
     await expect(page.getByRole('img', { name: /^1RM estimado por semana/ })).toBeVisible();
     await verificar(page, 'Histórico');
     await page.getByRole('link', { name: 'Treinos' }).click();

@@ -131,12 +131,12 @@ export function TelaCardio({ id }: { id?: string }) {
   const [data, setData] = useState(existente?.data ?? hoje.value);
   const [ocupado, setOcupado] = useState(false);
   const [confirmar, setConfirmar] = useState(false);
-  const voltar = id ? '#/historico/treinos' : '#/treino';
+  const voltar = id ? 'historico/treinos' : '';
 
   if (id && !existente)
     return (
       <section>
-        <Cabecalho titulo="Cardio" voltar={voltar} />
+        <Cabecalho titulo="Cardio" voltar={`/${voltar}`} />
         <Cartao>Este registro não existe mais.</Cartao>
       </section>
     );
@@ -185,7 +185,7 @@ export function TelaCardio({ id }: { id?: string }) {
 
   return (
     <section className="cardio">
-      <Cabecalho titulo={existente ? 'Editar cardio' : 'Cardio'} voltar={voltar} />
+      <Cabecalho titulo={existente ? 'Editar cardio' : 'Cardio'} voltar={`/${voltar}`} />
 
       <div className="chips" role="group" aria-label="Tipo">
         {tipos.map((t) => (

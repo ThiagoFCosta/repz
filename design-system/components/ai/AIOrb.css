@@ -1,0 +1,7 @@
+@layer components {
+.pr-orb{display:inline-block;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 8px 24px -8px rgba(6,47,40,.35)}
+.pr-orb img{width:100%;height:100%;object-fit:cover;display:block}
+.pr-orb--thinking{animation:pr-orb 1.6s var(--ease-standard) infinite}
+@keyframes pr-orb{0%,100%{transform:scale(1);filter:saturate(1)}50%{transform:scale(1.06);filter:saturate(1.25)}}
+@media (prefers-reduced-motion:reduce){.pr-orb--thinking{animation:none}}
+}

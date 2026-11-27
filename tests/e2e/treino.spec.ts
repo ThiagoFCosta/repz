@@ -1,10 +1,11 @@
+import { irPara } from './navegacao';
 import fs from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 
 const plano = fs.readFileSync(new URL('../fixtures/raul.treino.txt', import.meta.url), 'utf8');
 
 async function importarPlano(page: Page) {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page.getByLabel('Cole o anexo do plano').fill(plano);
   await page.getByRole('button', { name: 'Ler texto' }).click();
@@ -32,7 +33,7 @@ const titulo = (page: Page, nome: string) =>
 // BRIEFING 15, E2E 3: Push completo com bi-set; recarregar no meio; continuar sem perder séries
 test('treino Push completo com bi-set, recarregando no meio', async ({ page }) => {
   await importarPlano(page);
-  await page.getByRole('link', { name: 'Treino' }).click();
+  await irPara(page, 'Início');
   await expect(page.getByText('Próximo treino')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
   await page.getByRole('button', { name: 'Iniciar treino' }).click();
@@ -119,7 +120,7 @@ test('treino Push completo com bi-set, recarregando no meio', async ({ page }) =
 
 test('descartar treino pede confirmação e volta ao início', async ({ page }) => {
   await importarPlano(page);
-  await page.goto('./#/treino');
+  await page.goto('./');
   await page.getByRole('button', { name: 'Iniciar treino' }).click();
   await serie(page, '24');
   await pularDescanso(page);
@@ -135,7 +136,7 @@ test('descartar treino pede confirmação e volta ao início', async ({ page }) 
 // BRIEFING 15, E2E 4: sugestão ↑ no fim do treino e a carga pré-preenchida no treino seguinte
 test('sugestão ↑ no fim e carga pré-preenchida no treino seguinte do exercício', async ({ page }) => {
   await importarPlano(page);
-  await page.goto('./#/treino');
+  await page.goto('./');
   await page.getByRole('button', { name: 'Iniciar treino' }).click();
 
   // Supino inclinado (6-10 reps): 24 kg × 10 · 10 · 10, topo da faixa
@@ -181,7 +182,7 @@ test('sugestão ↑ no fim e carga pré-preenchida no treino seguinte do exercí
 
 test('botão Cardio do fim do treino conclui o treino e registra o cardio', async ({ page }) => {
   await importarPlano(page);
-  await page.goto('./#/treino');
+  await page.goto('./');
   await page.getByRole('button', { name: 'Iniciar treino' }).click();
   await serie(page, '24', '8');
   await pularDescanso(page);

@@ -1,0 +1,39 @@
+@layer components {
+.pr-dt{container-type:inline-size;container-name:pr-dt;min-width:0}
+.pr-dt__scroll{overflow-x:auto;min-width:0}
+.pr-dt table{width:100%;border-collapse:separate;border-spacing:0;font:400 var(--text-sm)/1.3 var(--font-sans);color:var(--text-primary)}
+.pr-dt th{height:40px;padding:0 10px;background:var(--surface-sunken);text-align:left;font:400 var(--text-xs)/1 var(--font-sans);color:var(--text-tertiary);white-space:nowrap}
+.pr-dt th:first-child{border-radius:var(--radius-md) 0 0 var(--radius-md);padding-left:12px}
+.pr-dt th:last-child{border-radius:0 var(--radius-md) var(--radius-md) 0;padding-right:12px}
+.pr-dt__sort{display:inline-flex;align-items:center;gap:4px;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer}
+.pr-dt__sort:hover,.pr-dt__sort--on{color:var(--text-primary)}
+.pr-dt td{padding:12px 10px;border-bottom:1px solid var(--border-subtle);vertical-align:middle;white-space:nowrap}
+.pr-dt td:first-child{padding-left:12px}
+.pr-dt td:last-child{padding-right:12px}
+.pr-dt--dense td{padding-top:9px;padding-bottom:9px}
+.pr-dt tbody tr{transition:background var(--duration-fast)}
+.pr-dt tbody tr:hover{background:var(--surface-card-hover)}
+.pr-dt tbody tr[aria-selected="true"]{background:var(--surface-brand-soft)}
+.pr-dt--click tbody tr{cursor:pointer}
+.pr-dt__list{display:none;margin:0;padding:0;list-style:none}
+.pr-dt__li{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--border-subtle);min-height:var(--touch-target)}
+.pr-dt__li:last-child{border-bottom:0}
+.pr-dt__li[aria-selected="true"]{background:var(--surface-brand-soft)}
+.pr-dt__li-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.pr-dt__li-end{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;text-align:right}
+.pr-dt__li-meta{font-size:var(--text-xs);color:var(--text-secondary);display:flex;gap:8px;flex-wrap:wrap}
+.pr-dt__empty{padding:32px 12px;text-align:center;color:var(--text-secondary);font-size:var(--text-sm)}
+.pr-dt__error{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px 12px;text-align:center;color:var(--text-danger);font-size:var(--text-sm)}
+.pr-dt__skel{height:12px;border-radius:var(--radius-xs);background:linear-gradient(90deg,var(--surface-muted),var(--surface-muted-hover),var(--surface-muted));background-size:200% 100%;animation:pr-skel 1.2s ease-in-out infinite}
+@keyframes pr-skel{from{background-position:200% 0}to{background-position:-200% 0}}
+/* Adição do projeto: primeira coluna fixa na rolagem horizontal (matrizes) */
+.pr-dt--fixa th:first-child,.pr-dt--fixa td:first-child{position:sticky;left:0;z-index:1;box-shadow:inset -1px 0 0 var(--border-subtle)}
+.pr-dt--fixa td:first-child{background:var(--surface-card)}
+.pr-dt--fixa tbody tr:hover td:first-child{background:var(--surface-card-hover)}
+/* Adição do projeto: linhas de seção e de total (rowTone) */
+.pr-dt tbody tr.pr-dt__row--section td{background:var(--surface-sunken);font:600 var(--text-md)/1.3 var(--font-sans)}
+.pr-dt tbody tr.pr-dt__row--total td{font:700 var(--text-md)/1.3 var(--font-sans);border-top:1px solid var(--border-strong)}
+.pr-dt__li.pr-dt__row--section{background:var(--surface-sunken);font-weight:600}
+.pr-dt__li.pr-dt__row--total{font-weight:700}
+@container pr-dt (max-width:520px){.pr-dt__scroll{display:none}.pr-dt__list{display:block}.pr-dt--sem-lista .pr-dt__scroll{display:block}.pr-dt--fixa th:first-child,.pr-dt--fixa td:first-child{white-space:normal;min-width:120px;max-width:42cqi}}
+}

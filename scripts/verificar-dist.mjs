@@ -13,6 +13,8 @@ const PERMITIDAS = [
   /^http:\/\/www\.w3\.org\//,
   /^https?:\/\/(www\.)?apache\.org\/licenses/,
   /^https?:\/\/opensource\.org\/licenses/,
+  // cabeçalho de licença do Tailwind no CSS (/*! tailwindcss … | https://tailwindcss.com */)
+  /^https:\/\/tailwindcss\.com$/,
   /^https?:\/\/github\.com\/(mozilla\/pdf\.js|parallax\/jsPDF|dexie\/Dexie\.js)/,
   // texto de uma mensagem de erro do Workbox (precache); nunca é requisitado
   /^https:\/\/bit\.ly\/wb-precache$/,
@@ -22,6 +24,10 @@ const PERMITIDAS = [
   /^https:\/\/dexie\.org$/,
   // React: prefixo do link montado nas mensagens de erro minificadas; nunca é requisitado (v2, D49)
   /^https:\/\/reactjs\.org\/docs\/error-decoder\.html/,
+  // React Router: base fictícia para montar URLs relativas (new URL(caminho, 'http://localhost')) e o link
+  // da documentação num aviso de desenvolvimento. Nenhum dos dois é requisitado (v2, D49)
+  /^http:\/\/localhost$/,
+  /^https:\/\/reactrouter\.com\/en\/main\/routers\/picking-a-router/,
   // pdf.js: namespaces XML de formulários XFA/XMP e o prefixo que ele põe em links "www." de
   // anotações do PDF. São identificadores, não requisições.
   /^http:\/\/www\.xfa\.org\/schema\//,
@@ -59,7 +65,7 @@ for (const f of texto) {
 // JS inicial = scripts e modulepreloads referenciados pelo index.html
 const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
 const iniciais = [...html.matchAll(/(?:src|href)="([^"]+\.js)"/g)].map((m) => m[1]);
-const base = '/repz/';
+const base = '/';
 // pdf.js e jsPDF só na importação e na exportação (import() dinâmico), nunca no carregamento inicial
 const sobDemanda = iniciais.filter((u) => /\/(pdf|pdf\.worker|jspdf)[.-]/.test(u));
 if (sobDemanda.length) {

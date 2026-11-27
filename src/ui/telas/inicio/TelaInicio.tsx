@@ -62,11 +62,7 @@ function CartaoTreinoAberto() {
       {esquecido && !erroTreino.value && <p>Este treino está aberto há mais de 4 horas. Quer encerrar?</p>}
       <div className="pilha">
         {a && (
-          <Botao
-            bloco
-            variante={esquecido ? 'secundario' : 'primario'}
-            onClick={() => navegar('treino/agora')}
-          >
+          <Botao bloco variante={esquecido ? 'secundario' : 'primario'} onClick={() => navegar('treino')}>
             Continuar treino
           </Botao>
         )}

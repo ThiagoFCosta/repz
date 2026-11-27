@@ -1,0 +1,110 @@
+/* Prisma — color tokens. Base ramps first, semantic aliases second. Always consume the semantic layer in UI.
+   Fonte da verdade: DESIGN.md (raiz). Tema escuro: theme-dark.css (redefine só a camada semântica). */
+:root{
+/* Lime — brand accent (#9FE870 is the hero swatch) */
+--lime-50:#F1FCEC;--lime-100:#E4F8D6;--lime-200:#CBF2B0;--lime-300:#B4EC8C;--lime-400:#9FE870;--lime-500:#8BDB57;--lime-600:#6CC23A;--lime-700:#3F8A1F;--lime-800:#2E6617;
+/* Forest — brand ink (#062F28) */
+--forest-50:#F3F7F2;--forest-100:#ECF4E8;--forest-200:#D3E2DA;--forest-300:#A9C2B8;--forest-400:#6F8F86;--forest-500:#3C665E;--forest-600:#1D4F46;--forest-700:#103F37;--forest-800:#0B372F;--forest-900:#062F28;
+/* Neutral — cool-free, true greys */
+--gray-0:#FFFFFF;--gray-25:#FAFAFA;--gray-50:#F5F5F5;--gray-100:#F0F0F0;--gray-150:#EBEBEB;--gray-200:#E5E5E5;--gray-250:#DCDCDC;--gray-300:#CFCFCF;--gray-400:#A4A4A4;--gray-500:#7B7B7B;--gray-600:#6B6B6B;--gray-700:#4A4A4A;--gray-800:#2B2B2B;--gray-900:#141414;
+/* Red — negative amounts, pending/failed */
+--red-50:#FDECEE;--red-100:#FBD7DB;--red-300:#F8A4AC;--red-500:#F43440;--red-600:#E0222F;--red-700:#B4141F;
+/* Amber — warnings (not in source palette; kept minimal) */
+--amber-50:#FEF5E4;--amber-100:#FDE7BF;--amber-500:#F2A516;--amber-700:#8F5A00;
+/* Orange — "Eu devo" (docs/04: dívidas do usuário em laranja). Adição do projeto, não existia no export. */
+--orange-50:#FFF1E6;--orange-500:#F27A1A;--orange-600:#C25A0A;--orange-700:#9A4706;
+}
+
+/* ---------- Semantic (tema claro) ---------- */
+:root,[data-theme="light"]{
+color-scheme:light;
+--bg-page:var(--gray-50);
+--bg-shell:var(--gray-100);
+--surface-card:var(--gray-0);
+--surface-card-hover:var(--gray-25);
+--surface-subtle:var(--gray-50);
+--surface-muted:var(--gray-100);
+--surface-muted-hover:var(--gray-150);
+--surface-sunken:#F4F4F4;
+--surface-hover:var(--gray-50);
+--surface-pressed:var(--gray-100);
+--surface-nav-hover:rgba(255,255,255,.6);
+--surface-brand:var(--lime-400);
+--surface-brand-hover:var(--lime-500);
+--surface-brand-soft:var(--lime-50);
+--surface-brand-tint:var(--forest-100);
+--surface-inverse:var(--forest-900);
+--surface-inverse-hover:var(--forest-700);
+--surface-success:var(--lime-50);
+--surface-danger:var(--red-50);
+--surface-danger-strong:var(--red-600);
+--surface-danger-strong-hover:var(--red-700);
+--surface-warning:var(--amber-50);
+--surface-owe:var(--orange-50);
+--surface-notify:var(--red-500);
+--surface-overlay:rgba(6,47,40,.32);
+
+--border-subtle:var(--gray-100);
+--border-default:var(--gray-150);
+--border-strong:var(--gray-200);
+--border-hover:var(--gray-250);
+--border-divider:var(--gray-200);
+--border-brand:var(--lime-400);
+--border-brand-soft:var(--lime-300);
+--border-inverse:var(--forest-900);
+--border-danger:var(--red-500);
+--border-danger-strong:var(--red-600);
+
+--control-border:var(--gray-300);
+--control-border-hover:var(--gray-400);
+--control-track:var(--gray-250);
+--control-thumb:var(--gray-0);
+--accent-on-inverse:var(--lime-400);
+
+--text-primary:var(--forest-900);
+--text-secondary:var(--gray-600);
+--text-tertiary:var(--gray-500);
+--text-placeholder:var(--gray-400);
+--text-disabled:var(--gray-400);
+--text-accent:var(--forest-600);
+--text-on-brand:var(--forest-900);
+--text-on-inverse:var(--gray-0);
+--text-on-inverse-secondary:var(--forest-200);
+--text-on-danger:var(--gray-0);
+--text-positive:var(--forest-900);
+--text-negative:var(--red-600);
+--text-success:var(--lime-700);
+--text-success-strong:var(--lime-800);
+--text-danger:var(--red-600);
+--text-danger-strong:var(--red-700);
+--text-warning:var(--amber-700);
+--text-owe:var(--orange-700);
+--text-owed:var(--lime-700);
+--text-link:var(--forest-900);
+--text-link-hover:var(--forest-600);
+
+--icon-primary:var(--forest-900);
+--icon-secondary:var(--gray-500);
+--icon-brand:var(--lime-600);
+
+/* Data viz — ordered series */
+--chart-1:var(--forest-900);
+--chart-2:var(--lime-400);
+--chart-3:var(--forest-100);
+--chart-4:var(--gray-500);
+--chart-5:var(--gray-200);
+--chart-grid:var(--gray-150);
+--chart-track:var(--gray-100);
+--chart-highlight:var(--lime-100);
+--chart-crosshair:var(--lime-500);
+--chart-area:rgba(159,232,112,.18);
+/* Medidor (Gauge/investidômetro): 5 faixas, de endividado a mega investidor */
+--gauge-1:var(--red-500);
+--gauge-2:var(--orange-600);
+--gauge-3:var(--amber-500);
+--gauge-4:var(--lime-400);
+--gauge-5:var(--lime-700);
+
+--focus-ring:rgba(159,232,112,.65);
+--focus-ring-danger:var(--red-100);
+}

@@ -1,0 +1,155 @@
+/* Ponte DS -> Tailwind v4. Cada utilitário resolve para um token do design system via var().
+   `reference` = o Tailwind não emite estas variáveis (elas já existem nos tokens, e muitos nomes
+   coincidem — ex.: --text-xs, --radius-card); `inline` = o utilitário recebe var(--token) direto.
+   Os namespaces padrão (cores, fontes, tamanhos, raios, sombras) são zerados: classes como
+   bg-blue-500 ou rounded-lg do Tailwind padrão NÃO existem — só o que está mapeado aqui. */
+@theme inline reference {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --ease-*: initial;
+  --font-weight-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
+
+  /* Espaçamento: base de 4px (p-4 = 16px = --space-4; meias-unidades p-0.5/1.5/2.5/3.5) */
+  --spacing: var(--space-1);
+
+  /* Superfícies */
+  --color-page: var(--bg-page);
+  --color-shell: var(--bg-shell);
+  --color-card: var(--surface-card);
+  --color-card-hover: var(--surface-card-hover);
+  --color-subtle: var(--surface-subtle);
+  --color-muted: var(--surface-muted);
+  --color-sunken: var(--surface-sunken);
+  --color-hover: var(--surface-hover);
+  --color-brand: var(--surface-brand);
+  --color-brand-hover: var(--surface-brand-hover);
+  --color-brand-soft: var(--surface-brand-soft);
+  --color-brand-tint: var(--surface-brand-tint);
+  --color-inverse: var(--surface-inverse);
+  --color-inverse-hover: var(--surface-inverse-hover);
+  --color-success-soft: var(--surface-success);
+  --color-danger-soft: var(--surface-danger);
+  --color-warning-soft: var(--surface-warning);
+  --color-owe-soft: var(--surface-owe);
+  --color-overlay: var(--surface-overlay);
+
+  /* Texto */
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-tertiary: var(--text-tertiary);
+  --color-placeholder: var(--text-placeholder);
+  --color-disabled: var(--text-disabled);
+  --color-accent: var(--text-accent);
+  --color-on-brand: var(--text-on-brand);
+  --color-on-inverse: var(--text-on-inverse);
+  --color-positive: var(--text-positive);
+  --color-negative: var(--text-negative);
+  --color-success: var(--text-success);
+  --color-danger: var(--text-danger);
+  --color-warning: var(--text-warning);
+  --color-owe: var(--text-owe);
+  --color-owed: var(--text-owed);
+  --color-link: var(--text-link);
+
+  /* Bordas (border-default etc.) e ícones */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-divider: var(--border-divider);
+  --color-border-brand: var(--border-brand);
+  --color-icon: var(--icon-primary);
+  --color-icon-secondary: var(--icon-secondary);
+  --color-icon-brand: var(--icon-brand);
+
+  /* Gráficos */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-grid: var(--chart-grid);
+
+  /* Rampas da marca (arte, ilustração, cartões) — preferir as semânticas acima */
+  --color-lime-50: var(--lime-50);
+  --color-lime-100: var(--lime-100);
+  --color-lime-300: var(--lime-300);
+  --color-lime-400: var(--lime-400);
+  --color-lime-500: var(--lime-500);
+  --color-lime-600: var(--lime-600);
+  --color-lime-700: var(--lime-700);
+  --color-forest-100: var(--forest-100);
+  --color-forest-600: var(--forest-600);
+  --color-forest-900: var(--forest-900);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Tipografia */
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+  --text-2xs: var(--text-2xs);
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+  --text-5xl: var(--text-5xl);
+  --text-6xl: var(--text-6xl);
+  --text-display: var(--text-display);
+  --font-weight-light: var(--weight-light);
+  --font-weight-normal: var(--weight-regular);
+  --font-weight-medium: var(--weight-medium);
+  --font-weight-semibold: var(--weight-semibold);
+  --font-weight-bold: var(--weight-bold);
+  --leading-tight: var(--leading-tight);
+  --leading-snug: var(--leading-snug);
+  --leading-normal: var(--leading-normal);
+  --leading-relaxed: var(--leading-relaxed);
+  --tracking-tight: var(--tracking-tight);
+  --tracking-snug: var(--tracking-snug);
+  --tracking-normal: var(--tracking-normal);
+  --tracking-wide: var(--tracking-wide);
+  --tracking-caps: var(--tracking-caps);
+
+  /* Raios */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+  --radius-pill: var(--radius-pill);
+  --radius-card: var(--radius-card);
+  --radius-tile: var(--radius-tile);
+  --radius-control: var(--radius-control);
+  --radius-badge: var(--radius-badge);
+
+  /* Sombras */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-focus: var(--shadow-focus);
+  --shadow-popover: var(--shadow-popover);
+  --shadow-dialog: var(--shadow-dialog);
+
+  /* Movimento */
+  --ease-standard: var(--ease-standard);
+  --ease-out: var(--ease-out);
+  --ease-in: var(--ease-in);
+}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 // Visão Treinos (BRIEFING 9.8): lista cronológica de treinos e cardio; treino completo com
 // edição e exclusão de séries; exclusão do treino com confirmação.
 
@@ -39,7 +40,7 @@ function LinhaCardio({ c }: { c: CardioRealizado }) {
     c.esforco != null && `esforço ${c.esforco}`,
   ].filter(Boolean);
   return (
-    <a href={`#/historico/cardio/${c.id}`}>
+    <Link to={`/historico/cardio/${c.id}`}>
       <span className="lista-treinos-data numero">{dataBR(c.data, true)}</span>
       <span className="lista-treinos-corpo">
         <span>
@@ -58,7 +59,7 @@ function LinhaCardio({ c }: { c: CardioRealizado }) {
       <span className="lista-treinos-seta" aria-hidden="true">
         ›
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -83,7 +84,7 @@ export function VisaoTreinos() {
           {itens.map((i) =>
             i.tipo === 'treino' ? (
               <li key={i.t.id}>
-                <a href={`#/historico/treino/${i.t.id}`}>
+                <Link to={`/historico/treino/${i.t.id}`}>
                   <span className="lista-treinos-data numero">{dataBR(i.t.data, true)}</span>
                   <span className="lista-treinos-corpo">
                     <span>{i.t.sessaoNome}</span>
@@ -95,7 +96,7 @@ export function VisaoTreinos() {
                   <span className="lista-treinos-seta" aria-hidden="true">
                     ›
                   </span>
-                </a>
+                </Link>
               </li>
             ) : (
               <li key={i.c.id}>
@@ -217,7 +218,7 @@ export function DetalheTreino({ id }: { id: string }) {
   if (!dados)
     return (
       <section>
-        <Cabecalho titulo="Treino" voltar="#/historico/treinos" />
+        <Cabecalho titulo="Treino" voltar="/historico/treinos" />
         <Cartao>Este treino não existe mais.</Cartao>
       </section>
     );
@@ -253,7 +254,7 @@ export function DetalheTreino({ id }: { id: string }) {
 
   return (
     <section>
-      <Cabecalho titulo={t.sessaoNome} voltar="#/historico/treinos" />
+      <Cabecalho titulo={t.sessaoNome} voltar="/historico/treinos" />
       <p className="muted">
         {diaTxt(t.data)} · {t.inicio.slice(11, 16)}
         {t.semanaBloco != null && ` · semana ${t.semanaBloco}`}

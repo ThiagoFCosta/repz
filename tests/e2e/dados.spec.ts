@@ -1,10 +1,11 @@
+import { irPara } from './navegacao';
 import fs from 'node:fs';
 import { expect, test, type Download, type Page } from '@playwright/test';
 
 const plano = fs.readFileSync(new URL('../fixtures/raul.treino.txt', import.meta.url), 'utf8');
 
 async function importarPlano(page: Page) {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page.getByLabel('Cole o anexo do plano').fill(plano);
   await page.getByRole('button', { name: 'Ler texto' }).click();
@@ -40,7 +41,7 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
   await importarPlano(page);
 
   // Cardio e um treino curto (supino inclinado 24 × 10, RIR 2)
-  await page.goto('./#/treino');
+  await page.goto('./');
   await page.getByRole('button', { name: 'Registrar cardio' }).click();
   await titulo(page, 'Cardio');
   await page.getByRole('group', { name: 'Tipo' }).getByRole('button', { name: 'Remo' }).click();
@@ -66,7 +67,7 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
   await expect(lembrete).toContainText('Você ainda não fez backup');
 
   // Planilha CSV: séries e cardio
-  await page.getByRole('link', { name: 'Plano' }).click();
+  await irPara(page, 'Plano');
   await expect(page.getByText('Nenhum backup feito ainda.')).toBeVisible();
   const [cardio, series] = await baixar(page, 'Planilha CSV', 2);
   expect(cardio!.suggestedFilename()).toMatch(new RegExp(`^treino-cardio-${DATA}\\.csv$`));
@@ -94,7 +95,7 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
   const arquivoBackup = test.info().outputPath('backup.json');
   await backup!.saveAs(arquivoBackup);
   await expect(page.getByText(/^Último backup: /)).toBeVisible();
-  await page.getByRole('link', { name: 'Treino' }).click();
+  await irPara(page, 'Início');
   await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
   await expect(lembrete).toBeHidden();
 
@@ -107,7 +108,7 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
         r.onerror = () => erro(r.error);
       }),
   );
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.reload();
   await titulo(page, 'Importar plano');
 
@@ -126,11 +127,11 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
   await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
   await expect(page.getByText('1 de 2')).toBeVisible();
   await expect(lembrete).toBeHidden();
-  await page.getByRole('link', { name: 'Histórico' }).click();
+  await irPara(page, 'Histórico');
   await expect(page.locator('.kpi').first()).toContainText('33,6 kg');
 
   // Mesclar o mesmo backup não duplica nada
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByLabel('Arquivo de backup').setInputFiles(arquivoBackup);
   await folha.getByRole('button', { name: 'Mesclar com os dados deste celular' }).click();
   await folha.getByRole('button', { name: 'Mesclar dados' }).click();
@@ -139,7 +140,7 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
 });
 
 test('recusa um arquivo que não é backup do REPZ', async ({ page }) => {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByLabel('Arquivo de backup').setInputFiles({
     name: 'outro.json',
     mimeType: 'application/json',

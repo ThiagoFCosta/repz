@@ -1,0 +1,22 @@
+@layer components {
+.pr-ib{--s:36px;position:relative;display:inline-flex;align-items:center;justify-content:center;width:var(--s);height:var(--s);padding:0;border:1px solid transparent;border-radius:var(--radius-icon-btn);background:transparent;color:var(--icon-primary);cursor:pointer;transition:background var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),transform var(--duration-instant) var(--ease-standard);-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.pr-ib:active:not(:disabled){transform:scale(.94)}
+.pr-ib:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.pr-ib:disabled{opacity:.45;cursor:not-allowed}
+.pr-ib--sm{--s:28px}.pr-ib--lg{--s:var(--touch-target)}
+.pr-ib--circle{border-radius:50%}
+.pr-ib--outline{background:var(--surface-card);border-color:var(--border-strong)}
+.pr-ib--outline:hover:not(:disabled){background:var(--surface-hover)}
+.pr-ib--ghost{color:var(--icon-primary)}
+.pr-ib--ghost:hover:not(:disabled){background:var(--surface-muted)}
+.pr-ib--white{background:var(--surface-card)}
+.pr-ib--white:hover:not(:disabled){background:var(--surface-card-hover);box-shadow:var(--shadow-xs)}
+.pr-ib--soft{background:var(--surface-muted)}
+.pr-ib--soft:hover:not(:disabled){background:var(--surface-muted-hover)}
+.pr-ib--brand{background:var(--surface-brand);color:var(--text-on-brand)}
+.pr-ib--brand:hover:not(:disabled){background:var(--surface-brand-hover)}
+.pr-ib--inverse{background:var(--surface-inverse);color:var(--text-on-inverse)}
+.pr-ib--inverse:hover:not(:disabled){background:var(--surface-inverse-hover)}
+.pr-ib__dot{position:absolute;top:22%;right:22%;width:8px;height:8px;border-radius:50%;background:var(--surface-notify);box-shadow:0 0 0 2px var(--surface-card)}
+.pr-ib__count{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--surface-notify);color:var(--text-on-danger);font:600 10px/18px var(--font-sans);box-shadow:0 0 0 2px var(--surface-card)}
+}

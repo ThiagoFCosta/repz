@@ -2,10 +2,11 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// GitHub Pages serve o app em /<repositório>/
-const BASE = '/repz/';
+// Netlify serve o app na raiz (a v1 no GitHub Pages usava /repz/; D32)
+const BASE = '/';
 
 // CSP só no build: o servidor de desenvolvimento usa scripts inline e websocket (HMR).
 const CSP = [
@@ -49,10 +50,16 @@ const VAZIO = fileURLToPath(new URL('./src/dados/vazio/index.ts', import.meta.ur
 export default defineConfig({
   base: BASE,
   resolve: {
-    alias: { html2canvas: VAZIO, canvg: VAZIO, dompurify: VAZIO },
+    alias: {
+      html2canvas: VAZIO,
+      canvg: VAZIO,
+      dompurify: VAZIO,
+      '@ds': fileURLToPath(new URL('./design-system/index.ts', import.meta.url)),
+    },
   },
   plugins: [
     react(),
+    tailwindcss(),
     csp(),
     jspdfSemCdn(),
     VitePWA({
@@ -67,8 +74,8 @@ export default defineConfig({
         scope: '.',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#0d1117',
-        theme_color: '#0d1117',
+        background_color: '#F5F5F5',
+        theme_color: '#F5F5F5',
         icons: [
           { src: 'icones/icone-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icones/icone-512.png', sizes: '512x512', type: 'image/png' },

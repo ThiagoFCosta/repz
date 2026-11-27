@@ -1,16 +1,14 @@
 import { createRoot } from 'react-dom/client';
-import './estilo/tokens.css';
-import './estilo/base.css';
-import './estilo/componentes.css';
+import { RouterProvider } from 'react-router';
+import './estilo/app.css';
 import { App } from './ui/App';
-import { iniciarRoteador } from './app/roteador';
+import { criarRoteador } from './app/roteador';
 import { registrarServiceWorker } from './app/pwa';
 import { iniciarInstalacao } from './app/instalacao';
 import { iniciarEstado } from './app/estado';
 import { restaurarTreino } from './app/controlador-treino';
 
-iniciarRoteador();
 iniciarInstalacao();
-createRoot(document.getElementById('app')!).render(<App />);
+createRoot(document.getElementById('app')!).render(<RouterProvider router={criarRoteador(<App />)} />);
 void iniciarEstado(restaurarTreino);
 registrarServiceWorker();

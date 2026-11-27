@@ -108,7 +108,7 @@ h2 {
 
 .botao-primario {
   background: var(--primary-fundo);
-  color: #fff;
+  color: var(--primary-sobre);
 }
 
 .botao-secundario {
@@ -186,23 +186,24 @@ h2 {
 }
 
 .etiqueta-ss {
-  color: var(--ss);
-  background: color-mix(in srgb, var(--ss) 15%, transparent);
+  color: var(--text-primary);
+  background: var(--surface-muted);
 }
 
 .etiqueta-variante {
-  color: var(--info);
-  background: color-mix(in srgb, var(--info) 14%, transparent);
+  color: var(--text-primary);
+  background: var(--surface-brand-soft);
 }
 
 .etiqueta-novo {
-  color: var(--warn);
-  background: color-mix(in srgb, var(--warn) 12%, transparent);
+  color: var(--text-warning);
+  background: var(--surface-warning);
 }
 
 .etiqueta-historico {
-  color: var(--primary-texto);
-  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  /* texto lime-700 em 12 px não passa no AA: forest sobre o fundo de sucesso */
+  color: var(--text-primary);
+  background: var(--surface-success);
 }
 
 /* ---- Checklist da importação ---- */
@@ -778,7 +779,7 @@ select {
 .rir-botao[aria-pressed='true'] {
   border-color: var(--primary-fundo);
   background: var(--primary-fundo);
-  color: #fff;
+  color: var(--primary-sobre);
 }
 
 .rodape-linha {
@@ -1000,8 +1001,8 @@ select {
 }
 
 .etiqueta-cardio {
-  color: var(--down);
-  background: color-mix(in srgb, var(--down) 14%, transparent);
+  color: var(--text-owe);
+  background: var(--surface-owe);
 }
 
 /* ---- Histórico (9.8) ---- */

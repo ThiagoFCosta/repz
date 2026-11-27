@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: `http://localhost:${PORTA}/repz/`,
+    baseURL: `http://localhost:${PORTA}/`,
     trace: 'retain-on-failure',
     // Boas-vindas de instalação já dispensadas; tests/e2e/instalacao.spec.ts começa sem isso
     storageState: {
@@ -28,10 +28,10 @@ export default defineConfig({
       use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 } },
     },
   ],
-  // roda contra o build de produção, com o mesmo base do GitHub Pages
+  // roda contra o build de produção, na raiz (como na Netlify)
   webServer: {
     command: 'npm run build && npm run preview',
-    url: `http://localhost:${PORTA}/repz/`,
+    url: `http://localhost:${PORTA}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },

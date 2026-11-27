@@ -1,0 +1,6 @@
+@layer components {
+.pr-logo{display:inline-flex;align-items:center}
+.pr-logo img{display:block;object-fit:contain;flex-shrink:0}
+.pr-logo__word{font-family:var(--font-display);font-weight:var(--weight-bold);line-height:1;letter-spacing:var(--tracking-tight);color:var(--text-primary)}
+.pr-logo--light .pr-logo__word{color:var(--gray-0)}
+}

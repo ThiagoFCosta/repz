@@ -1,3 +1,4 @@
+import { irPara } from './navegacao';
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
@@ -40,7 +41,7 @@ test.beforeAll(async () => {
     res.end(corpo);
   });
   await new Promise<void>((ok) => servidor.listen(0, '127.0.0.1', ok));
-  origem = `http://127.0.0.1:${(servidor.address() as AddressInfo).port}/repz/`;
+  origem = `http://127.0.0.1:${(servidor.address() as AddressInfo).port}/`;
 });
 
 test.afterAll(() => new Promise<void>((ok) => servidor.close(() => ok())));
@@ -53,13 +54,13 @@ test('atualização fica pendente durante o treino e aparece no resumo e no Iní
   await page.reload();
   expect(await page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
 
-  await page.goto(`${origem}#/plano`);
+  await page.goto(`${origem}plano`);
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page.getByLabel('Cole o anexo do plano').fill(plano);
   await page.getByRole('button', { name: 'Ler texto' }).click();
   await page.getByRole('button', { name: 'Revisar plano' }).click();
   await page.getByRole('button', { name: 'Salvar e ativar plano' }).click();
-  await page.getByRole('link', { name: 'Treino' }).click();
+  await irPara(page, 'Início');
   await page.getByRole('button', { name: 'Iniciar treino' }).click();
   await page.getByLabel('kg', { exact: true }).fill('24');
   await page.getByRole('button', { name: 'Concluir série 1' }).click();

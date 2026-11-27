@@ -13,14 +13,14 @@ test('Início interativo em menos de 2 s com CPU 4× mais lenta e o app em cache
   test.setTimeout(120_000);
   await page.goto('./');
   await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page.getByLabel('Cole o anexo do plano').fill(plano);
   await page.getByRole('button', { name: 'Ler texto' }).click();
   await page.getByRole('button', { name: 'Revisar plano' }).click();
   await page.getByRole('button', { name: 'Salvar e ativar plano' }).click();
   await expect(page.getByRole('heading', { name: 'Plano e dados' })).toBeVisible();
-  await page.goto('./#/treino');
+  await page.goto('./');
   await page.reload();
   expect(await page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
 

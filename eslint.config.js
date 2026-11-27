@@ -4,6 +4,7 @@ import importX from 'eslint-plugin-import-x';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
+import { adherenceConsumers, adherenceEverywhere } from './design-system/lint/adherence.js';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage', 'referencia', 'playwright-report', 'test-results', 'dev-dist'] },
@@ -67,5 +68,8 @@ export default tseslint.config(
       'import-x/extensions': ['error', 'always', { ignorePackages: true }],
     },
   },
+  // Aderência ao design system do Prisma (design-system/README.md): hex, px e fontes fora do sistema
+  { files: ['design-system/**/*.{ts,tsx}'], rules: adherenceEverywhere },
+  { files: ['src/ui/**/*.{ts,tsx}'], rules: adherenceConsumers },
   prettier,
 );

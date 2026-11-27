@@ -1,10 +1,11 @@
+import { irPara } from './navegacao';
 import fs from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 
 const plano = fs.readFileSync(new URL('../fixtures/raul.treino.txt', import.meta.url), 'utf8');
 
 async function importarPlano(page: Page) {
-  await page.goto('./#/plano');
+  await page.goto('./plano');
   await page.getByRole('button', { name: 'Colar texto' }).click();
   await page.getByLabel('Cole o anexo do plano').fill(plano);
   await page.getByRole('button', { name: 'Ler texto' }).click();
@@ -28,7 +29,7 @@ test('registrar cardio e ver o Histórico com o gráfico', async ({ page }) => {
   await importarPlano(page);
 
   // Cardio em qualquer dia, sem treino de força
-  await page.goto('./#/treino');
+  await page.goto('./');
   await expect(page.getByText('0 de 2')).toBeVisible();
   await page.getByRole('button', { name: 'Registrar cardio' }).click();
   await titulo(page, 'Cardio');
@@ -56,7 +57,7 @@ test('registrar cardio e ver o Histórico com o gráfico', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
 
   // Histórico: o exercício feito por último, KPIs e gráfico
-  await page.getByRole('link', { name: 'Histórico' }).click();
+  await irPara(page, 'Histórico');
   await expect(page.getByRole('button', { name: /Supino inclinado com halteres/ })).toBeVisible();
   // 24 × (1 + (10 + 2) / 30) = 33,6
   await expect(page.locator('.kpi').first()).toContainText('33,6 kg');
@@ -83,7 +84,7 @@ test('registrar cardio e ver o Histórico com o gráfico', async ({ page }) => {
   await page.getByLabel('kg').fill('26');
   await page.getByRole('button', { name: 'Salvar série 1' }).click();
   await expect(page.getByRole('button', { name: 'Editar série 1' })).toContainText('26 kg');
-  await page.getByRole('link', { name: 'Histórico' }).click();
+  await irPara(page, 'Histórico');
   // 26 × 1,4 = 36,4
   await expect(page.locator('.kpi').first()).toContainText('36,4 kg');
 

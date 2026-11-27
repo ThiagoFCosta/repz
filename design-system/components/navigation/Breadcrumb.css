@@ -1,0 +1,11 @@
+@layer components {
+.pr-bc{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-family:var(--font-sans);font-weight:var(--weight-regular);line-height:1.2;font-size:var(--text-2xl)}
+.pr-bc--sm{font-size:var(--text-base)}
+.pr-bc--lg{font-size:var(--text-3xl)}
+.pr-bc__link{border:0;padding:0;background:none;font:inherit;color:var(--text-tertiary);cursor:default;border-radius:var(--radius-xs)}
+.pr-bc__link--click{cursor:pointer}
+.pr-bc__link--click:hover{color:var(--text-primary)}
+.pr-bc__link:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.pr-bc__current{color:var(--text-primary);font-weight:var(--weight-semibold)}
+.pr-bc__sep{color:var(--text-tertiary);font-size:.8em}
+}

@@ -1,0 +1,27 @@
+@layer components {
+.pr-btn{--h:var(--control-h-md);display:inline-flex;align-items:center;justify-content:center;gap:8px;height:var(--h);padding:0 18px;border:1px solid transparent;border-radius:var(--radius-button);font:500 var(--text-base)/1 var(--font-sans);letter-spacing:0;white-space:nowrap;cursor:pointer;text-decoration:none;transition:background var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard),transform var(--duration-instant) var(--ease-standard),box-shadow var(--duration-fast) var(--ease-standard);-webkit-tap-highlight-color:transparent}
+.pr-btn:active:not(:disabled){transform:scale(var(--press-scale))}
+.pr-btn:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.pr-btn:disabled,.pr-btn[aria-disabled="true"]{cursor:not-allowed;opacity:.45}
+.pr-btn--sm{--h:var(--control-h-sm);padding:0 12px;font-size:var(--text-sm);gap:6px}
+.pr-btn--lg{--h:var(--control-h-lg);padding:0 24px;font-size:var(--text-lg)}
+.pr-btn--rounded{border-radius:var(--radius-md)}
+.pr-btn--block{width:100%}
+.pr-btn--primary{background:var(--surface-inverse);color:var(--text-on-inverse)}
+.pr-btn--primary:hover:not(:disabled){background:var(--surface-inverse-hover)}
+.pr-btn--brand{background:var(--surface-brand);color:var(--text-on-brand)}
+.pr-btn--brand:hover:not(:disabled){background:var(--surface-brand-hover)}
+.pr-btn--secondary{background:var(--surface-card);color:var(--text-primary);border-color:var(--border-strong)}
+.pr-btn--secondary:hover:not(:disabled){background:var(--surface-hover);border-color:var(--border-hover)}
+.pr-btn--white{background:var(--surface-card);color:var(--text-primary)}
+.pr-btn--white:hover:not(:disabled){background:var(--surface-card-hover)}
+.pr-btn--soft{background:var(--surface-muted);color:var(--text-primary)}
+.pr-btn--soft:hover:not(:disabled){background:var(--surface-muted-hover)}
+.pr-btn--ghost{background:transparent;color:var(--text-primary)}
+.pr-btn--ghost:hover:not(:disabled){background:var(--surface-muted)}
+.pr-btn--danger{background:var(--surface-danger-strong);color:var(--text-on-danger)}
+.pr-btn--danger:hover:not(:disabled){background:var(--surface-danger-strong-hover)}
+.pr-btn--raised{box-shadow:var(--shadow-raised)}
+.pr-btn__spin{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:pr-spin .7s linear infinite}
+@keyframes pr-spin{to{transform:rotate(360deg)}}
+}

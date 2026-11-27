@@ -1,7 +1,8 @@
+import { Link } from 'react-router';
 // Aba Histórico (BRIEFING 9.8).
-// #/historico[/ex/<chave>] → exercício: seletor, KPIs, gráfico e treinos do exercício
-// #/historico/treinos → visão Treinos (força e cardio) · #/historico/treino/<id> → treino completo
-// #/historico/cardio/<id> → editar ou excluir um cardio
+// /historico[/ex/<chave>] → exercício: seletor, KPIs, gráfico e treinos do exercício
+// /historico/treinos → visão Treinos (força e cardio) · /historico/treino/<id> → treino completo
+// /historico/cardio/<id> → editar ou excluir um cardio
 
 import { useEffect, useState } from 'react';
 import { dataBR } from '../../../dominio/datas';
@@ -128,7 +129,7 @@ function ListaTreinos({
     <ul className="lista-treinos" aria-label="Treinos do exercício">
       {[...treinos].reverse().map((t) => (
         <li key={t.treinoId}>
-          <a href={`#/historico/treino/${t.treinoId}`}>
+          <Link to={`/historico/treino/${t.treinoId}`}>
             <span className="lista-treinos-data numero">{dataBR(t.data, true)}</span>
             <span className="lista-treinos-corpo">
               <span className="numero">{seriesTxt(t.series, porTempo)}</span>
@@ -140,7 +141,7 @@ function ListaTreinos({
             <span className="lista-treinos-seta" aria-hidden="true">
               ›
             </span>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

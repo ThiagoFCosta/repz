@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 48" role="img" aria-label="Repz">
+  <!-- Marca provisória do Repz (decisão 16.4): hexágono facetado no estilo do Prisma com uma barra e anilhas. -->
+  <path d="M20.5 0 41 12v24L20.5 48 0 36V12z" fill="#062F28"/>
+  <path d="M20.5 0 41 12 20.5 24z" fill="#1D4F46"/>
+  <path d="M0 12 20.5 24v24L0 36z" fill="#0B372F"/>
+  <rect x="8" y="22.5" width="25" height="3" rx="1.5" fill="#9FE870"/>
+  <rect x="10" y="16" width="4" height="16" rx="2" fill="#9FE870"/>
+  <rect x="27" y="16" width="4" height="16" rx="2" fill="#9FE870"/>
+</svg>

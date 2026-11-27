@@ -1,6 +1,7 @@
 import { carregado, erroFatal } from '../app/estado';
 import { useSinais } from '../app/sinal';
-import { rota } from '../app/roteador';
+import { rota, type Aba } from '../app/roteador';
+import type { ReactNode } from 'react';
 import { mostrarBoasVindas } from '../app/instalacao';
 import { Cartao } from './componentes/basicos';
 import { AppShell } from './layout/AppShell';
@@ -8,8 +9,15 @@ import { AbaTreino } from './telas/treino/AbaTreino';
 import { TelaPlano } from './telas/plano/TelaPlano';
 import { TelaHistorico } from './telas/historico/TelaHistorico';
 import { BoasVindas } from './telas/boas-vindas/BoasVindas';
+import { TelaInicio } from './telas/inicio/TelaInicio';
+import { EmBreve } from './telas/EmBreve';
 
-const TELAS = { treino: AbaTreino, historico: TelaHistorico, plano: TelaPlano };
+const TELAS: Partial<Record<Aba, () => ReactNode>> = {
+  inicio: TelaInicio,
+  treino: AbaTreino,
+  historico: TelaHistorico,
+  plano: TelaPlano,
+};
 
 export function App() {
   // Qualquer sinal alterado redesenha a árvore (D34)
@@ -23,10 +31,7 @@ export function App() {
   if (!carregado.value) return null;
   // Fora do app instalado, até ser dispensada (BRIEFING 11)
   if (mostrarBoasVindas.value) return <BoasVindas />;
-  const Tela = TELAS[rota.value.aba];
-  return (
-    <AppShell>
-      <Tela />
-    </AppShell>
-  );
+  const aba = rota.value.aba;
+  const Tela = TELAS[aba];
+  return <AppShell>{Tela ? <Tela /> : <EmBreve aba={aba} />}</AppShell>;
 }

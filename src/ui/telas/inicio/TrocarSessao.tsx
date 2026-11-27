@@ -16,11 +16,11 @@ export function TrocarSessao() {
   if (!plano) return null;
   const escolher = (id: string) => {
     sessaoEscolhida.value = id === sessaoSugerida.value?.id ? null : id;
-    navegar('treino');
+    navegar('');
   };
   return (
     <section>
-      <Cabecalho titulo="Trocar sessão" voltar="#/treino" />
+      <Cabecalho titulo="Trocar sessão" voltar="/" />
       <ul className="lista-sessoes">
         {plano.sessoes.map((s) => (
           <li key={s.id}>

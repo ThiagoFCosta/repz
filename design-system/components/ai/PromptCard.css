@@ -1,0 +1,11 @@
+@layer components {
+.pr-prompt{display:flex;flex-direction:column;gap:6px;width:100%;padding:16px 16px 14px;border:0;border-radius:var(--radius-xl);background:linear-gradient(180deg,var(--surface-card-hover),var(--surface-card));box-shadow:inset 0 0 0 1px var(--border-default);text-align:left;cursor:pointer;transition:box-shadow var(--duration-fast),background var(--duration-fast);font-family:var(--font-sans)}
+.pr-prompt:hover{box-shadow:inset 0 0 0 1px var(--border-brand-soft),var(--shadow-sm);background:var(--surface-brand-soft)}
+.pr-prompt:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.pr-prompt:disabled{opacity:.5;cursor:not-allowed}
+.pr-prompt__title{display:flex;align-items:center;gap:8px;font:500 var(--text-lg)/1.3 var(--font-sans);color:var(--text-primary)}
+.pr-prompt__desc{font:400 var(--text-sm)/1.5 var(--font-sans);color:var(--text-secondary);text-wrap:pretty}
+.pr-prompt__cta{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding-top:12px;border-top:1px solid var(--border-subtle);font:600 var(--text-base)/1 var(--font-sans);color:var(--text-primary)}
+.pr-prompt:hover .pr-prompt__cta svg{transform:translateX(3px)}
+.pr-prompt__cta svg{transition:transform var(--duration-fast) var(--ease-out)}
+}

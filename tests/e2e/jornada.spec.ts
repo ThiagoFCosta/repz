@@ -1,3 +1,4 @@
+import { irPara } from './navegacao';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { expect, test, type Download, type Page } from '@playwright/test';
@@ -56,7 +57,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
   await expect(page.getByText('Comece pelo seu plano')).toBeVisible();
 
   await test.step('E2E 2: PDF sem anexo mostra o erro', async () => {
-    await page.getByRole('link', { name: 'Plano' }).click();
+    await irPara(page, 'Plano');
     await page.getByLabel('Arquivo PDF do plano').setInputFiles(fixture('plano-original-raul.pdf'));
     await expect(page.getByText('Anexo TREINO v1 não encontrado')).toBeVisible();
     await expect(page.getByText('Marcador #TREINO-INICIO não encontrado')).toBeVisible();
@@ -75,7 +76,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
   });
 
   await test.step('E2E 3: Push completo com bi-set, recarregando no meio', async () => {
-    await page.getByRole('link', { name: 'Treino' }).click();
+    await irPara(page, 'Início');
     await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
     await page.getByRole('button', { name: 'Iniciar treino' }).click();
 
@@ -170,7 +171,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
     await page.getByRole('button', { name: 'Registrar cardio' }).click();
     await expect(page.getByText('1 de 2')).toBeVisible();
 
-    await page.getByRole('link', { name: 'Plano' }).click();
+    await irPara(page, 'Plano');
     const [cardio, series] = await baixar(page, 'Planilha CSV', 2);
     expect((await conteudo(cardio!)).toString('utf8')).toContain(';Remo;35;;;');
     const csv = (await conteudo(series!)).toString('utf8');
@@ -190,7 +191,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
           r.onerror = () => erro(r.error);
         }),
     );
-    await page.goto('./#/plano');
+    await page.goto('./plano');
     await page.reload();
     await titulo(page, 'Importar plano');
 
@@ -201,7 +202,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
     await expect(page.getByText('Backup restaurado.')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
     await expect(page.getByText('1 de 2')).toBeVisible();
-    await page.getByRole('link', { name: 'Histórico' }).click();
+    await irPara(page, 'Histórico');
     // o histórico voltou: gráfico do último exercício feito
     await expect(page.getByRole('img', { name: /^1RM estimado por semana/ })).toBeVisible();
   });

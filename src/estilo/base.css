@@ -14,7 +14,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--fonte);
-  font-size: 16px;
+  font-size: var(--text-base);
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -34,7 +34,7 @@ textarea {
 }
 
 :focus-visible {
-  outline: 2px solid var(--info);
+  outline: 2px solid var(--border-brand);
   outline-offset: 2px;
 }
 
@@ -99,8 +99,9 @@ textarea {
 }
 
 h1 {
-  font-size: 24px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
   margin: 8px 0 16px;
 }
 
@@ -127,4 +128,21 @@ h1 {
   border: 1px solid var(--border-forte);
   border-radius: var(--raio);
   padding: 12px var(--espaco);
+}
+
+/* ---- v2: moldura do design system (src/ui/layout/AppShell.tsx) ---- */
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* A rolagem é do conteúdo da moldura, acima da barra inferior: o rodapé de ação gruda no fim dela */
+.pr-shell__content .rodape-acao {
+  bottom: 0;
+}
+
+/* Mockup: no celular o topo mostra ☰ + logo (o Prisma esconde o título abaixo de 1024 px) */
+.pr-tb.repz-topo .pr-tb__titles {
+  visibility: visible;
 }

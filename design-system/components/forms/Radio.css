@@ -1,0 +1,11 @@
+@layer components {
+.pr-radio{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font:400 var(--text-sm)/1.3 var(--font-sans);color:var(--text-primary);-webkit-tap-highlight-color:transparent}
+.pr-radio--disabled{opacity:.5;cursor:not-allowed}
+.pr-radio input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.pr-radio__dot{display:inline-flex;width:20px;height:20px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--control-border);background:var(--surface-card);transition:all var(--duration-fast) var(--ease-standard)}
+.pr-radio:hover .pr-radio__dot{border-color:var(--control-border-hover)}
+.pr-radio input:checked+.pr-radio__dot{border:0;background:var(--lime-400);box-shadow:inset 0 0 0 4px var(--lime-400),inset 0 0 0 6px var(--control-thumb)}
+.pr-radio input:focus-visible+.pr-radio__dot{box-shadow:var(--shadow-focus)}
+.pr-radio input:checked:focus-visible+.pr-radio__dot{box-shadow:inset 0 0 0 4px var(--lime-400),inset 0 0 0 6px var(--control-thumb),var(--shadow-focus)}
+.pr-radio--error .pr-radio__dot{border-color:var(--border-danger)}
+}

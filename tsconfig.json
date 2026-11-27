@@ -14,9 +14,10 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "skipLibCheck": true,
+    "paths": { "@ds": ["./design-system/index.ts"] },
     "noEmit": true,
     "types": ["vite/client", "vite-plugin-pwa/client", "node"]
   },
-  "include": ["src", "tests", "scripts", "vite.config.ts", "playwright.config.ts"],
+  "include": ["src", "design-system", "tests", "scripts", "vite.config.ts", "playwright.config.ts"],
   "exclude": ["referencia", "dist", "node_modules"]
 }

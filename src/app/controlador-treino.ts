@@ -267,7 +267,7 @@ async function encerrarSessao(): Promise<void> {
   treinoAtivo.value = null;
   sessaoEscolhida.value = null;
   await recarregar();
-  navegar('treino');
+  navegar('');
 }
 
 // ---- Início, retomada e encerramento ----
@@ -308,7 +308,7 @@ export async function iniciarTreino(sessaoId: string): Promise<void> {
   treinoAberto.value = treino;
   treinoAtivo.value = { treino, estado, series: [], sessao, itens };
   manterTelaLigada(preferencias.value.manterTelaLigada);
-  navegar('treino/agora');
+  navegar('treino');
 }
 
 // Ao abrir o app: carrega o treino em andamento; descanso vencido vai direto à próxima série

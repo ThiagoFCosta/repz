@@ -90,7 +90,7 @@ export function TelaRevisar() {
   if (!plano) {
     return (
       <section>
-        <Cabecalho titulo="Revisar plano" voltar="#/plano/importar" />
+        <Cabecalho titulo="Revisar plano" voltar="/plano/importar" />
         <Cartao>
           <p>Nenhum plano lido para revisar.</p>
           <Botao onClick={() => navegar('plano/importar')}>Importar plano</Botao>
@@ -116,7 +116,7 @@ export function TelaRevisar() {
 
   return (
     <section>
-      <Cabecalho titulo="Revisar plano" voltar="#/plano/importar" />
+      <Cabecalho titulo="Revisar plano" voltar="/plano/importar" />
       <Cartao>
         <h2 className="plano-nome">{plano.nome || 'Plano sem nome'}</h2>
         <p className="muted">

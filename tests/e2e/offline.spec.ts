@@ -1,3 +1,4 @@
+import { irPara } from './navegacao';
 import { fileURLToPath } from 'node:url';
 import { expect, test } from '@playwright/test';
 
@@ -21,7 +22,7 @@ test('abre e importa PDF offline depois da primeira visita', async ({ page, cont
   await page.reload();
   await expect(page.getByText('Comece pelo seu plano')).toBeVisible();
 
-  await page.getByRole('link', { name: 'Plano' }).click();
+  await irPara(page, 'Plano');
   await expect(page.getByRole('heading', { name: 'Importar plano' })).toBeVisible();
 
   // pdf.js e o worker vêm do precache: a importação funciona sem rede (BRIEFING 2.2)
