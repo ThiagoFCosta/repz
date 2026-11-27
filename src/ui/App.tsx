@@ -15,7 +15,8 @@ import { TelaLogin } from './telas/login/TelaLogin';
 import { TelaPerfil } from './telas/perfil/TelaPerfil';
 import { TelaReferencias } from './telas/referencias/TelaReferencias';
 import { TelaCorpo } from './telas/corpo/TelaCorpo';
-import { usuarioAtual } from '../app/sessao';
+import { definindoSenha, usuarioAtual } from '../app/sessao';
+import { TelaDefinirSenha } from './telas/login/TelaDefinirSenha';
 
 const TELAS: Partial<Record<Aba, () => ReactNode>> = {
   inicio: TelaInicio,
@@ -38,6 +39,7 @@ export function App() {
     );
   if (usuarioAtual.value === undefined) return null;
   if (usuarioAtual.value === null) return <TelaLogin />;
+  if (definindoSenha.value) return <TelaDefinirSenha />;
   if (!carregado.value) return null;
   // Fora do app instalado, até ser dispensada (BRIEFING 11)
   if (mostrarBoasVindas.value) return <BoasVindas />;

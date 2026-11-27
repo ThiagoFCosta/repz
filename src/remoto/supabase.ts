@@ -59,6 +59,15 @@ export class SupabaseRemoto implements Remoto {
     const { error } = await sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: location.origin });
     if (error) throw new ErroRemoto(traduzir(error.message));
   }
+  async definirSenha(senha: string) {
+    const sb = await this.cliente();
+    const { error } = await sb.auth.updateUser({ password: senha });
+    if (!error) return;
+    if (/different from the old/i.test(error.message))
+      throw new ErroRemoto('Use uma senha diferente da anterior.');
+    if (/at least|weak|short/i.test(error.message)) throw new ErroRemoto('Use pelo menos 8 caracteres.');
+    throw new ErroRemoto(traduzir(error.message));
+  }
 
   // ---- Sincronização (ARCHITECTURE, seção 8) ----
 

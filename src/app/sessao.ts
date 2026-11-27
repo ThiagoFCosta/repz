@@ -36,7 +36,38 @@ async function abrir(u: Usuario): Promise<void> {
   iniciarSincronizador(u.id);
 }
 
+// Chegou pelo link do convite ou de "esqueci a senha": a sessão vem no endereço e falta criar a senha
+export const definindoSenha = signal(false);
+// Link vencido ou já usado: aviso na tela de login
+export const avisoDoLink = signal<string | null>(null);
+
+function lerLink(): 'senha' | 'erro' | null {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.get('error_code') || h.get('error')) return 'erro';
+  return /^(invite|recovery|signup)$/.test(h.get('type') ?? '') ? 'senha' : null;
+}
+
 export async function iniciarSessao(): Promise<void> {
+  const link = lerLink();
+  if (link === 'erro') {
+    avisoDoLink.value = 'Esse link venceu ou já foi usado. Use "Esqueci a senha" para receber outro.';
+    history.replaceState(null, '', location.pathname);
+  }
+  if (link === 'senha') {
+    try {
+      // O supabase-js lê o token do endereço ao iniciar
+      const s = await remoto.sessao();
+      history.replaceState(null, '', location.pathname);
+      if (s) {
+        definindoSenha.value = true;
+        usuarioAtual.value = s;
+        return;
+      }
+    } catch {
+      // segue para o fluxo normal
+    }
+    avisoDoLink.value = 'Esse link venceu ou já foi usado. Use "Esqueci a senha" para receber outro.';
+  }
   const marca = lerMarca();
   if (marca) {
     await abrir(marca);
@@ -61,6 +92,14 @@ export async function iniciarSessao(): Promise<void> {
 export async function entrar(email: string, senha: string): Promise<void> {
   const u = await remoto.entrar(email, senha);
   await abrir(u);
+}
+
+export async function definirSenha(senha: string, confirmacao: string): Promise<void> {
+  if (senha.length < 8) throw new ErroRemoto('Use pelo menos 8 caracteres.');
+  if (senha !== confirmacao) throw new ErroRemoto('As duas senhas não são iguais.');
+  await remoto.definirSenha(senha);
+  definindoSenha.value = false;
+  await abrir(usuarioAtual.value!);
 }
 
 export async function esqueciSenha(email: string): Promise<void> {

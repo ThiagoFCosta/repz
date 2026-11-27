@@ -84,6 +84,7 @@ export class MemoriaRemoto implements Remoto {
     if (temStorage()) localStorage.setItem(CHAVE_SESSAO, 'saiu');
   }
   async esqueciSenha() {}
+  async definirSenha() {}
 
   async enviar(tabela: string, linhas: LinhaRemota[]): Promise<ResultadoEnvio> {
     this.rede();

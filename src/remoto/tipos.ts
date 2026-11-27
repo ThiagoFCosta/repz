@@ -26,6 +26,8 @@ export interface Remoto {
   entrar(email: string, senha: string): Promise<Usuario>;
   sair(): Promise<void>;
   esqueciSenha(email: string): Promise<void>;
+  // Depois do link do convite ou de "esqueci a senha": a sessão já está aberta, falta a senha
+  definirSenha(senha: string): Promise<void>;
 
   // Sincronização (ARCHITECTURE, seção 8). Sem rede: ErroRede.
   enviar(tabela: string, linhas: LinhaRemota[]): Promise<ResultadoEnvio>;

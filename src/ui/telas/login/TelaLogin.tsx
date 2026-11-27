@@ -2,13 +2,13 @@
 
 import { useState, type FormEvent } from 'react';
 import { Button, Card, Input, Logo } from '@ds';
-import { entrar, esqueciSenha } from '../../../app/sessao';
+import { avisoDoLink, entrar, esqueciSenha } from '../../../app/sessao';
 
 export function TelaLogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState<string | null>(null);
-  const [aviso, setAviso] = useState<string | null>(null);
+  const [aviso, setAviso] = useState<string | null>(avisoDoLink.value);
   const [ocupado, setOcupado] = useState(false);
 
   const enviar = async (e: FormEvent) => {
