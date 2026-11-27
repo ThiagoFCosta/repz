@@ -11,6 +11,7 @@ import type {
   ConfigExercicio,
   Meta,
   Plano,
+  RegistroSugestao,
   SerieRealizada,
   Treino,
 } from './tipos';
@@ -26,6 +27,7 @@ export class RepzDb extends Dexie {
   meta!: EntityTable<Meta, 'chave'>;
   sincronia!: EntityTable<MarcaSincronia, 'chave'>;
   checkins!: EntityTable<CheckinLocal, 'data'>;
+  sugestoes!: EntityTable<RegistroSugestao, 'id'>;
 
   constructor(nome = NOME_DB) {
     super(nome);
@@ -63,6 +65,8 @@ export class RepzDb extends Dexie {
       });
     // v3 (V3 · check-in de prontidão): um por dia, chave = data
     this.version(3).stores({ checkins: 'data' });
+    // v4 (V4 · motor v2): log de cada sugestão (BRIEFING-v2 8.2, D39)
+    this.version(4).stores({ sugestoes: 'id, treinoId' });
     this.use(middlewareSincronia);
   }
 }

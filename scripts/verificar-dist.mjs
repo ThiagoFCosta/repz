@@ -61,6 +61,9 @@ const PERMITIDAS = [
   // jsPDF: namespace padrão dos metadados XMP do documento (identificador, não requisição).
   // A URL de CDN do pdfobject sai no build (plugin repz-jspdf-sem-cdn no vite.config.ts).
   /^http:\/\/jspdf\.default\.namespaceuri\/$/,
+  // Referências científicas (v2, D54): links de DOI que o usuário abre na tela Referências. É navegação, não
+  // requisição do app (a CSP continua sem esse host em connect-src).
+  /^https:\/\/doi\.org\/(10\.[\w./-]+)?$/,
 ];
 
 function arquivos(dir) {

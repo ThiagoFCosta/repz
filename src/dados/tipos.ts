@@ -3,6 +3,7 @@
 import type { ISODate, ISODateTime } from '../dominio/datas';
 import type { CardioPrescrito, ExercicioImportado, Fase, Mensagem, Progressao } from '../dominio/tipos';
 import type { EstadoTreino } from '../dominio/treino/maquina';
+export type { RegistroSugestao } from '../dominio/motor/snapshot';
 
 export interface ExercicioPrescrito extends ExercicioImportado {
   id: string;

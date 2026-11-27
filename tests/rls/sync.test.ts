@@ -110,6 +110,42 @@ describe.skipIf(!configurado)('sincronização com o Supabase real', () => {
       distanciaKm: 8.5,
       esforco: 6,
       feitoEm: '2026-11-27T07:00:00-03:00',
+      kcalRelogio: 210,
+      nota: 'leve',
+    });
+    // V3/V4: check-in e log do motor também sobem
+    await a.checkins.put({
+      data: '2026-11-26',
+      sonoHoras: 5.5,
+      disposicao: 2,
+      pulado: false,
+      origem: 'manual',
+    });
+    const idSugestao = randomUUID();
+    await a.sugestoes.put({
+      id: idSugestao,
+      treinoId: idTreino,
+      exercicioPrescritoId: 'e',
+      chave: 'supino',
+      variante: 'Supino',
+      versaoMotor: '2.0.0',
+      versaoParametros: 1,
+      regra: 'P1',
+      entradas: {
+        historico: [],
+        presc: { reps: { min: 6, max: 10 }, rir: { min: 1, max: 2 }, porTempo: false, fase: null },
+        incremento: 2.5,
+        horasDesdeUltima: 72,
+      },
+      prontidao: { baixa: true, motivos: ['Dormiu 5,5 h, menos de 6 h'], sono: 5.5, mediaSono: 7 },
+      acao: 'manter',
+      carga: 82.5,
+      motivo: 'Prontidão baixa hoje: mantenha 82,5 kg.',
+      alertas: ['Pouco descanso desde a última vez neste exercício.'],
+      cargaUsada: 82.5,
+      desfecho: 'aceita',
+      resultado: { reps: [10, 9], rir: [2, 2], naFaixa: true, abaixoDaFaixa: false, rirNoAlvo: true },
+      criadoEm: '2026-11-27T19:00:00-03:00',
     });
 
     const r = await sincronizar(a, remoto, usuario);
@@ -125,7 +161,20 @@ describe.skipIf(!configurado)('sincronização com o Supabase real', () => {
       [82.5, 10],
       [82.5, 9],
     ]);
-    expect(await b.cardio.get(idCardio)).toMatchObject({ minutos: 30, distanciaKm: 8.5, esforco: 6 });
+    expect(await b.cardio.get(idCardio)).toMatchObject({
+      minutos: 30,
+      distanciaKm: 8.5,
+      esforco: 6,
+      kcalRelogio: 210,
+    });
+    expect(await b.checkins.get('2026-11-26')).toMatchObject({ sonoHoras: 5.5, disposicao: 2 });
+    expect(await b.sugestoes.get(idSugestao)).toMatchObject({
+      regra: 'P1',
+      carga: 82.5,
+      desfecho: 'aceita',
+      alertas: ['Pouco descanso desde a última vez neste exercício.'],
+      prontidao: { baixa: true, sono: 5.5 },
+    });
     expect((await contarPendentes(b)).pendentes).toBe(0);
 
     // limpeza: o plano de teste deixa de ser o ativo e sai (soft delete)

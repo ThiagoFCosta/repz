@@ -132,9 +132,21 @@ V0 Fase 0 ─► V1 Base ─► V2 Sync ─► V3 Treino+ ─► V4 Motor v2 ─
 6. `dominio/referencias.ts`: as 7 referências **conferidas na fonte** (PubMed/DOI), com nível; seed gerado; tela Mais → **Referências** (funciona offline).
 7. Testes: os 16 cenários da v1 inalterados **e** rodando pelo `sugerirV2` sem check-in; P1-P5 isolados e combinados (P1 + regra 5; P2 + regra 3; P3 + regra 4 com e sem repetição em prontidão normal); snapshot completo; desfecho; limites; E2E "check-in com sono baixo → sem aumento no dia".
 
+**Feito no V4 (27/11/2026)**
+- `dominio/motor/`: `sugerirV2` (P1, P4), P2/P3 no núcleo do motor da v1, ids de regra, `VERSAO_MOTOR` 2.0.0,
+  parâmetros versionados com limites rígidos (`validarParametros`, `mudancas`) e o log (`criarRegistro`,
+  `fecharRegistro`). D53.
+- App: histórico com a prontidão de cada dia, P1 no pré-preenchimento, log criado ao montar o treino e fechado ao
+  concluir (Dexie v4, sincronizado com `sugestoes`).
+- `dominio/referencias.ts` com as 7 referências conferidas e 3 convenções práticas (D54); semente gerada e aplicada
+  no Supabase; tela **Referências** (offline) e "Por quê?" em cada sugestão.
+- P5 (perda de peso) fica pronto no V5, junto com a tendência de peso.
+- Testes: 24 do motor v2 (v1 sem check-in idêntico, P1-P4 isolados e combinados, limites, snapshot), 4 das referências,
+  integração real (check-in e log), E2E "sono baixo → sem aumento".
+
 **Aceite**
-- [ ] 16 cenários da v1 + os novos verdes.
-- [ ] Cada sugestão gravada com snapshot completo (versões, regra, entradas, prontidão, ação, carga, motivo) e fechada ao concluir o treino.
+- [x] 16 cenários da v1 + os novos verdes.
+- [x] Cada sugestão gravada com snapshot completo (versões, regra, entradas, prontidão, ação, carga, motivo) e fechada ao concluir o treino (E2E e integração com o Supabase real).
 
 ---
 

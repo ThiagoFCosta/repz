@@ -13,6 +13,7 @@ import { TelaInicio } from './telas/inicio/TelaInicio';
 import { EmBreve } from './telas/EmBreve';
 import { TelaLogin } from './telas/login/TelaLogin';
 import { TelaPerfil } from './telas/perfil/TelaPerfil';
+import { TelaReferencias } from './telas/referencias/TelaReferencias';
 import { usuarioAtual } from '../app/sessao';
 
 const TELAS: Partial<Record<Aba, () => ReactNode>> = {
@@ -21,6 +22,7 @@ const TELAS: Partial<Record<Aba, () => ReactNode>> = {
   historico: TelaHistorico,
   plano: TelaPlano,
   perfil: TelaPerfil,
+  referencias: TelaReferencias,
 };
 
 export function App() {

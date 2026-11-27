@@ -221,3 +221,43 @@ body,
   border-bottom: 1px solid var(--border-default);
   font-size: var(--text-sm);
 }
+
+/* ---- Referências (V4) ---- */
+.lista-referencias {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.referencia-destaque {
+  box-shadow: 0 0 0 2px var(--border-brand);
+}
+
+.referencia-resumo {
+  margin: var(--space-2) 0;
+  font-weight: 600;
+}
+
+.referencia-citacao {
+  margin: 0 0 var(--space-2);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.referencia-usos {
+  margin: var(--space-1) 0 0;
+  padding-left: var(--space-5);
+}
+
+.por-que {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  padding: 0 var(--space-1);
+  color: var(--text-link);
+  text-decoration: underline;
+  white-space: nowrap;
+}

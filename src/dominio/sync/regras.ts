@@ -6,6 +6,7 @@ export const ORDEM_ENVIO = [
   'config_exercicio',
   'checkins',
   'treinos',
+  'sugestoes',
   'series',
   'cardio',
   'preferencias',

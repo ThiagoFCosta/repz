@@ -1,3 +1,4 @@
+import { PorQue } from '../../componentes/PorQue';
 // Fim do treino (BRIEFING 9.6): duração, séries, volume, recordes e "Para o próximo treino" (7.6).
 
 import { useState } from 'react';
@@ -35,7 +36,9 @@ function CartaoSugestao({ a, c }: { a: TreinoAtivo; c: CartaoProximo }) {
       <div className="proximo-corpo">
         <div className="proximo-nome">{nome}</div>
         <div className="muted numero pequeno">{seriesTxt(c.series, ctx.presc.porTempo)}</div>
-        <div className="proximo-motivo">{c.sugestao.motivo}</div>
+        <div className="proximo-motivo">
+          {c.sugestao.motivo} <PorQue regra={c.sugestao.regra} />
+        </div>
         {c.sugestao.alertas.map((al) => (
           <div key={al} className="proximo-aviso pequeno">
             ! {al}

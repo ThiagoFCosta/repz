@@ -1,3 +1,4 @@
+import { PorQue } from '../../componentes/PorQue';
 // Registro da série (BRIEFING 9.4), o núcleo do app. Meta: 2 toques quando a sugestão está certa
 // (RIR + Concluir, D4): carga e reps chegam pré-preenchidas.
 
@@ -486,7 +487,9 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
             <dt>
               <span aria-hidden="true">{ICONE_ACAO[sug.acao]}</span> Sugestão
             </dt>
-            <dd>{sug.motivo}</dd>
+            <dd>
+              {sug.motivo} <PorQue regra={sug.regra} />
+            </dd>
             {sug.alertas.map((al) => (
               <dd key={al} className="alerta">
                 ! {al}

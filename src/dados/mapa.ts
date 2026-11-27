@@ -9,6 +9,7 @@ import {
   PREFERENCIAS_PADRAO,
   type CardioRealizado,
   type CheckinLocal,
+  type RegistroSugestao,
   type ConfigExercicio,
   type Plano,
   type Preferencias,
@@ -16,7 +17,8 @@ import {
   type Treino,
 } from './tipos';
 
-export type StoreSync = 'planos' | 'treinos' | 'series' | 'cardio' | 'configExercicios' | 'meta' | 'checkins';
+export type StoreSync =
+  'planos' | 'treinos' | 'series' | 'cardio' | 'configExercicios' | 'meta' | 'checkins' | 'sugestoes';
 
 // Tabela remota de cada store (em meta, só as preferências viram linha; o plano ativo é planos_treino.ativo)
 export const TABELA_DA_STORE: Record<StoreSync, string> = {
@@ -27,6 +29,7 @@ export const TABELA_DA_STORE: Record<StoreSync, string> = {
   configExercicios: 'config_exercicio',
   meta: 'preferencias',
   checkins: 'checkins',
+  sugestoes: 'sugestoes',
 };
 
 export const idConfig = (usuarioId: string, chave: string) =>
@@ -123,6 +126,30 @@ export function paraRemoto(store: StoreSync, r: unknown, usuarioId: string, em: 
         kcal_relogio: c.kcalRelogio ?? null,
         nota: c.nota ?? null,
         origem: c.origem ?? 'manual',
+      };
+    }
+    case 'sugestoes': {
+      const g = r as RegistroSugestao;
+      return {
+        ...base,
+        id: g.id,
+        criado_em: g.criadoEm,
+        treino_id: g.treinoId,
+        exercicio_prescrito_id: g.exercicioPrescritoId,
+        chave: g.chave,
+        variante: g.variante,
+        versao_motor: g.versaoMotor,
+        versao_parametros: g.versaoParametros,
+        regra: g.regra,
+        entradas: g.entradas,
+        prontidao: g.prontidao,
+        acao: g.acao,
+        carga: g.carga,
+        motivo: g.motivo,
+        alertas: g.alertas,
+        carga_usada: g.cargaUsada,
+        desfecho: g.desfecho,
+        resultado: g.resultado,
       };
     }
     case 'checkins': {
@@ -242,6 +269,29 @@ export function doRemoto(tabela: string, l: LinhaRemota): RegistroLocal | null {
         origem: l.origem === 'print' ? 'print' : 'manual',
       };
       return { store: 'cardio', id: c.id, registro: c };
+    }
+    case 'sugestoes': {
+      const g: RegistroSugestao = {
+        id: l.id,
+        treinoId: String(l.treino_id),
+        exercicioPrescritoId: String(l.exercicio_prescrito_id),
+        chave: String(l.chave),
+        variante: String(l.variante),
+        versaoMotor: String(l.versao_motor),
+        versaoParametros: Number(l.versao_parametros),
+        regra: String(l.regra),
+        entradas: l.entradas as RegistroSugestao['entradas'],
+        prontidao: (l.prontidao as RegistroSugestao['prontidao']) ?? null,
+        acao: l.acao as RegistroSugestao['acao'],
+        carga: num(l.carga),
+        motivo: String(l.motivo),
+        alertas: (l.alertas as string[] | null) ?? [],
+        cargaUsada: num(l.carga_usada),
+        desfecho: (l.desfecho as RegistroSugestao['desfecho']) ?? null,
+        resultado: (l.resultado as RegistroSugestao['resultado']) ?? null,
+        criadoEm: local(l.criado_em)!,
+      };
+      return { store: 'sugestoes', id: g.id, registro: g };
     }
     case 'checkins': {
       const c: CheckinLocal = {

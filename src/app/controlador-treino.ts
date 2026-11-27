@@ -6,7 +6,12 @@ import { computed, signal } from './sinal';
 import { agoraISO, hojeLocal } from '../dominio/datas';
 import { prescricao, type Prescricao } from '../dominio/periodizacao/prescricao';
 import { incrementoPadrao } from '../dominio/progressao/incremento';
-import { sugerir, type Sugestao } from '../dominio/progressao/motor';
+import type { TreinoHistorico } from '../dominio/progressao/motor';
+import { sugerirV2, type SugestaoV2 } from '../dominio/motor/sugerir';
+import { criarRegistro, fecharRegistro } from '../dominio/motor/snapshot';
+import { avaliarProntidao } from '../dominio/prontidao/prontidao';
+import { diasEntre } from '../dominio/datas';
+import { salvarSugestoes, sugestoesDoTreino } from '../dados/repos/sugestoes';
 import { proximaSessao } from '../dominio/rotacao';
 import { duracaoEstimada } from '../dominio/treino/estimativa';
 import {
@@ -25,6 +30,7 @@ import { criarTreino, persistirTransicao, seriesDoTreino, type Transicao } from 
 import type { ExercicioPrescrito, Plano, SerieRealizada, SessaoTemplate, Treino } from '../dados/tipos';
 import { agendarDescanso, cancelarDescanso, prepararAudio } from './descanso';
 import {
+  checkins,
   configs,
   db,
   hoje,
@@ -36,6 +42,7 @@ import {
   ultimaSessaoConcluida,
 } from './estado';
 import { navegar } from './roteador';
+import { prontidaoHoje } from './prontidao';
 import { manterTelaLigada } from './wake-lock';
 
 export interface ItemContexto {
@@ -106,19 +113,91 @@ function varianteInicial(ctx: ItemContexto): number | null {
 
 // ---- Sugestão e pré-preenchimento ----
 
+// Cada treino do histórico com a prontidão do dia em que foi feito (regras P2 e P3 do motor v2)
+export function comProntidao(historico: TreinoHistorico[]): TreinoHistorico[] {
+  return historico.map((t) => {
+    const c = checkins.value.find((x) => x.data === t.data) ?? null;
+    return avaliarProntidao(c, checkins.value, t.data).baixa ? { ...t, prontidaoBaixa: true } : t;
+  });
+}
+
+// Motor v2 (BRIEFING-v2 8.1). `paraHoje`: a sugestão do treino de hoje usa a prontidão de hoje (P1); o cartão
+// "Para o próximo" do fim não, porque a próxima vez terá o check-in dela.
 export function sugestaoDoItem(
   a: TreinoAtivo,
   item: number,
   variante = a.estado.variante[item] ?? 0,
   historico = a.itens[item]!.historico[variante]?.treinos ?? [],
-): Sugestao {
+  paraHoje = true,
+): SugestaoV2 {
   const ctx = a.itens[item]!;
-  return sugerir(historico, ctx.presc, {
+  return sugerirV2({
+    historico: comProntidao(historico),
+    presc: ctx.presc,
     hoje: hoje.value,
     incremento: ctx.incremento[variante],
     nome: ctx.ex.variantes[variante],
-    config: { estagnadoSemanas: planoAtivo.value?.progressao.estagnado ?? 3 },
+    estagnadoSemanas: planoAtivo.value?.progressao.estagnado ?? 3,
+    prontidaoHoje: paraHoje ? prontidaoHoje.value : null,
+    avisoDescanso: paraHoje,
   });
+}
+
+// Log: uma sugestão por exercício, ao montar o treino (D39)
+async function registrarSugestoes(a: TreinoAtivo): Promise<void> {
+  const prontidao = prontidaoHoje.value;
+  const regs = a.itens.flatMap((ctx, item) => {
+    const v = a.estado.variante[item];
+    if (v == null) return [];
+    const historico = ctx.historico[v]?.treinos ?? [];
+    const ultimo = historico.at(-1);
+    return [
+      criarRegistro({
+        id: novoId(),
+        treinoId: a.treino.id,
+        exercicioPrescritoId: ctx.ex.id,
+        chave: ctx.ex.chaves[v]!,
+        variante: ctx.ex.variantes[v]!,
+        sugestao: sugerirV2({
+          historico: comProntidao(historico),
+          presc: ctx.presc,
+          hoje: hoje.value,
+          incremento: ctx.incremento[v],
+          nome: ctx.ex.variantes[v],
+          estagnadoSemanas: planoAtivo.value?.progressao.estagnado ?? 3,
+          prontidaoHoje: prontidao,
+        }),
+        historico: comProntidao(historico),
+        presc: ctx.presc,
+        incremento: ctx.incremento[v] ?? null,
+        horasDesdeUltima: ultimo ? diasEntre(ultimo.data, hoje.value) * 24 : null,
+        prontidao: prontidao.sono == null && !prontidao.baixa ? null : prontidao,
+        criadoEm: agoraISO(new Date()),
+      }),
+    ];
+  });
+  await salvarSugestoes(db, regs);
+}
+
+// Ao concluir: carga usada, aceita/editada/ignorada e o resultado (BRIEFING-v2 8.2)
+async function fecharSugestoes(treinoId: string): Promise<void> {
+  const [regs, series] = await Promise.all([sugestoesDoTreino(db, treinoId), seriesDoTreino(db, treinoId)]);
+  const tol = 1;
+  await salvarSugestoes(
+    db,
+    regs
+      .filter((r) => r.desfecho == null)
+      .map((r) => ({
+        ...r,
+        ...fecharRegistro(
+          r,
+          series.filter(
+            (s) => !s.aquecimento && s.exercicioPrescritoId === r.exercicioPrescritoId && s.chave === r.chave,
+          ),
+          tol,
+        ),
+      })),
+  );
 }
 
 // Séries de trabalho deste treino no item (na variante, se informada)
@@ -130,7 +209,7 @@ export function seriesDoItem(a: TreinoAtivo, item: number, variante?: number): S
   );
 }
 
-export function preenchimentoDoItem(a: TreinoAtivo, item: number): Preenchimento & { sugestao: Sugestao } {
+export function preenchimentoDoItem(a: TreinoAtivo, item: number): Preenchimento & { sugestao: SugestaoV2 } {
   const v = a.estado.variante[item] ?? 0;
   const ctx = a.itens[item]!;
   const sugestao = sugestaoDoItem(a, item, v);
@@ -144,7 +223,7 @@ export interface CartaoProximo {
   item: number;
   variante: number;
   series: SerieRealizada[]; // de trabalho, neste treino
-  sugestao: Sugestao; // com este treino no histórico: o que vale para o próximo
+  sugestao: SugestaoV2; // com este treino no histórico: o que vale para o próximo
   recorde: Recorde | null;
 }
 
@@ -161,7 +240,13 @@ export function cartoesDoFim(a: TreinoAtivo): CartaoProximo[] {
           item,
           variante,
           series,
-          sugestao: sugestaoDoItem(a, item, variante, comTreinoAtual(antes, a.treino.data, hojeSeries)),
+          sugestao: sugestaoDoItem(
+            a,
+            item,
+            variante,
+            comTreinoAtual(antes, a.treino.data, hojeSeries),
+            false,
+          ),
           recorde: recorde(hojeSeries, antes, ctx.presc),
         },
       ];
@@ -246,6 +331,7 @@ async function processar(ev: Evento): Promise<void> {
     if (ef.tipo === 'iniciarDescanso') aplicarAgendamento(estado);
     else if (ef.tipo === 'cancelarDescanso') cancelarDescanso();
   }
+  if (efeitos.some((ef) => ef.tipo === 'concluirTreino')) await fecharSugestoes(a.treino.id);
   if (efeitos.some((ef) => ef.tipo === 'concluirTreino' || ef.tipo === 'descartarTreino'))
     await encerrarSessao();
   else if (estado.etapa.tipo === 'resumo') manterTelaLigada(false);
@@ -307,6 +393,7 @@ export async function iniciarTreino(sessaoId: string): Promise<void> {
   await criarTreino(db, treino);
   treinoAberto.value = treino;
   treinoAtivo.value = { treino, estado, series: [], sessao, itens };
+  await registrarSugestoes(treinoAtivo.value);
   manterTelaLigada(preferencias.value.manterTelaLigada);
   navegar('treino');
 }
@@ -349,6 +436,7 @@ export async function encerrarTreinoAberto(): Promise<void> {
     },
   });
   erroTreino.value = null;
+  if (temSeries) await fecharSugestoes(t.id);
   await encerrarSessao();
 }
 
