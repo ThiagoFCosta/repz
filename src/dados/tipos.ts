@@ -74,6 +74,19 @@ export interface CardioRealizado {
   distanciaKm: number | null;
   esforco: number | null;
   feitoEm: ISODateTime;
+  // v2 (V3): opcionais, para os backups da v1 continuarem válidos
+  kcalRelogio?: number | null;
+  nota?: string | null;
+  origem?: 'manual' | 'print';
+}
+
+// Check-in de prontidão (BRIEFING-v2 7.3): um por dia
+export interface CheckinLocal {
+  data: ISODate;
+  sonoHoras: number | null;
+  disposicao: number | null;
+  pulado: boolean;
+  origem: 'manual' | 'print';
 }
 
 export interface ConfigExercicio {

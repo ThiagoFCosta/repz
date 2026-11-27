@@ -102,7 +102,7 @@ describe('banco vazio (schema v1)', () => {
       vibrar: true,
       manterTelaLigada: true,
     });
-    expect(db.verno).toBe(2); // v2: store `sincronia` (docs/v2/DECISOES.md, D51)
+    expect(db.verno).toBe(3); // v2: stores `sincronia` (D51) e `checkins` (V3)
   });
 });
 

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 
 const plano = fs.readFileSync(new URL('../fixtures/raul.treino.txt', import.meta.url), 'utf8');
 
@@ -36,7 +36,7 @@ test('treino feito sem internet sobe quando a conexão volta', async ({ page, co
   await context.setOffline(true);
   await irPara(page, 'Início');
   await expect(page.getByText('Offline · salvo no celular')).toBeVisible();
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
   await serie(page, '24', '10');
   await page.getByRole('button', { name: 'Pular descanso' }).click();
   await serie(page, '24', '9');

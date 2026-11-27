@@ -6,10 +6,11 @@ import {
   avaliar,
   metaSemanal,
   prescricaoDoRegistro,
-  tiposDoPlano,
+  cardioPorSemana,
+  tiposParaRegistro,
   type Comparacao,
 } from '../../../dominio/cardio';
-import { agoraISO, ehDataValida } from '../../../dominio/datas';
+import { agoraISO, ehDataValida, dataBR } from '../../../dominio/datas';
 import { formatarDecimal, lerDecimal } from '../../../dominio/numeros';
 import type { CardioPrescrito } from '../../../dominio/tipos';
 import { novoId } from '../../../dados/db';
@@ -112,12 +113,37 @@ function Campo({
   );
 }
 
+// Histórico (BRIEFING-v2 7.2): minutos, sessões e FC média nas últimas 8 semanas
+function HistoricoSemanal() {
+  const semanas = cardioPorSemana(cardios.value, hoje.value, 8).reverse();
+  if (!cardios.value.length) return null;
+  return (
+    <section className="cardio-historico" aria-label="Cardio por semana">
+      <h2 className="cartao-titulo">Últimas semanas</h2>
+      <ul className="lista-semanas">
+        {semanas.map((s) => (
+          <li key={s.inicio} className={s.sessoes ? '' : 'muted'}>
+            <span className="numero">{dataBR(s.inicio, true)}</span>
+            <span className="numero">{s.minutos} min</span>
+            <span>
+              {s.sessoes} {s.sessoes === 1 ? 'sessão' : 'sessões'}
+            </span>
+            <span className="numero">{s.fcMedia != null ? `FC ${s.fcMedia}` : '—'}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function TelaCardio({ id }: { id?: string }) {
   const existente = id ? cardios.value.find((c) => c.id === id) : undefined;
   const prescritos = planoAtivo.value?.cardio ?? [];
-  const tipos = [...tiposDoPlano(prescritos), OUTRO];
+  const tipos = [...tiposParaRegistro(prescritos), OUTRO];
   const ultimo = cardios.value[0]?.tipo;
-  const inicial = existente?.tipo ?? (ultimo && tipos.includes(ultimo) ? ultimo : tipos[0]!);
+  // Bicicleta é o padrão (BRIEFING-v2 7.2); depois, o último tipo registrado
+  const bike = tipos.find((t) => /bic|bike/i.test(t));
+  const inicial = existente?.tipo ?? (ultimo && tipos.includes(ultimo) ? ultimo : (bike ?? tipos[0]!));
   const ehDoPlano = tipos.includes(inicial);
 
   const [tipo, setTipo] = useState(ehDoPlano ? inicial : OUTRO);
@@ -128,6 +154,8 @@ export function TelaCardio({ id }: { id?: string }) {
     existente?.distanciaKm != null ? formatarDecimal(existente.distanciaKm) : '',
   );
   const [esforco, setEsforco] = useState<number | null>(existente?.esforco ?? null);
+  const [kcal, setKcal] = useState(existente?.kcalRelogio != null ? String(existente.kcalRelogio) : '');
+  const [nota, setNota] = useState(existente?.nota ?? '');
   const [data, setData] = useState(existente?.data ?? hoje.value);
   const [ocupado, setOcupado] = useState(false);
   const [confirmar, setConfirmar] = useState(false);
@@ -145,13 +173,15 @@ export function TelaCardio({ id }: { id?: string }) {
   const min = inteiro(minutos, 1, 600);
   const fcVal = vazio(fc) ? null : inteiro(fc, 30, 250);
   const distVal = vazio(dist) ? null : lerDecimal(dist);
+  const kcalVal = vazio(kcal) ? null : inteiro(kcal, 1, 5000);
   const dataOk = ehDataValida(data) && data <= hoje.value;
   const erros = {
     minutos: !vazio(minutos) && min == null,
     fc: !vazio(fc) && fcVal == null,
     dist: !vazio(dist) && distVal == null,
+    kcal: !vazio(kcal) && kcalVal == null,
   };
-  const valido = min != null && !erros.fc && !erros.dist && dataOk;
+  const valido = min != null && !erros.fc && !erros.dist && !erros.kcal && dataOk;
   const presc = prescricaoDoRegistro(prescritos, { tipo: nomeTipo, minutos: min });
 
   const salvar = async () => {
@@ -166,6 +196,9 @@ export function TelaCardio({ id }: { id?: string }) {
       distanciaKm: distVal,
       esforco,
       feitoEm: existente?.feitoEm ?? agoraISO(new Date()),
+      kcalRelogio: kcalVal,
+      nota: nota.trim() || null,
+      origem: existente?.origem ?? 'manual',
     };
     try {
       await gravarCardio(c);
@@ -235,6 +268,14 @@ export function TelaCardio({ id }: { id?: string }) {
           modo="decimal"
           erro={erros.dist}
         />
+        <Campo
+          id="cardio-kcal"
+          rotulo="kcal do relógio"
+          valor={kcal}
+          aoMudar={setKcal}
+          modo="numeric"
+          erro={erros.kcal}
+        />
         <div>
           <label className="rotulo" htmlFor="cardio-data">
             Data
@@ -268,6 +309,18 @@ export function TelaCardio({ id }: { id?: string }) {
         ))}
       </div>
 
+      <label className="rotulo" htmlFor="cardio-nota">
+        Nota (opcional)
+      </label>
+      <input
+        id="cardio-nota"
+        className="campo"
+        autoComplete="off"
+        maxLength={200}
+        value={nota}
+        onChange={(e) => setNota(e.currentTarget.value)}
+      />
+
       {presc ? (
         <Comparacoes presc={presc} minutos={min} fc={fcVal} />
       ) : (
@@ -284,6 +337,8 @@ export function TelaCardio({ id }: { id?: string }) {
           </Botao>
         )}
       </div>
+
+      {!existente && <HistoricoSemanal />}
 
       {confirmar && (
         <Folha titulo="Excluir cardio?" aoFechar={() => setConfirmar(false)}>

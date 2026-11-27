@@ -1,4 +1,4 @@
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
@@ -61,7 +61,7 @@ test('atualização fica pendente durante o treino e aparece no resumo e no Iní
   await page.getByRole('button', { name: 'Revisar plano' }).click();
   await page.getByRole('button', { name: 'Salvar e ativar plano' }).click();
   await irPara(page, 'Início');
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
   await page.getByLabel('kg', { exact: true }).fill('24');
   await page.getByRole('button', { name: 'Concluir série 1' }).click();
 

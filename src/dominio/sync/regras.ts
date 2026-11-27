@@ -4,6 +4,7 @@
 export const ORDEM_ENVIO = [
   'planos_treino',
   'config_exercicio',
+  'checkins',
   'treinos',
   'series',
   'cardio',

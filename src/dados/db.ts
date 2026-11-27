@@ -1,8 +1,19 @@
 // Banco IndexedDB (Dexie). Cada versão de schema fica declarada aqui, com a migração em migracoes/.
 
 import Dexie, { type EntityTable } from 'dexie';
-import { middlewareSincronia, chaveMarca, STORES_SINCRONIZADAS, type MarcaSincronia } from './sincronia';
-import type { CardioRealizado, ConfigExercicio, Meta, Plano, SerieRealizada, Treino } from './tipos';
+import { middlewareSincronia, chaveMarca, type MarcaSincronia } from './sincronia';
+
+// Stores que existiam na v2 do Dexie (a migração v1 → v2 marca o que já havia nelas)
+const STORES_V2 = ['planos', 'treinos', 'series', 'cardio', 'configExercicios', 'meta'];
+import type {
+  CardioRealizado,
+  CheckinLocal,
+  ConfigExercicio,
+  Meta,
+  Plano,
+  SerieRealizada,
+  Treino,
+} from './tipos';
 
 export const NOME_DB = 'repz';
 
@@ -14,6 +25,7 @@ export class RepzDb extends Dexie {
   configExercicios!: EntityTable<ConfigExercicio, 'chave'>;
   meta!: EntityTable<Meta, 'chave'>;
   sincronia!: EntityTable<MarcaSincronia, 'chave'>;
+  checkins!: EntityTable<CheckinLocal, 'data'>;
 
   constructor(nome = NOME_DB) {
     super(nome);
@@ -34,7 +46,7 @@ export class RepzDb extends Dexie {
       .upgrade(async (tx) => {
         const agora = new Date().toISOString();
         const marcas: MarcaSincronia[] = [];
-        for (const store of STORES_SINCRONIZADAS) {
+        for (const store of STORES_V2) {
           const ids = (await tx.table(store).toCollection().primaryKeys()) as string[];
           for (const id of ids)
             if (store !== 'meta' || id === 'preferencias' || id === 'planoAtivoId')
@@ -49,6 +61,8 @@ export class RepzDb extends Dexie {
         }
         await tx.table('sincronia').bulkPut(marcas);
       });
+    // v3 (V3 · check-in de prontidão): um por dia, chave = data
+    this.version(3).stores({ checkins: 'data' });
     this.use(middlewareSincronia);
   }
 }

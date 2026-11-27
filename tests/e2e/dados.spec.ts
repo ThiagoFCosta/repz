@@ -1,4 +1,4 @@
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 import fs from 'node:fs';
 import { expect, test, type Download, type Page } from '@playwright/test';
 
@@ -51,7 +51,7 @@ test('exportar, fazer backup, limpar os dados e restaurar', async ({ page }) => 
   await expect(page.getByText('1 de 2')).toBeVisible();
   await expect(page.getByRole('complementary', { name: 'Lembrete de backup' })).toBeHidden();
 
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
   await titulo(page, 'Supino inclinado com halteres');
   await page.getByLabel('kg', { exact: true }).fill('24');
   await page.getByLabel('reps', { exact: true }).fill('10');

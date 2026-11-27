@@ -1,4 +1,4 @@
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { expect, test, type Download, type Page } from '@playwright/test';
@@ -78,7 +78,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
   await test.step('E2E 3: Push completo com bi-set, recarregando no meio', async () => {
     await irPara(page, 'Início');
     await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
-    await page.getByRole('button', { name: 'Iniciar treino' }).click();
+    await iniciarTreino(page);
 
     // topo da faixa (6-10) com RIR 2: a sugestão do E2E 4 é subir
     await titulo(page, 'Supino inclinado com halteres');
@@ -151,7 +151,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
     await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
     await page.getByRole('button', { name: 'Trocar sessão' }).click();
     await page.getByRole('button', { name: /^Push/ }).click();
-    await page.getByRole('button', { name: 'Iniciar treino' }).click();
+    await iniciarTreino(page);
     await titulo(page, 'Supino inclinado com halteres');
     await expect(page.getByLabel('kg', { exact: true })).toHaveValue('26');
     await expect(page.getByLabel('reps', { exact: true })).toHaveValue('6');

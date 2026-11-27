@@ -1,4 +1,4 @@
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 import fs from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
@@ -72,7 +72,7 @@ test.describe('acessibilidade', () => {
     await verificar(page, 'Trocar sessão');
     await page.getByRole('button', { name: /^Push/ }).click();
 
-    await page.getByRole('button', { name: 'Iniciar treino' }).click();
+    await iniciarTreino(page);
     await expect(
       page.getByRole('heading', { level: 1, name: 'Supino inclinado com halteres' }),
     ).toBeVisible();

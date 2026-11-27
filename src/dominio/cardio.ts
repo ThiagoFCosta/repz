@@ -104,3 +104,41 @@ export function progressoDaSemana(
     ate,
   };
 }
+
+// ---- Histórico semanal (BRIEFING-v2 7.2): minutos, sessões e FC média por semana (segunda a domingo) ----
+
+export interface SemanaCardio {
+  inicio: ISODate; // segunda-feira
+  minutos: number;
+  sessoes: number;
+  fcMedia: number | null; // média das sessões com FC, ponderada pela duração
+}
+
+export function cardioPorSemana(
+  registros: readonly RegistroCardio[],
+  hoje: ISODate,
+  semanas = 8,
+): SemanaCardio[] {
+  const atual = inicioDaSemana(hoje);
+  const lista: SemanaCardio[] = [];
+  for (let i = semanas - 1; i >= 0; i--) {
+    const inicio = somarDias(atual, -7 * i);
+    const fim = somarDias(inicio, 6);
+    const daSemana = registros.filter((r) => r.data >= inicio && r.data <= fim);
+    const comFc = daSemana.filter((r) => r.fcMedia != null);
+    const minFc = comFc.reduce((s, r) => s + r.minutos, 0);
+    lista.push({
+      inicio,
+      minutos: daSemana.reduce((s, r) => s + r.minutos, 0),
+      sessoes: daSemana.length,
+      fcMedia: minFc ? Math.round(comFc.reduce((s, r) => s + r.fcMedia! * r.minutos, 0) / minFc) : null,
+    });
+  }
+  return lista;
+}
+
+// Tipos para os chips: os do plano e, se o plano não tiver bicicleta, "Bicicleta" (o padrão, BRIEFING-v2 7.2)
+export function tiposParaRegistro(cardio: readonly CardioPrescrito[]): string[] {
+  const doPlano = tiposDoPlano(cardio);
+  return doPlano.some((t) => /bic|bike/i.test(semAcento(t))) ? doPlano : [...doPlano, 'Bicicleta'];
+}

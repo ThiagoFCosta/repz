@@ -13,6 +13,7 @@ export const STORES_SINCRONIZADAS = new Set([
   'cardio',
   'configExercicios',
   'meta',
+  'checkins',
 ]);
 export const META_SINCRONIZADA = new Set(['preferencias', 'planoAtivoId']);
 

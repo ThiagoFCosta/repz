@@ -8,6 +8,7 @@ import type { LinhaRemota } from '../remoto/tipos';
 import {
   PREFERENCIAS_PADRAO,
   type CardioRealizado,
+  type CheckinLocal,
   type ConfigExercicio,
   type Plano,
   type Preferencias,
@@ -15,7 +16,7 @@ import {
   type Treino,
 } from './tipos';
 
-export type StoreSync = 'planos' | 'treinos' | 'series' | 'cardio' | 'configExercicios' | 'meta';
+export type StoreSync = 'planos' | 'treinos' | 'series' | 'cardio' | 'configExercicios' | 'meta' | 'checkins';
 
 // Tabela remota de cada store (em meta, só as preferências viram linha; o plano ativo é planos_treino.ativo)
 export const TABELA_DA_STORE: Record<StoreSync, string> = {
@@ -25,16 +26,19 @@ export const TABELA_DA_STORE: Record<StoreSync, string> = {
   cardio: 'cardio',
   configExercicios: 'config_exercicio',
   meta: 'preferencias',
+  checkins: 'checkins',
 };
 
 export const idConfig = (usuarioId: string, chave: string) =>
   uuidv5(`${usuarioId}|config_exercicio|${chave}`);
 export const idPreferencias = (usuarioId: string) => uuidv5(`${usuarioId}|preferencias`);
+export const idCheckin = (usuarioId: string, data: string) => uuidv5(`${usuarioId}|checkins|${data}`);
 
 // id da linha remota de um registro local (config é por chave; preferências, uma por usuário)
 export function idRemoto(store: StoreSync, idLocal: string, usuarioId: string): string {
   if (store === 'configExercicios') return idConfig(usuarioId, idLocal);
   if (store === 'meta') return idPreferencias(usuarioId);
+  if (store === 'checkins') return idCheckin(usuarioId, idLocal);
   return idLocal;
 }
 
@@ -116,6 +120,21 @@ export function paraRemoto(store: StoreSync, r: unknown, usuarioId: string, em: 
         distancia_km: c.distanciaKm,
         esforco: c.esforco,
         feito_em: c.feitoEm,
+        kcal_relogio: c.kcalRelogio ?? null,
+        nota: c.nota ?? null,
+        origem: c.origem ?? 'manual',
+      };
+    }
+    case 'checkins': {
+      const c = r as CheckinLocal;
+      return {
+        ...base,
+        id: idCheckin(usuarioId, c.data),
+        data: c.data,
+        sono_horas: c.sonoHoras,
+        disposicao: c.disposicao,
+        pulado: c.pulado,
+        origem: c.origem,
       };
     }
     case 'configExercicios': {
@@ -218,8 +237,21 @@ export function doRemoto(tabela: string, l: LinhaRemota): RegistroLocal | null {
         distanciaKm: num(l.distancia_km),
         esforco: num(l.esforco),
         feitoEm: local(l.feito_em)!,
+        kcalRelogio: num(l.kcal_relogio),
+        nota: txt(l.nota),
+        origem: l.origem === 'print' ? 'print' : 'manual',
       };
       return { store: 'cardio', id: c.id, registro: c };
+    }
+    case 'checkins': {
+      const c: CheckinLocal = {
+        data: String(l.data),
+        sonoHoras: num(l.sono_horas),
+        disposicao: num(l.disposicao),
+        pulado: Boolean(l.pulado),
+        origem: l.origem === 'print' ? 'print' : 'manual',
+      };
+      return { store: 'checkins', id: c.data, registro: c };
     }
     case 'config_exercicio': {
       const c: ConfigExercicio = {

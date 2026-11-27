@@ -11,6 +11,7 @@ import {
   preferencias,
   progressoCardio,
   semanaAtual,
+  semanaResumo,
   treinoAberto,
 } from '../../../app/estado';
 import {
@@ -34,6 +35,8 @@ import {
 import { navegar } from '../../../app/roteador';
 import { Botao, Cartao, Pilula } from '../../componentes/basicos';
 import { decorrido } from '../treino/formatos';
+import { Button, Card } from '@ds';
+import { FolhaCheckin } from './FolhaCheckin';
 
 function saudacao(): string {
   const h = new Date().getHours();
@@ -84,44 +87,74 @@ function CartaoTreinoAberto() {
 function CartaoProximoTreino() {
   const plano = planoAtivo.value!;
   const sessao = proximaSessaoTreino.value;
-  const [ocupado, setOcupado] = useState(false);
+  const [checkin, setCheckin] = useState(false);
   if (!sessao) return null;
   const sugerida = sessao.id === sessaoSugerida.value?.id;
-  const iniciar = async () => {
-    setOcupado(true);
-    try {
-      await iniciarTreino(sessao.id);
-    } finally {
-      setOcupado(false);
-    }
-  };
+  // Mockup, tela 1: card lime "Treino de hoje" no lugar do saldo do Prisma
   return (
-    <Cartao titulo={sugerida ? 'Próximo treino' : 'Treino escolhido'}>
-      <h2 className="plano-nome">{sessao.nome}</h2>
-      <p className="muted pequeno">
-        {sessao.itens.length} exercícios · ~{duracaoDaSessao(plano, sessao)} min
-        {sessao.dia != null && <> · planejado para {NOMES_DIAS[sessao.dia]}</>}
-      </p>
-      <ul className="lista-simples pequeno">
-        {sessao.itens.slice(0, 3).map((ex) => (
-          <li key={ex.id}>{ex.nome}</li>
-        ))}
-        {sessao.itens.length > 3 && <li className="muted">e mais {sessao.itens.length - 3}</li>}
-      </ul>
-      <div className="pilha">
-        <Botao bloco disabled={ocupado} onClick={() => void iniciar()}>
-          Iniciar treino
-        </Botao>
-        <Botao bloco variante="secundario" onClick={() => navegar('treino/sessao')}>
-          Trocar sessão
-        </Botao>
+    <>
+      <Card
+        tone="brand"
+        className="treino-hoje"
+        aria-label={sugerida ? 'Treino de hoje' : 'Treino escolhido'}
+      >
+        <p className="treino-hoje-rotulo">{sugerida ? 'Treino de hoje' : 'Treino escolhido'}</p>
+        <h2 className="treino-hoje-nome">{sessao.nome}</h2>
+        <p className="treino-hoje-info">
+          {pilulaSemana.value ? `${pilulaSemana.value} · ` : ''}
+          {sessao.itens.length} exercícios · ~{duracaoDaSessao(plano, sessao)} min
+          {sessao.dia != null && <> · planejado para {NOMES_DIAS[sessao.dia]}</>}
+        </p>
+        <p className="treino-hoje-lista">
+          {sessao.itens
+            .slice(0, 3)
+            .map((ex) => ex.nome)
+            .join(' · ')}
+          {sessao.itens.length > 3 && ` e mais ${sessao.itens.length - 3}`}
+        </p>
+        <div className="treino-hoje-acoes">
+          <Button variant="white" size="lg" onClick={() => navegar('treino/sessao')}>
+            Trocar sessão
+          </Button>
+          <Button variant="primary" size="lg" iconRight="arrow-right" onClick={() => setCheckin(true)}>
+            Iniciar treino
+          </Button>
+        </div>
         {!sugerida && (
-          <Botao bloco variante="texto" onClick={() => (sessaoEscolhida.value = null)}>
+          <Button variant="ghost" block onClick={() => (sessaoEscolhida.value = null)}>
             Voltar para a sugerida ({sessaoSugerida.value?.nome})
-          </Botao>
+          </Button>
         )}
+      </Card>
+      {/* fora do card: a folha não herda a cor do texto sobre o lime */}
+      {checkin && (
+        <FolhaCheckin aoFechar={() => setCheckin(false)} aoComecar={() => iniciarTreino(sessao.id)} />
+      )}
+    </>
+  );
+}
+
+// Mockup, tela 1: "Esta semana" — treinos e séries (semana de segunda a domingo)
+function CartaoSemana() {
+  const plano = planoAtivo.value;
+  const s = semanaResumo.value;
+  const metaTreinos = plano?.sessoes.length ?? 0;
+  return (
+    <Card title="Esta semana" className="esta-semana">
+      <div className="esta-semana-tiles">
+        <div className="tile">
+          <span className="tile-rotulo">Treinos</span>
+          <strong className="tile-valor numero">
+            {s.treinos}
+            {metaTreinos > 0 && <span className="tile-meta">/{metaTreinos}</span>}
+          </strong>
+        </div>
+        <div className="tile">
+          <span className="tile-rotulo">Séries</span>
+          <strong className="tile-valor numero">{s.series}</strong>
+        </div>
       </div>
-    </Cartao>
+    </Card>
   );
 }
 
@@ -228,7 +261,7 @@ export function TelaInicio() {
         {saudacao()}
         {plano.autor && `, ${plano.autor}`}
       </h1>
-      {pilulaSemana.value && (
+      {pilulaSemana.value && treinoAberto.value && (
         <p>
           <Pilula tom={semana?.fase?.deload ? 'aviso' : 'neutro'}>{pilulaSemana.value}</Pilula>
         </p>
@@ -236,6 +269,7 @@ export function TelaInicio() {
       {semana?.antesDoInicio && <p className="muted pequeno">O bloco ainda não começou.</p>}
 
       {treinoAberto.value ? <CartaoTreinoAberto /> : <CartaoProximoTreino />}
+      <CartaoSemana />
       <CartaoCardio />
 
       {semana?.concluido && (

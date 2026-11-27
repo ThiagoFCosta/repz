@@ -16,3 +16,12 @@ export async function irPara(page: Page, destino: 'Início' | 'Histórico' | 'Pl
     .getByRole('button', { name: destino === 'Plano' ? 'Plano de treino' : destino })
     .click();
 }
+
+// v2 (V3): "Iniciar treino" abre o check-in de prontidão; "Começar treino" é o 2º toque (BRIEFING-v2 7.3)
+export async function iniciarTreino(page: Page) {
+  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await page
+    .getByRole('dialog', { name: 'Antes de começar' })
+    .getByRole('button', { name: 'Começar treino' })
+    .click();
+}

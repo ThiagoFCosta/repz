@@ -28,7 +28,9 @@ test('Início interativo em menos de 2 s com CPU 4× mais lenta e o app em cache
   await page.addInitScript(() => {
     const w = window as unknown as { interativo?: number };
     new MutationObserver((_, obs) => {
-      const b = [...document.querySelectorAll('button')].find((x) => x.textContent === 'Iniciar treino');
+      const b = [...document.querySelectorAll('button')].find(
+        (x) => x.textContent?.trim() === 'Iniciar treino',
+      );
       if (b) {
         w.interativo = performance.now();
         obs.disconnect();

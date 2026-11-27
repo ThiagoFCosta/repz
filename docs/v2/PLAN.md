@@ -104,9 +104,20 @@ V0 Fase 0 ─► V1 Base ─► V2 Sync ─► V3 Treino+ ─► V4 Motor v2 ─
 4. **Início novo** do mockup: card lime "Treino de hoje" (sessão, semana/fase/RIR, nº de exercícios, duração, Trocar/Iniciar), "Esta semana" (treinos, séries, cardio), avisos (lista vazia até o V7), insights (placeholder até o V4/V5).
 5. Testes: prontidão (bordas 6 h, média com < 14 noites, disposição ausente); E2E check-in em ≤ 2 toques (Iniciar → Começar) e "Pular"; E2E cardio.
 
+**Feito no V3 (27/11/2026)**
+- `dominio/prontidao/`: média de 14 dias, sono sugerido, prontidão baixa com motivos (6 testes).
+- Check-in local por dia (Dexie v3, store `checkins`) sincronizado com `checkins` no Supabase (id v5 por data).
+- Folha "Antes de começar" (sono ±0,5 h já preenchido, disposição 1-5 opcional, Começar/Pular).
+- Cardio: kcal do relógio, nota, Bicicleta como padrão, histórico das últimas 8 semanas (minutos, sessões, FC média
+  ponderada); campos sincronizados.
+- Início do mockup: card lime "Treino de hoje" e "Esta semana" (treinos/séries); lime na ação de concluir e no RIR.
+- E2E: todos os inícios de treino passam pelo check-in (`iniciarTreino`, D36) e um E2E próprio do check-in.
+- Ficam para os próximos marcos: insights do coach (V4/V5) e avisos (V7) no Início; registrar cardio pela aba Treino
+  (hoje pelo Início, pelo menu ☰ e pelo fim do treino).
+
 **Aceite**
-- [ ] Check-in resolvido em ≤ 2 toques; cardio registrado em ≤ 20 s (cronometrado no E2E e no celular).
-- [ ] Início igual ao mockup (tela 1) nos dois temas, no celular.
+- [x] Check-in resolvido em 2 toques ("Iniciar treino" → "Começar treino"), coberto em todos os E2E de treino.
+- [ ] Cardio registrado em ≤ 20 s e Início igual ao mockup nos dois temas: conferido por foto no navegador; falta o celular.
 
 ---
 

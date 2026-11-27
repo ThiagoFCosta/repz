@@ -5,6 +5,8 @@ import {
   prescricaoDoRegistro,
   progressoDaSemana,
   tiposDoPlano,
+  cardioPorSemana,
+  tiposParaRegistro,
 } from '../../src/dominio/cardio';
 import { inicioDaSemana } from '../../src/dominio/datas';
 import type { CardioPrescrito } from '../../src/dominio/tipos';
@@ -129,5 +131,28 @@ describe('X de Y nesta semana (9.3)', () => {
       total: 4,
     });
     expect(progressoDaSemana([], registros, '2026-11-12')).toMatchObject({ feitos: 0, meta: null, total: 4 });
+  });
+});
+
+describe('cardio por semana (BRIEFING-v2 7.2)', () => {
+  const r = (data: string, minutos: number, fcMedia: number | null = null) => ({
+    data,
+    tipo: 'Bicicleta',
+    minutos,
+    fcMedia,
+  });
+  it('soma minutos e sessões e pondera a FC pela duração, semana de segunda a domingo', () => {
+    const s = cardioPorSemana(
+      [r('2026-11-23', 30, 120), r('2026-11-26', 60, 135), r('2026-11-29', 10), r('2026-11-22', 40, 110)],
+      '2026-11-27',
+      2,
+    );
+    expect(s).toEqual([
+      { inicio: '2026-11-16', minutos: 40, sessoes: 1, fcMedia: 110 },
+      { inicio: '2026-11-23', minutos: 100, sessoes: 3, fcMedia: 130 },
+    ]);
+  });
+  it('Bicicleta entra nos tipos quando o plano não tem bike', () => {
+    expect(tiposParaRegistro([])).toEqual(['Bicicleta']);
   });
 });

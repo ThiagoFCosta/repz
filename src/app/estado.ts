@@ -2,11 +2,12 @@
 
 import { computed, signal } from './sinal';
 import { progressoDaSemana } from '../dominio/cardio';
-import { hojeLocal } from '../dominio/datas';
+import { hojeLocal, inicioDaSemana } from '../dominio/datas';
 import { rotuloSemana, semanaDoBloco } from '../dominio/periodizacao/semana';
 import { precisaLembrete } from '../dados/backup';
 import { RepzDb } from '../dados/db';
 import { listarCardio } from '../dados/repos/cardio';
+import { listarCheckins } from '../dados/repos/checkins';
 import { lerConfigs, type MapaConfig } from '../dados/repos/config';
 import { gravarMeta, lerMeta, lerPreferencias } from '../dados/repos/meta';
 import { listarPlanos, planoAtivo as lerPlanoAtivo } from '../dados/repos/planos';
@@ -14,6 +15,7 @@ import { chavesComHistorico, treinoEmAndamento, ultimoConcluido } from '../dados
 import {
   PREFERENCIAS_PADRAO,
   type CardioRealizado,
+  type CheckinLocal,
   type Persistencia,
   type Plano,
   type Preferencias,
@@ -36,6 +38,10 @@ export const persistencia = signal<Persistencia>('indisponivel');
 export const preferencias = signal<Preferencias>(PREFERENCIAS_PADRAO);
 // Cardio registrado, do mais recente ao mais antigo (poucos registros: cabe na memória)
 export const cardios = signal<CardioRealizado[]>([]);
+// Esta semana (segunda a domingo) no Início do mockup: treinos concluídos e séries de trabalho
+export const semanaResumo = signal({ treinos: 0, series: 0 });
+// Check-ins de prontidão, do mais recente ao mais antigo (V3)
+export const checkins = signal<CheckinLocal[]>([]);
 // Treinos concluídos (lembrete de backup no Início, 9.9)
 export const totalTreinos = signal(0);
 // sessaoId do último treino concluído do plano ativo (rotação, 6.3)
@@ -75,6 +81,20 @@ export async function recarregar(): Promise<void> {
     listarCardio(db),
     db.treinos.where('status').equals('concluido').count(),
   ]);
+  checkins.value = await listarCheckins(db);
+  const daSemana = await db.treinos
+    .where('data')
+    .aboveOrEqual(inicioDaSemana(hoje.value))
+    .filter((t) => t.status === 'concluido')
+    .primaryKeys();
+  const seriesSemana = daSemana.length
+    ? await db.series
+        .where('treinoId')
+        .anyOf(daSemana)
+        .filter((s) => !s.aquecimento)
+        .count()
+    : 0;
+  semanaResumo.value = { treinos: daSemana.length, series: seriesSemana };
   planoAtivo.value = p;
   planos.value = todos;
   configs.value = c;

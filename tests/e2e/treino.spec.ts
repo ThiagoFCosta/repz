@@ -1,4 +1,4 @@
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 import fs from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 
@@ -34,9 +34,9 @@ const titulo = (page: Page, nome: string) =>
 test('treino Push completo com bi-set, recarregando no meio', async ({ page }) => {
   await importarPlano(page);
   await irPara(page, 'Início');
-  await expect(page.getByText('Próximo treino')).toBeVisible();
+  await expect(page.getByText('Treino de hoje', { exact: true })).toBeVisible(); // v2: card do mockup (D36)
   await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
 
   // Supino inclinado: 3 séries; da 2ª em diante a carga vem pré-preenchida (RIR + Concluir)
   await titulo(page, 'Supino inclinado com halteres');
@@ -114,14 +114,14 @@ test('treino Push completo com bi-set, recarregando no meio', async ({ page }) =
   await page.getByRole('button', { name: 'Fechar' }).click();
 
   // Rotação: o próximo é o Pull
-  await expect(page.getByText('Próximo treino')).toBeVisible();
+  await expect(page.getByText('Treino de hoje', { exact: true })).toBeVisible(); // v2: card do mockup (D36)
   await expect(page.getByRole('heading', { name: 'Pull' })).toBeVisible();
 });
 
 test('descartar treino pede confirmação e volta ao início', async ({ page }) => {
   await importarPlano(page);
   await page.goto('./');
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
   await serie(page, '24');
   await pularDescanso(page);
   await page.getByRole('button', { name: 'Mais ações' }).click();
@@ -137,7 +137,7 @@ test('descartar treino pede confirmação e volta ao início', async ({ page }) 
 test('sugestão ↑ no fim e carga pré-preenchida no treino seguinte do exercício', async ({ page }) => {
   await importarPlano(page);
   await page.goto('./');
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
 
   // Supino inclinado (6-10 reps): 24 kg × 10 · 10 · 10, topo da faixa
   await titulo(page, 'Supino inclinado com halteres');
@@ -167,7 +167,7 @@ test('sugestão ↑ no fim e carga pré-preenchida no treino seguinte do exercí
   await page.getByRole('button', { name: 'Trocar sessão' }).click();
   await page.getByRole('button', { name: /^Push/ }).click();
   await expect(page.getByRole('heading', { name: 'Push' })).toBeVisible();
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
 
   // Carga sugerida pré-preenchida e reps no mínimo da faixa, em todas as séries
   await titulo(page, 'Supino inclinado com halteres');
@@ -183,7 +183,7 @@ test('sugestão ↑ no fim e carga pré-preenchida no treino seguinte do exercí
 test('botão Cardio do fim do treino conclui o treino e registra o cardio', async ({ page }) => {
   await importarPlano(page);
   await page.goto('./');
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
   await serie(page, '24', '8');
   await pularDescanso(page);
   await page.getByRole('button', { name: 'Mais ações' }).click();

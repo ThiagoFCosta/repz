@@ -89,3 +89,135 @@ body,
 .pr-card + .pr-card {
   margin-top: var(--space-4);
 }
+
+/* ---- Início do mockup (V3) ---- */
+.treino-hoje {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.treino-hoje-rotulo,
+.treino-hoje-info,
+.treino-hoje-lista {
+  margin: 0;
+  color: var(--text-on-brand);
+  font-size: var(--text-sm);
+}
+
+.treino-hoje-nome {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-on-brand);
+}
+
+.treino-hoje-lista {
+  opacity: 0.85;
+}
+
+.treino-hoje-acoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.esta-semana {
+  margin-bottom: var(--space-4);
+}
+
+.esta-semana-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-tile);
+}
+
+.tile-rotulo {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.tile-valor {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+}
+
+.tile-meta {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+/* ---- Check-in (V3) ---- */
+.checkin {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.checkin-pergunta {
+  margin: 0;
+  font-weight: 600;
+}
+
+.checkin-sono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.checkin-valor {
+  min-width: 5ch;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 600;
+}
+
+.checkin-disposicao {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+}
+
+/* Mockup, tela 2: no treino, o lime fica só na ação de concluir e no RIR escolhido */
+.rodape-acao .botao-primario:not(:disabled),
+.rir-botao[aria-pressed='true'] {
+  border-color: var(--surface-brand);
+  background: var(--surface-brand);
+  color: var(--text-on-brand);
+}
+
+/* ---- Cardio (V3) ---- */
+.cardio-historico {
+  margin-top: var(--space-6);
+}
+
+.lista-semanas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-semanas li {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr 1fr 4.5rem;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--text-sm);
+}

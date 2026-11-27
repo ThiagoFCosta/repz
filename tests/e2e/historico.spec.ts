@@ -1,4 +1,4 @@
-import { irPara } from './navegacao';
+import { iniciarTreino, irPara } from './navegacao';
 import fs from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 
@@ -45,7 +45,7 @@ test('registrar cardio e ver o Histórico com o gráfico', async ({ page }) => {
   await expect(page.getByText('1 de 2')).toBeVisible();
 
   // Um treino curto: supino inclinado 24 × 10 e 24 × 8, RIR 2
-  await page.getByRole('button', { name: 'Iniciar treino' }).click();
+  await iniciarTreino(page);
   await titulo(page, 'Supino inclinado com halteres');
   await serie(page, '24', '10');
   await page.getByRole('button', { name: 'Pular descanso' }).click();
