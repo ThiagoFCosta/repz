@@ -19,3 +19,4 @@ dados-reais/
 # Supabase local
 supabase/.temp/
 supabase/.branches/
+.netlify/
