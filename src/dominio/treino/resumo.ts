@@ -2,10 +2,10 @@
 // Recordes comparam a variante com todo o histórico anterior; o treino atual entra no histórico
 // do motor uma única vez (ele ainda não está concluído, então o histórico gravado não o inclui).
 
-import type { ISODate } from '../datas';
-import { e1rm, umaCasa } from '../progressao/e1rm';
-import type { Acao, SerieHistorico, Sugestao, TreinoHistorico } from '../progressao/motor';
-import type { Faixa } from '../tipos';
+import type { ISODate } from '../datas.ts';
+import { e1rm, umaCasa } from '../progressao/e1rm.ts';
+import type { Acao, SerieHistorico, Sugestao, TreinoHistorico } from '../progressao/motor.ts';
+import type { Faixa } from '../tipos.ts';
 
 export interface SerieFeita {
   kg: number;

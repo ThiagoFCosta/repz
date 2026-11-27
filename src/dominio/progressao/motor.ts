@@ -1,12 +1,12 @@
 // Motor de sugestão de carga: ↑ aumentar · = manter · ↓ reduzir · calibrar (BRIEFING 7).
 // Porte de referencia/parser/progressao.js. Diferenças: `hoje` obrigatório e `repsSugeridas` (7.6).
 
-import { diasEntre, type ISODate } from '../datas';
-import { formatarKg } from '../numeros';
-import type { Faixa } from '../tipos';
-import { CONFIG_PROGRESSAO, type ConfigProgressao } from './config';
-import { arredonda, arredondaParaBaixo, cargaPara, e1rm, umaCasa } from './e1rm';
-import { incrementoPadrao } from './incremento';
+import { diasEntre, type ISODate } from '../datas.ts';
+import { formatarKg } from '../numeros.ts';
+import type { Faixa } from '../tipos.ts';
+import { CONFIG_PROGRESSAO, type ConfigProgressao } from './config.ts';
+import { arredonda, arredondaParaBaixo, cargaPara, e1rm, umaCasa } from './e1rm.ts';
+import { incrementoPadrao } from './incremento.ts';
 
 export interface SerieHistorico {
   kg: number;

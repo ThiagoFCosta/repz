@@ -9,8 +9,8 @@ import type {
   Mensagem,
   PlanoImportado,
   SessaoImportada,
-} from '../tipos';
-import { chaveExercicio, normalizar, semAcento } from './normalizar';
+} from '../tipos.ts';
+import { chaveExercicio, normalizar, semAcento } from './normalizar.ts';
 
 export interface ResultadoParse {
   plano: PlanoImportado | null; // null quando há erro

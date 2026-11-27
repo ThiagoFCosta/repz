@@ -1,7 +1,7 @@
 // Duração estimada da sessão (BRIEFING 9.3): soma de séries × (tempo médio da série + descanso).
 // Bi-set: o descanso vem só no fim de cada rodada.
 
-import type { Faixa } from '../tipos';
+import type { Faixa } from '../tipos.ts';
 
 export const TEMPO_SERIE_S = 45; // tempo médio de execução de uma série
 

@@ -1,9 +1,9 @@
 // Cardio (BRIEFING 9.3 e 9.7): meta semanal pela frequência do plano e comparação do registro
 // com a duração e a faixa de FC prescritas.
 
-import { inicioDaSemana, somarDias, type ISODate } from './datas';
-import { semAcento } from './formato/normalizar';
-import type { CardioPrescrito, Faixa } from './tipos';
+import { inicioDaSemana, somarDias, type ISODate } from './datas.ts';
+import { semAcento } from './formato/normalizar.ts';
+import type { CardioPrescrito, Faixa } from './tipos.ts';
 
 // '2x' → 2 · '3 x' → 3 · 'diario' / 'diário' → 7 · 'opcional' (ou qualquer outra coisa) → null (sem meta)
 export function metaSemanal(frequencia: string): number | null {

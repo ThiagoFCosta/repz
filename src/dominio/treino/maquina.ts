@@ -8,7 +8,7 @@ import {
   proximoItem,
   restantes,
   seguinteNaRodada,
-} from './biset';
+} from './biset.ts';
 
 export type Etapa =
   | { tipo: 'ocioso' }

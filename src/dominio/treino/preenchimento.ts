@@ -1,8 +1,8 @@
 // Pré-preenchimento da série atual (BRIEFING 7.6 e 9.4): carga sugerida e reps.
 // Depois da 1ª série do exercício no treino, vale o que o usuário fez na série anterior.
 
-import type { Sugestao, TreinoHistorico } from '../progressao/motor';
-import type { Faixa } from '../tipos';
+import type { Sugestao, TreinoHistorico } from '../progressao/motor.ts';
+import type { Faixa } from '../tipos.ts';
 
 export interface Preenchimento {
   kg: number | null; // null = sem referência (calibrar): o usuário digita

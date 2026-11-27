@@ -1,6 +1,6 @@
 // 1RM estimado (Epley com RIR) e arredondamentos de carga ao salto do equipamento.
 
-export { incrementoPadrao } from './incremento';
+export { incrementoPadrao } from './incremento.ts';
 
 // Repetições até a falha = reps feitas + RIR
 export function e1rm(kg: number, reps: number, rir: number | null): number {

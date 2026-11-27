@@ -37,9 +37,27 @@ export default tseslint.config(
     rules: {
       'no-restricted-imports': [
         'error',
-        { patterns: ['preact', 'preact/*', '@preact/*', 'dexie', 'pdfjs-dist', 'pdfjs-dist/*', 'jspdf'] },
+        {
+          patterns: [
+            'preact',
+            'preact/*',
+            '@preact/*',
+            'react',
+            'react-dom',
+            'react-dom/*',
+            'react-router',
+            '@supabase/*',
+            '@tanstack/*',
+            'dexie',
+            'pdfjs-dist',
+            'pdfjs-dist/*',
+            'jspdf',
+          ],
+        },
       ],
       'no-restricted-globals': ['error', 'window', 'document', 'localStorage', 'indexedDB', 'navigator'],
+      // A Edge Function agente-mcp (Deno) importa src/dominio direto: o Deno exige a extensão (docs/v2, D35)
+      'import-x/extensions': ['error', 'always', { ignorePackages: true }],
     },
   },
   prettier,

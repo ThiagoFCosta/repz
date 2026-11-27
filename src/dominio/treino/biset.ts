@@ -1,6 +1,6 @@
 // Bi-sets e ordem dos itens (ARCHITECTURE 7.3). Rodada k de um grupo = membros com séries totais ≥ k.
 
-import type { EstadoTreino } from './maquina';
+import type { EstadoTreino } from './maquina.ts';
 
 type Base = Pick<EstadoTreino, 'itens' | 'alvo' | 'feitas' | 'extras' | 'pulados'>;
 

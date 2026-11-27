@@ -1,8 +1,8 @@
 // Semana atual do bloco (BRIEFING 6.1) e o rótulo da pílula do Início (9.3).
 
-import { diasEntre, type ISODate } from '../datas';
-import type { Fase, Faixa, PlanoImportado } from '../tipos';
-import { faseDaSemana } from './prescricao';
+import { diasEntre, type ISODate } from '../datas.ts';
+import type { Fase, Faixa, PlanoImportado } from '../tipos.ts';
+import { faseDaSemana } from './prescricao.ts';
 
 export interface PlanoComBloco extends Pick<PlanoImportado, 'bloco' | 'progressao'> {
   inicioBloco: ISODate | null;

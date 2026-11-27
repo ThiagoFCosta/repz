@@ -1,6 +1,6 @@
 // Prescrição efetiva de um exercício numa semana do bloco (BRIEFING 6.2).
 
-import type { ExercicioImportado, Faixa, Fase, PlanoImportado } from '../tipos';
+import type { ExercicioImportado, Faixa, Fase, PlanoImportado } from '../tipos.ts';
 
 export interface Prescricao {
   series: number;

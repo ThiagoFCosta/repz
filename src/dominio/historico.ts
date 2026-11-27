@@ -2,9 +2,9 @@
 // gráfico, com as semanas de deload marcadas; variação em 8 semanas; melhor série.
 // Exercício por tempo usa a maior duração (segundos) no lugar do e1RM.
 
-import { inicioDaSemana, somarDias, type ISODate } from './datas';
-import { e1rm, umaCasa } from './progressao/e1rm';
-import type { SerieHistorico } from './progressao/motor';
+import { inicioDaSemana, somarDias, type ISODate } from './datas.ts';
+import { e1rm, umaCasa } from './progressao/e1rm.ts';
+import type { SerieHistorico } from './progressao/motor.ts';
 
 export interface TreinoDoExercicio {
   treinoId: string;
