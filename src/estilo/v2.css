@@ -1,0 +1,53 @@
+/* Ajustes da v2 sobre o design system (fora de camada: vencem os componentes do @ds quando precisam). */
+/* ---- v2: moldura do design system (src/ui/layout/AppShell.tsx) ---- */
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* A rolagem é do conteúdo da moldura, acima da barra inferior: o rodapé de ação gruda no fim dela */
+.pr-shell__content .rodape-acao {
+  bottom: 0;
+}
+
+/* Mockup: no celular o topo mostra ☰ + logo (o Prisma esconde o título abaixo de 1024 px) */
+.pr-tb.repz-topo .pr-tb__titles {
+  visibility: visible;
+}
+
+/* ---- Login e Perfil (v2) ---- */
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: calc(var(--space-10) + env(safe-area-inset-top)) var(--space-4) var(--space-8);
+  min-height: 100%;
+  background: var(--bg-page);
+}
+
+.login h1 {
+  margin: var(--space-4) 0 0;
+}
+
+.login-erro {
+  color: var(--text-danger-strong);
+  margin: 0;
+}
+
+.perfil-conta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.perfil-email {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.perfil-acoes {
+  margin-top: var(--space-4);
+}

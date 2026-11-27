@@ -9,7 +9,27 @@ const DIST = path.resolve('dist');
 const LIMITE_KB = 200;
 
 // URLs inertes: namespaces XML e comentários de licença não fazem requisição.
+// O projeto Supabase do Repz (lido do .env no build) é o único host externo permitido (docs/v2, D46)
+const SUPABASE = (process.env.VITE_SUPABASE_URL ?? lerEnv('.env').VITE_SUPABASE_URL ?? '').replace(
+  /\/+$/,
+  '',
+);
+function lerEnv(arquivo) {
+  try {
+    return Object.fromEntries(
+      fs
+        .readFileSync(arquivo, 'utf8')
+        .split(/\r?\n/)
+        .filter((l) => /^[A-Z_]+=/.test(l))
+        .map((l) => [l.slice(0, l.indexOf('=')), l.slice(l.indexOf('=') + 1).trim()]),
+    );
+  } catch {
+    return {};
+  }
+}
+
 const PERMITIDAS = [
+  ...(SUPABASE ? [new RegExp(`^${SUPABASE.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`)] : []),
   /^http:\/\/www\.w3\.org\//,
   /^https?:\/\/(www\.)?apache\.org\/licenses/,
   /^https?:\/\/opensource\.org\/licenses/,
@@ -28,6 +48,11 @@ const PERMITIDAS = [
   // da documentação num aviso de desenvolvimento. Nenhum dos dois é requisitado (v2, D49)
   /^http:\/\/localhost$/,
   /^https:\/\/reactrouter\.com\/en\/main\/routers\/picking-a-router/,
+  // supabase-js (chunk carregado só para falar com o servidor): links de documentação em avisos e a URL padrão
+  // do GoTrue local, usada só quando nenhuma URL é passada. Nenhum é requisitado: o app usa a URL do projeto
+  /^https:\/\/github\.com\/supabase\/supabase-js\/blob\//,
+  /^https:\/\/github\.com\/orgs\/supabase\/discussions\//,
+  /^http:\/\/localhost:9999$/,
   // pdf.js: namespaces XML de formulários XFA/XMP e o prefixo que ele põe em links "www." de
   // anotações do PDF. São identificadores, não requisições.
   /^http:\/\/www\.xfa\.org\/schema\//,

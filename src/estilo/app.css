@@ -5,5 +5,7 @@
 @import '../../design-system/tokens/index.css';
 @import '../../design-system/tokens/tailwind.css';
 @import './tokens.css';
-@import './base.css';
+/* resets da v1 na camada base: não podem vencer os componentes do @ds */
+@import './base.css' layer(base);
 @import './componentes.css';
+@import './v2.css';

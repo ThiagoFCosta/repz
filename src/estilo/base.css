@@ -129,20 +129,3 @@ h1 {
   border-radius: var(--raio);
   padding: 12px var(--espaco);
 }
-
-/* ---- v2: moldura do design system (src/ui/layout/AppShell.tsx) ---- */
-html,
-body,
-#app {
-  height: 100%;
-}
-
-/* A rolagem é do conteúdo da moldura, acima da barra inferior: o rodapé de ação gruda no fim dela */
-.pr-shell__content .rodape-acao {
-  bottom: 0;
-}
-
-/* Mockup: no celular o topo mostra ☰ + logo (o Prisma esconde o título abaixo de 1024 px) */
-.pr-tb.repz-topo .pr-tb__titles {
-  visibility: visible;
-}

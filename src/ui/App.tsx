@@ -11,12 +11,16 @@ import { TelaHistorico } from './telas/historico/TelaHistorico';
 import { BoasVindas } from './telas/boas-vindas/BoasVindas';
 import { TelaInicio } from './telas/inicio/TelaInicio';
 import { EmBreve } from './telas/EmBreve';
+import { TelaLogin } from './telas/login/TelaLogin';
+import { TelaPerfil } from './telas/perfil/TelaPerfil';
+import { usuarioAtual } from '../app/sessao';
 
 const TELAS: Partial<Record<Aba, () => ReactNode>> = {
   inicio: TelaInicio,
   treino: AbaTreino,
   historico: TelaHistorico,
   plano: TelaPlano,
+  perfil: TelaPerfil,
 };
 
 export function App() {
@@ -28,6 +32,8 @@ export function App() {
         <Cartao className="cartao-erro">{erroFatal.value}</Cartao>
       </main>
     );
+  if (usuarioAtual.value === undefined) return null;
+  if (usuarioAtual.value === null) return <TelaLogin />;
   if (!carregado.value) return null;
   // Fora do app instalado, até ser dispensada (BRIEFING 11)
   if (mostrarBoasVindas.value) return <BoasVindas />;

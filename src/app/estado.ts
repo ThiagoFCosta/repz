@@ -20,7 +20,9 @@ import {
   type Treino,
 } from '../dados/tipos';
 
-export const db = new RepzDb();
+// Um banco local por usuário (repz-<user_id>, ARCHITECTURE 7.1); aberto por iniciarEstado depois do login.
+// `let` exportado: quem importa `db` enxerga o banco aberto (ligação viva do módulo).
+export let db = new RepzDb();
 
 export const carregado = signal(false);
 export const erroFatal = signal<string | null>(null);
@@ -100,7 +102,8 @@ async function garantirPersistencia(): Promise<void> {
 }
 
 // `aoCarregar` roda antes de a UI aparecer (ex.: retomar o treino em andamento)
-export async function iniciarEstado(aoCarregar?: () => Promise<void>): Promise<void> {
+export async function iniciarEstado(usuarioId: string, aoCarregar?: () => Promise<void>): Promise<void> {
+  db = new RepzDb(`repz-${usuarioId}`);
   try {
     await db.open();
     await recarregar();

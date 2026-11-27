@@ -186,7 +186,7 @@ test('os 5 fluxos da seção 15 em sequência, offline depois da 1ª carga', asy
     await page.evaluate(
       () =>
         new Promise<void>((ok, erro) => {
-          const r = indexedDB.deleteDatabase('repz');
+          const r = indexedDB.deleteDatabase('repz-00000000-0000-4000-8000-00000000e2e0');
           r.onsuccess = () => ok();
           r.onerror = () => erro(r.error);
         }),

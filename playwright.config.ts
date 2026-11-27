@@ -30,7 +30,9 @@ export default defineConfig({
   ],
   // roda contra o build de produção, na raiz (como na Netlify)
   webServer: {
+    // remoto em memória: login simulado e nenhuma chamada ao Supabase (docs/v2, seção 14)
     command: 'npm run build && npm run preview',
+    env: { VITE_REMOTO: 'memoria' },
     url: `http://localhost:${PORTA}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

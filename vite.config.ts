@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
+import { loadEnv } from 'vite';
 import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -9,13 +10,15 @@ import { VitePWA } from 'vite-plugin-pwa';
 const BASE = '/';
 
 // CSP só no build: o servidor de desenvolvimento usa scripts inline e websocket (HMR).
+// O app só conversa com o projeto Supabase do Repz (D46); nenhum outro host
+const SUPABASE = loadEnv('production', process.cwd(), 'VITE_').VITE_SUPABASE_URL ?? '';
 const CSP = [
   "default-src 'self'",
   "script-src 'self'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self'${SUPABASE ? ` ${SUPABASE}` : ''}`,
   "worker-src 'self' blob:",
   "manifest-src 'self'",
   "base-uri 'self'",
