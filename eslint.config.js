@@ -3,10 +3,17 @@ import tseslint from 'typescript-eslint';
 import importX from 'eslint-plugin-import-x';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage', 'referencia', 'playwright-report', 'test-results', 'dev-dist'] },
   js.configs.recommended,
+  {
+    // Só as regras clássicas: as do React Compiler (immutability, set-state-in-effect) não combinam com os
+    // sinais globais da v1 (src/app/sinal.ts, D34)
+    plugins: { 'react-hooks': reactHooks },
+    rules: { 'react-hooks/rules-of-hooks': 'error', 'react-hooks/exhaustive-deps': 'warn' },
+  },
   ...tseslint.configs.recommended,
   {
     languageOptions: { globals: { ...globals.browser, ...globals.node } },

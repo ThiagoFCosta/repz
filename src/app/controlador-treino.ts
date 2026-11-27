@@ -2,7 +2,7 @@
 // (série + Treino.estadoUI) → efeitos (descanso, som, vibração, wake lock).
 // A UI nunca escreve no banco durante o treino sem passar por aqui.
 
-import { computed, signal } from '@preact/signals';
+import { computed, signal } from './sinal';
 import { agoraISO, hojeLocal } from '../dominio/datas';
 import { prescricao, type Prescricao } from '../dominio/periodizacao/prescricao';
 import { incrementoPadrao } from '../dominio/progressao/incremento';

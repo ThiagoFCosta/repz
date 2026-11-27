@@ -1,7 +1,7 @@
 // Registro de cardio (BRIEFING 9.7): em qualquer dia, com ou sem treino de força.
 // Sem id, registra um novo; com id (vindo da visão Treinos), edita ou exclui.
 
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import {
   avaliar,
   metaSemanal,
@@ -55,7 +55,7 @@ function Comparacoes({
 }) {
   const a = minutos == null ? null : avaliar({ minutos, fcMedia: fc }, presc);
   return (
-    <dl class="meta" aria-label="Comparação com a meta">
+    <dl className="meta" aria-label="Comparação com a meta">
       <div>
         <dt>Meta do plano</dt>
         <dd>{metaTxt(presc)}</dd>
@@ -64,11 +64,11 @@ function Comparacoes({
         <div>
           <dt>Resultado</dt>
           <dd>
-            <span class={`comparacao comparacao-${a.duracao}`}>
+            <span className={`comparacao comparacao-${a.duracao}`}>
               {a.duracao === 'dentro' ? '✓' : '!'} Duração {COMPARACAO_TXT[a.duracao]}
             </span>
             {a.fc && (
-              <span class={`comparacao comparacao-${a.fc}`}>
+              <span className={`comparacao comparacao-${a.fc}`}>
                 {a.fc === 'dentro' ? '✓' : '!'} FC {COMPARACAO_TXT[a.fc]}
               </span>
             )}
@@ -96,17 +96,17 @@ function Campo({
 }) {
   return (
     <div>
-      <label class="rotulo" for={id}>
+      <label className="rotulo" htmlFor={id}>
         {rotulo}
       </label>
       <input
         id={id}
-        class="campo numero"
+        className="campo numero"
         inputMode={modo}
         autoComplete="off"
         aria-invalid={erro || undefined}
         value={valor}
-        onInput={(e) => aoMudar(e.currentTarget.value)}
+        onChange={(e) => aoMudar(e.currentTarget.value)}
       />
     </div>
   );
@@ -184,33 +184,33 @@ export function TelaCardio({ id }: { id?: string }) {
   };
 
   return (
-    <section class="cardio">
+    <section className="cardio">
       <Cabecalho titulo={existente ? 'Editar cardio' : 'Cardio'} voltar={voltar} />
 
-      <div class="chips" role="group" aria-label="Tipo">
+      <div className="chips" role="group" aria-label="Tipo">
         {tipos.map((t) => (
-          <button key={t} type="button" class="chip" aria-pressed={tipo === t} onClick={() => setTipo(t)}>
+          <button key={t} type="button" className="chip" aria-pressed={tipo === t} onClick={() => setTipo(t)}>
             {t}
           </button>
         ))}
       </div>
       {tipo === OUTRO && (
         <>
-          <label class="rotulo" for="cardio-outro">
+          <label className="rotulo" htmlFor="cardio-outro">
             Qual?
           </label>
           <input
             id="cardio-outro"
-            class="campo"
+            className="campo"
             autoComplete="off"
             placeholder="Corrida, caminhada…"
             value={outro}
-            onInput={(e) => setOutro(e.currentTarget.value)}
+            onChange={(e) => setOutro(e.currentTarget.value)}
           />
         </>
       )}
 
-      <div class="campos-cardio">
+      <div className="campos-cardio">
         <Campo
           id="cardio-minutos"
           rotulo="Duração (min)"
@@ -236,30 +236,30 @@ export function TelaCardio({ id }: { id?: string }) {
           erro={erros.dist}
         />
         <div>
-          <label class="rotulo" for="cardio-data">
+          <label className="rotulo" htmlFor="cardio-data">
             Data
           </label>
           <input
             id="cardio-data"
-            class="campo"
+            className="campo"
             type="date"
             max={hoje.value}
             aria-invalid={!dataOk || undefined}
             value={data}
-            onInput={(e) => setData(e.currentTarget.value)}
+            onChange={(e) => setData(e.currentTarget.value)}
           />
         </div>
       </div>
 
-      <span class="rotulo" id="rotulo-esforco">
+      <span className="rotulo" id="rotulo-esforco">
         Esforço (0 a 10, opcional)
       </span>
-      <div class="esforco" role="group" aria-labelledby="rotulo-esforco">
+      <div className="esforco" role="group" aria-labelledby="rotulo-esforco">
         {ESFORCOS.map((e) => (
           <button
             key={e}
             type="button"
-            class="rir-botao numero"
+            className="rir-botao numero"
             aria-pressed={esforco === e}
             onClick={() => setEsforco(esforco === e ? null : e)}
           >
@@ -271,10 +271,10 @@ export function TelaCardio({ id }: { id?: string }) {
       {presc ? (
         <Comparacoes presc={presc} minutos={min} fc={fcVal} />
       ) : (
-        <p class="muted pequeno">O plano ativo não tem meta de cardio.</p>
+        <p className="muted pequeno">O plano ativo não tem meta de cardio.</p>
       )}
 
-      <div class="rodape-acao pilha">
+      <div className="rodape-acao pilha">
         <Botao bloco disabled={!valido || ocupado} onClick={() => void salvar()}>
           {existente ? 'Salvar' : 'Registrar cardio'}
         </Botao>
@@ -290,7 +290,7 @@ export function TelaCardio({ id }: { id?: string }) {
           <p>
             {nomeTipo}, {existente!.minutos} min. Não dá para desfazer.
           </p>
-          <div class="acoes-lado">
+          <div className="acoes-lado">
             <Botao variante="secundario" onClick={() => setConfirmar(false)}>
               Cancelar
             </Botao>

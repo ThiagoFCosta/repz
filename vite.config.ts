@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 import type { Plugin } from 'vite';
-import preact from '@preact/preset-vite';
+import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // GitHub Pages serve o app em /<repositório>/
@@ -52,7 +52,7 @@ export default defineConfig({
     alias: { html2canvas: VAZIO, canvg: VAZIO, dompurify: VAZIO },
   },
   plugins: [
-    preact(),
+    react(),
     csp(),
     jspdfSemCdn(),
     VitePWA({

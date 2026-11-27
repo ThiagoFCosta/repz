@@ -13,7 +13,7 @@ import { Botao, Cartao } from '../../componentes/basicos';
 function Android() {
   return (
     <Cartao titulo="Android (Chrome)">
-      <ol class="passos-instalacao">
+      <ol className="passos-instalacao">
         <li>
           Toque no menu <strong aria-label="de três pontos">⋮</strong> no canto de cima.
         </li>
@@ -29,7 +29,7 @@ function Android() {
 function Iphone() {
   return (
     <Cartao titulo="iPhone (Safari)">
-      <ol class="passos-instalacao">
+      <ol className="passos-instalacao">
         <li>Abra este link no Safari.</li>
         <li>
           Toque em <strong>Compartilhar</strong> (o quadrado com a seta para cima).
@@ -46,14 +46,14 @@ function Iphone() {
 export function BoasVindas() {
   const reaberta = boasVindasDispensada.value;
   return (
-    <main class="shell-conteudo boas-vindas">
-      <img class="boas-vindas-icone" src={`${import.meta.env.BASE_URL}icones/icone.svg`} alt="" />
+    <main className="shell-conteudo boas-vindas">
+      <img className="boas-vindas-icone" src={`${import.meta.env.BASE_URL}icones/icone.svg`} alt="" />
       <h1>{reaberta ? 'Instalar o REPZ' : 'Bem-vindo ao REPZ'}</h1>
       <p>
         Registre cada série, acompanhe a evolução e receba sugestões de carga. Funciona sem internet, e os
         seus dados ficam só neste celular.
       </p>
-      <p class="muted">
+      <p className="muted">
         Instale na tela inicial: o app abre como um aplicativo, funciona offline na academia e o armazenamento
         fica protegido (no iPhone, um site não instalado pode ter os dados apagados depois de alguns dias sem
         uso).
@@ -65,11 +65,11 @@ export function BoasVindas() {
         </Botao>
       )}
 
-      <div class="pilha">
+      <div className="pilha">
         {ehIos ? [<Iphone key="i" />, <Android key="a" />] : [<Android key="a" />, <Iphone key="i" />]}
       </div>
 
-      <div class="rodape-acao">
+      <div className="rodape-acao">
         <Botao bloco variante="secundario" onClick={dispensarBoasVindas}>
           {reaberta ? 'Voltar' : 'Continuar no navegador'}
         </Botao>

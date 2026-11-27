@@ -1,4 +1,4 @@
-import { signal } from '@preact/signals';
+import { signal } from './sinal';
 
 // Hash router: o GitHub Pages não faz fallback de SPA, então as rotas ficam depois do "#".
 // Formato: #/<aba>/<subcaminho…>, ex. #/plano/revisar

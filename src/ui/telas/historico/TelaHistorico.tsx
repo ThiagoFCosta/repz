@@ -3,7 +3,7 @@
 // #/historico/treinos → visão Treinos (força e cardio) · #/historico/treino/<id> → treino completo
 // #/historico/cardio/<id> → editar ou excluir um cardio
 
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'react';
 import { dataBR } from '../../../dominio/datas';
 import {
   melhorPorSemana,
@@ -44,22 +44,22 @@ function Seletor({
   ].filter((g) => g.itens.length);
   return (
     <Folha titulo="Escolher exercício" aoFechar={aoFechar}>
-      <label class="oculto-visual" for="busca-exercicio">
+      <label className="oculto-visual" htmlFor="busca-exercicio">
         Buscar exercício
       </label>
       <input
         id="busca-exercicio"
-        class="campo"
+        className="campo"
         type="search"
         placeholder="Buscar pelo nome"
         autoComplete="off"
         value={q}
-        onInput={(e) => setQ(e.currentTarget.value)}
+        onChange={(e) => setQ(e.currentTarget.value)}
       />
       {grupos.map((g) => (
         <section key={g.titulo}>
-          <h3 class="secao">{g.titulo}</h3>
-          <ul class="lista-menu">
+          <h3 className="secao">{g.titulo}</h3>
+          <ul className="lista-menu">
             {g.itens.map((e) => (
               <li key={e.chave}>
                 <button
@@ -77,7 +77,7 @@ function Seletor({
           </ul>
         </section>
       ))}
-      {!achados.length && <p class="muted">Nenhum exercício com esse nome.</p>}
+      {!achados.length && <p className="muted">Nenhum exercício com esse nome.</p>}
     </Folha>
   );
 }
@@ -89,25 +89,25 @@ function Kpis({ h }: { h: HistoricoExercicio }) {
   const u = h.porTempo ? 's' : 'kg';
   const atual = pontos.at(-1);
   return (
-    <div class="kpis kpis-2">
-      <div class="kpi">
-        <span class="kpi-valor numero">{atual ? `${formatarDecimal(atual.valor)} ${u}` : '–'}</span>
-        <span class="kpi-rotulo">{h.porTempo ? 'melhor tempo atual' : '1RM estimado'}</span>
+    <div className="kpis kpis-2">
+      <div className="kpi">
+        <span className="kpi-valor numero">{atual ? `${formatarDecimal(atual.valor)} ${u}` : '–'}</span>
+        <span className="kpi-rotulo">{h.porTempo ? 'melhor tempo atual' : '1RM estimado'}</span>
         {v && (
-          <span class={`kpi-variacao numero ${v.delta > 0 ? 'sobe' : v.delta < 0 ? 'desce' : ''}`}>
+          <span className={`kpi-variacao numero ${v.delta > 0 ? 'sobe' : v.delta < 0 ? 'desce' : ''}`}>
             {v.delta > 0 ? '+' : v.delta < 0 ? '−' : '±'}
             {formatarDecimal(Math.abs(v.delta))} {u} ({formatarDecimal(Math.abs(v.pct))}%)
             {v.completa ? ' em 8 semanas' : ` desde ${dataBR(v.desde, true)}`}
           </span>
         )}
       </div>
-      <div class="kpi">
-        <span class="kpi-valor numero">
+      <div className="kpi">
+        <span className="kpi-valor numero">
           {m ? (h.porTempo ? `${m.reps} s` : `${formatarDecimal(m.kg)} kg × ${m.reps}`) : '–'}
         </span>
-        <span class="kpi-rotulo">melhor série</span>
+        <span className="kpi-rotulo">melhor série</span>
         {m && (
-          <span class="kpi-variacao numero">
+          <span className="kpi-variacao numero">
             {dataBR(m.data, true)}
             {!h.porTempo && ` · RIR ${rirTxt(m.rir)}`}
           </span>
@@ -125,19 +125,19 @@ function ListaTreinos({
   porTempo: boolean;
 }) {
   return (
-    <ul class="lista-treinos" aria-label="Treinos do exercício">
+    <ul className="lista-treinos" aria-label="Treinos do exercício">
       {[...treinos].reverse().map((t) => (
         <li key={t.treinoId}>
           <a href={`#/historico/treino/${t.treinoId}`}>
-            <span class="lista-treinos-data numero">{dataBR(t.data, true)}</span>
-            <span class="lista-treinos-corpo">
-              <span class="numero">{seriesTxt(t.series, porTempo)}</span>
-              <span class="muted pequeno">
+            <span className="lista-treinos-data numero">{dataBR(t.data, true)}</span>
+            <span className="lista-treinos-corpo">
+              <span className="numero">{seriesTxt(t.series, porTempo)}</span>
+              <span className="muted pequeno">
                 {t.sessaoNome}
                 {t.deload && ' · deload'}
               </span>
             </span>
-            <span class="lista-treinos-seta" aria-hidden="true">
+            <span className="lista-treinos-seta" aria-hidden="true">
               ›
             </span>
           </a>
@@ -174,28 +174,33 @@ function VisaoExercicio({ chave }: { chave?: string }) {
       {!lista.length ? (
         <Cartao>
           <p>Seus treinos aparecem aqui.</p>
-          <p class="muted pequeno">Termine um treino para ver a evolução de cada exercício.</p>
+          <p className="muted pequeno">Termine um treino para ver a evolução de cada exercício.</p>
         </Cartao>
       ) : (
         <>
-          <button type="button" class="seletor" aria-haspopup="dialog" onClick={() => setEscolhendo(true)}>
-            <span class="seletor-nome">{ex?.nome ?? 'Exercício sem histórico'}</span>
-            <span class="seletor-acao">Trocar</span>
+          <button
+            type="button"
+            className="seletor"
+            aria-haspopup="dialog"
+            onClick={() => setEscolhendo(true)}
+          >
+            <span className="seletor-nome">{ex?.nome ?? 'Exercício sem histórico'}</span>
+            <span className="seletor-acao">Trocar</span>
           </button>
           {h && (
             <>
               <Kpis h={h} />
-              <h2 class="secao">{h.porTempo ? 'Melhor tempo por semana' : '1RM estimado por semana'}</h2>
+              <h2 className="secao">{h.porTempo ? 'Melhor tempo por semana' : '1RM estimado por semana'}</h2>
               <Grafico
                 pontos={melhorPorSemana(h.treinos, h.porTempo)}
                 unidade={h.porTempo ? 's' : 'kg'}
                 titulo={h.porTempo ? 'Melhor tempo por semana' : '1RM estimado por semana'}
               />
-              <h2 class="secao">Treinos</h2>
+              <h2 className="secao">Treinos</h2>
               {h.treinos.length ? (
                 <ListaTreinos treinos={h.treinos} porTempo={h.porTempo} />
               ) : (
-                <p class="muted">Nenhum treino concluído com este exercício.</p>
+                <p className="muted">Nenhum treino concluído com este exercício.</p>
               )}
             </>
           )}

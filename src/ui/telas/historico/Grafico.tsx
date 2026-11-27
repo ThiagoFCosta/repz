@@ -1,7 +1,7 @@
 // Gráfico de linha em SVG próprio (BRIEFING 9.8): melhor e1RM (ou duração) por semana, com as
 // semanas de deload marcadas por uma faixa e um ponto vazado. Tocar num ponto mostra o valor.
 
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import { dataBR, diasEntre } from '../../../dominio/datas';
 import type { PontoSemana } from '../../../dominio/historico';
 import { formatarDecimal } from '../../../dominio/numeros';
@@ -55,15 +55,15 @@ export function Grafico({
   const p = sel == null ? null : pontos[sel];
 
   return (
-    <figure class="grafico">
-      <p class="grafico-leitura numero" aria-live="polite">
+    <figure className="grafico">
+      <p className="grafico-leitura numero" aria-live="polite">
         {p ? (
           <>
             Semana de {dataBR(p.semana, true)}: <strong>{fmt(p.valor)}</strong>
-            {p.deload && <span class="grafico-deload-txt"> · deload</span>}
+            {p.deload && <span className="grafico-deload-txt"> · deload</span>}
           </>
         ) : (
-          <span class="muted">Toque num ponto para ver o valor</span>
+          <span className="muted">Toque num ponto para ver o valor</span>
         )}
       </p>
       <svg viewBox={`0 0 ${L} ${A}`} role="img" aria-label={resumo}>
@@ -72,7 +72,7 @@ export function Grafico({
             q.deload && (
               <rect
                 key={`d${q.semana}`}
-                class="grafico-faixa-deload"
+                className="grafico-faixa-deload"
                 x={x(q) - semanaPx / 2}
                 y={M.topo}
                 width={semanaPx}
@@ -82,27 +82,27 @@ export function Grafico({
         )}
         {ys.map((v) => (
           <g key={v}>
-            <line class="grafico-grade" x1={M.esq} x2={L - M.dir} y1={y(v)} y2={y(v)} />
-            <text class="grafico-eixo" x={M.esq - 6} y={y(v) + 4} text-anchor="end">
+            <line className="grafico-grade" x1={M.esq} x2={L - M.dir} y1={y(v)} y2={y(v)} />
+            <text className="grafico-eixo" x={M.esq - 6} y={y(v) + 4} text-anchor="end">
               {formatarDecimal(v)}
             </text>
           </g>
         ))}
-        <text class="grafico-eixo" x={M.esq} y={A - 6} text-anchor="start">
+        <text className="grafico-eixo" x={M.esq} y={A - 6} text-anchor="start">
           {dataBR(pontos[0]!.semana, true)}
         </text>
         {pontos.length > 1 && (
-          <text class="grafico-eixo" x={L - M.dir} y={A - 6} text-anchor="end">
+          <text className="grafico-eixo" x={L - M.dir} y={A - 6} text-anchor="end">
             {dataBR(pontos.at(-1)!.semana, true)}
           </text>
         )}
-        <polyline class="grafico-linha" points={pontos.map((q) => `${x(q)},${y(q.valor)}`).join(' ')} />
+        <polyline className="grafico-linha" points={pontos.map((q) => `${x(q)},${y(q.valor)}`).join(' ')} />
         {pontos.map((q, i) => (
-          <g key={q.semana} class="grafico-alvo" onClick={() => setSel(sel === i ? null : i)}>
+          <g key={q.semana} className="grafico-alvo" onClick={() => setSel(sel === i ? null : i)}>
             {/* alvo de toque maior que o ponto */}
             <circle cx={x(q)} cy={y(q.valor)} r={14} fill="transparent" />
             <circle
-              class={`grafico-ponto${q.deload ? ' grafico-ponto-deload' : ''}${sel === i ? ' grafico-ponto-sel' : ''}`}
+              className={`grafico-ponto${q.deload ? ' grafico-ponto-deload' : ''}${sel === i ? ' grafico-ponto-sel' : ''}`}
               cx={x(q)}
               cy={y(q.valor)}
               r={sel === i ? 6 : 4.5}
@@ -111,8 +111,8 @@ export function Grafico({
         ))}
       </svg>
       {deloads > 0 && (
-        <figcaption class="grafico-legenda pequeno">
-          <span class="grafico-legenda-deload" aria-hidden="true" /> semana de deload
+        <figcaption className="grafico-legenda pequeno">
+          <span className="grafico-legenda-deload" aria-hidden="true" /> semana de deload
         </figcaption>
       )}
     </figure>

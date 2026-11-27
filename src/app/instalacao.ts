@@ -2,7 +2,7 @@
 // no navegador, lembrete discreto depois de dispensada e o botão "Instalar" quando o navegador
 // oferece o `beforeinstallprompt` (Chrome do Android).
 
-import { computed, signal } from '@preact/signals';
+import { computed, signal } from './sinal';
 
 // Evento do Chrome, fora do lib.dom do TypeScript
 interface PromptInstalacao extends Event {

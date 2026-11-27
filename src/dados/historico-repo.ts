@@ -7,6 +7,7 @@ import { prescricao } from '../dominio/periodizacao/prescricao';
 import type { TreinoHistorico } from '../dominio/progressao/motor';
 import type { RepzDb } from './db';
 import { canonica, chavesEquivalentes, type MapaConfig } from './repos/config';
+import { porFeitaEm } from './ordem';
 import type { ExercicioPrescrito, Plano, Treino } from './tipos';
 
 export interface HistoricoVariante {
@@ -36,7 +37,7 @@ export async function historicoDaChave(
   )
     .flat()
     .filter((s) => !s.aquecimento && concluidos.has(s.treinoId))
-    .sort((a, b) => a.feitaEm.localeCompare(b.feitaEm));
+    .sort(porFeitaEm);
 
   const porTreino = new Map<string, TreinoHistorico>();
   for (const s of series) {
@@ -122,7 +123,7 @@ export async function historicoDoExercicio(
   )
     .flat()
     .filter((s) => !s.aquecimento)
-    .sort((a, b) => a.feitaEm.localeCompare(b.feitaEm));
+    .sort(porFeitaEm);
   const treinos = new Map(
     (await db.treinos.bulkGet([...new Set(series.map((s) => s.treinoId))]))
       .filter((t): t is Treino => t?.status === 'concluido')

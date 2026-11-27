@@ -21,21 +21,21 @@ export function Descanso({ a, etapa }: { a: TreinoAtivo; etapa: Extract<Etapa, {
   const pct = etapa.duracao ? Math.min(100, (restante / etapa.duracao) * 100) : 0;
 
   return (
-    <div class="descanso">
-      <p class="cartao-titulo">Descanso</p>
-      <div class="cronometro numero" role="timer" aria-label="Descanso restante">
+    <div className="descanso">
+      <p className="cartao-titulo">Descanso</p>
+      <div className="cronometro numero" role="timer" aria-label="Descanso restante">
         {mmss(restante)}
       </div>
-      <div class="barra barra-descanso" aria-hidden="true">
+      <div className="barra barra-descanso" aria-hidden="true">
         <span style={{ width: `${pct}%` }} />
       </div>
 
-      <div class="cartao a-seguir">
-        <p class="cartao-titulo">A seguir</p>
-        <p class="a-seguir-nome">
+      <div className="cartao a-seguir">
+        <p className="cartao-titulo">A seguir</p>
+        <p className="a-seguir-nome">
           {grupo != null && <Etiqueta tipo="ss">SS{grupo}</Etiqueta>} {ex.nome}
         </p>
-        <p class="muted numero">
+        <p className="muted numero">
           {r ? `Rodada ${r.atual} de ${r.total} · ` : ''}série {(e.feitas[prox] ?? 0) + 1} de{' '}
           {totalSeries(e, prox)}
           {pre.kg != null && (!porTempo || pre.kg > 0) && <> · {formatarDecimal(pre.kg)} kg</>}
@@ -43,10 +43,10 @@ export function Descanso({ a, etapa }: { a: TreinoAtivo; etapa: Extract<Etapa, {
         </p>
       </div>
 
-      <p class="muted pequeno">Mantenha a tela ligada para ouvir o bipe e sentir a vibração no fim.</p>
+      <p className="muted pequeno">Mantenha a tela ligada para ouvir o bipe e sentir a vibração no fim.</p>
 
-      <div class="rodape-acao">
-        <div class="descanso-acoes">
+      <div className="rodape-acao">
+        <div className="descanso-acoes">
           <Botao
             variante="secundario"
             aria-label="−15 s: menos 15 segundos"

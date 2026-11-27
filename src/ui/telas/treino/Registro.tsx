@@ -1,7 +1,7 @@
 // Registro da série (BRIEFING 9.4), o núcleo do app. Meta: 2 toques quando a sugestão está certa
 // (RIR + Concluir, D4): carga e reps chegam pré-preenchidas.
 
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'react';
 import { dataBR } from '../../../dominio/datas';
 import { formatarDecimal, lerDecimal } from '../../../dominio/numeros';
 import { concluido, membros, restantes, rodada, totalSeries } from '../../../dominio/treino/biset';
@@ -39,12 +39,12 @@ export function BotoesRir({
   rotulo: string;
 }) {
   return (
-    <div class="rir" role="group" aria-label={rotulo}>
+    <div className="rir" role="group" aria-label={rotulo}>
       {RIRS.map((r) => (
         <button
           key={r}
           type="button"
-          class="rir-botao numero"
+          className="rir-botao numero"
           aria-pressed={valor === r}
           onClick={() => aoMudar(valor === r ? null : r)}
         >
@@ -75,14 +75,14 @@ function Passo({
     aoMudar(formatarDecimal(Math.max(0, Math.round((atual + d) * 100) / 100)));
   };
   return (
-    <div class="passo-grande">
-      <label class="rotulo" for={`campo-${rotulo}`}>
+    <div className="passo-grande">
+      <label className="rotulo" htmlFor={`campo-${rotulo}`}>
         {rotulo}
       </label>
-      <div class="passo-linha">
+      <div className="passo-linha">
         <button
           type="button"
-          class="botao botao-secundario passo-botao"
+          className="botao botao-secundario passo-botao"
           aria-label={`${rotulo} −${passoTxt}`}
           onClick={() => somar(-passo)}
         >
@@ -90,15 +90,15 @@ function Passo({
         </button>
         <input
           id={`campo-${rotulo}`}
-          class="campo campo-grande numero"
+          className="campo campo-grande numero"
           inputMode={modo}
           autoComplete="off"
           value={valor}
-          onInput={(e) => aoMudar(e.currentTarget.value)}
+          onChange={(e) => aoMudar(e.currentTarget.value)}
         />
         <button
           type="button"
-          class="botao botao-secundario passo-botao"
+          className="botao botao-secundario passo-botao"
           aria-label={`${rotulo} +${passoTxt}`}
           onClick={() => somar(passo)}
         >
@@ -118,17 +118,17 @@ function LinhaSerie({ s, porTempo, n }: { s: SerieRealizada; porTempo: boolean; 
   if (!editando)
     return (
       <li>
-        <button type="button" class="serie-feita numero" onClick={() => setEditando(true)}>
+        <button type="button" className="serie-feita numero" onClick={() => setEditando(true)}>
           {/* o nome acessível inclui o texto visível (WCAG 2.5.3) */}
-          <span class="oculto-visual">Editar série </span>
-          <span class="serie-n">{n}</span>
+          <span className="oculto-visual">Editar série </span>
+          <span className="serie-n">{n}</span>
           <span>{formatarDecimal(s.kg)} kg</span>
           <span>
             {s.reps}
             {porTempo ? ' s' : ''}
           </span>
           <span>RIR {rirTxt(s.rir)}</span>
-          <span class="serie-ok" aria-hidden="true">
+          <span className="serie-ok" aria-hidden="true">
             ✓
           </span>
         </button>
@@ -140,29 +140,29 @@ function LinhaSerie({ s, porTempo, n }: { s: SerieRealizada; porTempo: boolean; 
     setEditando(false);
   };
   return (
-    <li class="serie-edicao">
-      <div class="serie-edicao-campos">
+    <li className="serie-edicao">
+      <div className="serie-edicao-campos">
         <label>
-          <span class="rotulo">kg</span>
+          <span className="rotulo">kg</span>
           <input
-            class="campo numero"
+            className="campo numero"
             inputMode="decimal"
             value={kg}
-            onInput={(e) => setKg(e.currentTarget.value)}
+            onChange={(e) => setKg(e.currentTarget.value)}
           />
         </label>
         <label>
-          <span class="rotulo">{porTempo ? 'segundos' : 'reps'}</span>
+          <span className="rotulo">{porTempo ? 'segundos' : 'reps'}</span>
           <input
-            class="campo numero"
+            className="campo numero"
             inputMode="numeric"
             value={reps}
-            onInput={(e) => setReps(e.currentTarget.value)}
+            onChange={(e) => setReps(e.currentTarget.value)}
           />
         </label>
       </div>
       <BotoesRir valor={rir} aoMudar={setRir} rotulo={`RIR da série ${n}`} />
-      <div class="acoes-lado">
+      <div className="acoes-lado">
         <Botao variante="secundario" onClick={() => setEditando(false)}>
           Cancelar
         </Botao>
@@ -201,19 +201,19 @@ function MenuAcoes({
   if (tela === 'ir')
     return (
       <Folha titulo="Ir para exercício" aoFechar={aoFechar}>
-        <ul class="lista-ir">
+        <ul className="lista-ir">
           {a.itens.map((c, j) => (
             <li key={c.ex.id}>
               <button
                 type="button"
-                class="item-ir"
+                className="item-ir"
                 aria-current={j === item ? 'true' : undefined}
                 onClick={acao(() => despachar({ tipo: 'IR_PARA', item: j }))}
               >
                 <span>
                   {c.ex.grupo != null && <Etiqueta tipo="ss">SS{c.ex.grupo}</Etiqueta>} {c.ex.nome}
                 </span>
-                <span class="muted numero pequeno">
+                <span className="muted numero pequeno">
                   {e.pulados.includes(j) ? 'pulado' : `${e.feitas[j]}/${totalSeries(e, j)}`}
                 </span>
               </button>
@@ -226,17 +226,17 @@ function MenuAcoes({
   if (tela === 'nota')
     return (
       <Folha titulo={`Nota: ${ex.nome}`} aoFechar={aoFechar}>
-        <label class="oculto-visual" for="nota-ex">
+        <label className="oculto-visual" htmlFor="nota-ex">
           Nota no exercício
         </label>
         <textarea
           id="nota-ex"
-          class="campo"
+          className="campo"
           rows={3}
           value={nota}
-          onInput={(ev) => setNota(ev.currentTarget.value)}
+          onChange={(ev) => setNota(ev.currentTarget.value)}
         />
-        <div class="pilha">
+        <div className="pilha">
           <Botao bloco onClick={acao(() => salvarNota(item, nota))}>
             Salvar nota
           </Botao>
@@ -248,7 +248,7 @@ function MenuAcoes({
     return (
       <Folha titulo="Descartar treino?" aoFechar={aoFechar}>
         <p>O treino sai do histórico e não conta para as sugestões. As séries ficam guardadas no aparelho.</p>
-        <div class="pilha">
+        <div className="pilha">
           <Botao bloco variante="perigo" onClick={acao(() => despachar({ tipo: 'DESCARTAR' }))}>
             Descartar treino
           </Botao>
@@ -261,7 +261,7 @@ function MenuAcoes({
 
   return (
     <Folha titulo="Mais ações" aoFechar={aoFechar}>
-      <ul class="lista-menu">
+      <ul className="lista-menu">
         <li>
           <button type="button" onClick={acao(() => despachar({ tipo: 'ADICIONAR_SERIE', item }))}>
             Adicionar série
@@ -301,7 +301,7 @@ function MenuAcoes({
           </button>
         </li>
         <li>
-          <button type="button" class="perigo" onClick={() => setTela('descartar')}>
+          <button type="button" className="perigo" onClick={() => setTela('descartar')}>
             Descartar treino
           </button>
         </li>
@@ -316,16 +316,20 @@ function BiSet({ a, item }: { a: TreinoAtivo; item: number }) {
   if (g == null) return null;
   const r = rodada(e, item);
   return (
-    <div class="biset">
+    <div className="biset">
       <div>
         <Etiqueta tipo="ss">SS{g}</Etiqueta>{' '}
-        <strong class="numero">
+        <strong className="numero">
           Rodada {r.atual} de {r.total}
         </strong>
       </div>
-      <ol class="biset-membros">
+      <ol className="biset-membros">
         {membros(e, item).map((j) => (
-          <li key={j} aria-current={j === item ? 'step' : undefined} class={concluido(e, j) ? 'muted' : ''}>
+          <li
+            key={j}
+            aria-current={j === item ? 'step' : undefined}
+            className={concluido(e, j) ? 'muted' : ''}
+          >
             {a.itens[j]!.ex.nome}
           </li>
         ))}
@@ -367,12 +371,12 @@ function FormSerie({
   const extra = restantes(e, item) <= 0;
   return (
     <>
-      <h2 class="serie-atual numero">
+      <h2 className="serie-atual numero">
         Série {n}
-        {!extra && <span class="muted"> de {totalSeries(e, item)}</span>}
-        {extra && <span class="muted"> (extra)</span>}
+        {!extra && <span className="muted"> de {totalSeries(e, item)}</span>}
+        {extra && <span className="muted"> (extra)</span>}
       </h2>
-      <div class="passos">
+      <div className="passos">
         <Passo
           rotulo="kg"
           valor={kg}
@@ -396,14 +400,14 @@ function FormSerie({
           modo="numeric"
         />
       </div>
-      <div class="rotulo">RIR (repetições em reserva)</div>
+      <div className="rotulo">RIR (repetições em reserva)</div>
       <BotoesRir valor={rir} aoMudar={setRir} rotulo="RIR" />
 
-      <div class="rodape-acao">
-        <div class="rodape-linha">
+      <div className="rodape-acao">
+        <div className="rodape-linha">
           <Botao
             variante="secundario"
-            class="botao-mais"
+            className="botao-mais"
             aria-label="Mais ações"
             onClick={() => setMenu('menu')}
           >
@@ -438,17 +442,17 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
   let nTrabalho = 0;
 
   return (
-    <div class="registro">
+    <div className="registro">
       <BiSet a={a} item={item} />
-      <h1 class="ex-titulo">{ex.nome}</h1>
+      <h1 className="ex-titulo">{ex.nome}</h1>
 
       {ex.variantes.length > 1 && (
-        <div class="chips" role="group" aria-label="Variante">
+        <div className="chips" role="group" aria-label="Variante">
           {ex.variantes.map((nome, j) => (
             <button
               key={nome}
               type="button"
-              class="chip"
+              className="chip"
               aria-pressed={v === j}
               onClick={() => void despachar({ tipo: 'ESCOLHER_VARIANTE', item, variante: j })}
             >
@@ -458,10 +462,10 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
         </div>
       )}
 
-      <dl class="meta">
+      <dl className="meta">
         <div>
           <dt>Meta da semana</dt>
-          <dd class="numero">
+          <dd className="numero">
             {presc.series} × {faixaTxt(presc.reps)}
             {presc.porTempo ? ' s' : ''} · RIR {faixaTxt(presc.rir)} · {descansoTxt(presc.descanso)}
             {presc.fase?.deload && <> · deload</>}
@@ -469,7 +473,7 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
         </div>
         <div>
           <dt>Última vez</dt>
-          <dd class="numero">
+          <dd className="numero">
             {v == null
               ? 'escolha a variante'
               : ultimo
@@ -478,13 +482,13 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
           </dd>
         </div>
         {v != null && (
-          <div class={`sugestao sugestao-${sug.acao}`}>
+          <div className={`sugestao sugestao-${sug.acao}`}>
             <dt>
               <span aria-hidden="true">{ICONE_ACAO[sug.acao]}</span> Sugestão
             </dt>
             <dd>{sug.motivo}</dd>
             {sug.alertas.map((al) => (
-              <dd key={al} class="alerta">
+              <dd key={al} className="alerta">
                 ! {al}
               </dd>
             ))}
@@ -499,7 +503,7 @@ export function Registro({ a, item }: { a: TreinoAtivo; item: number }) {
       </dl>
 
       {feitasAqui.length > 0 && (
-        <ul class="series-feitas" aria-label="Séries feitas">
+        <ul className="series-feitas" aria-label="Séries feitas">
           {feitasAqui.map((s) => (
             <LinhaSerie
               key={`${s.id}-${s.kg}-${s.reps}-${s.rir}`}

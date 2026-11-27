@@ -1,6 +1,6 @@
 // Fim do treino (BRIEFING 9.6): duração, séries, volume, recordes e "Para o próximo treino" (7.6).
 
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import { formatarDecimal } from '../../../dominio/numeros';
 import { concluido } from '../../../dominio/treino/biset';
 import { tipoCartao, volume, type Recorde } from '../../../dominio/treino/resumo';
@@ -28,16 +28,16 @@ function CartaoSugestao({ a, c }: { a: TreinoAtivo; c: CartaoProximo }) {
   const tipo = tipoCartao(c.sugestao);
   const nome = ctx.ex.variantes[c.variante]!;
   return (
-    <li class={`proximo proximo-${tipo}`} aria-label={nome}>
-      <span class="proximo-icone" aria-hidden="true">
+    <li className={`proximo proximo-${tipo}`} aria-label={nome}>
+      <span className="proximo-icone" aria-hidden="true">
         {ICONE_CARTAO[tipo]}
       </span>
-      <div class="proximo-corpo">
-        <div class="proximo-nome">{nome}</div>
-        <div class="muted numero pequeno">{seriesTxt(c.series, ctx.presc.porTempo)}</div>
-        <div class="proximo-motivo">{c.sugestao.motivo}</div>
+      <div className="proximo-corpo">
+        <div className="proximo-nome">{nome}</div>
+        <div className="muted numero pequeno">{seriesTxt(c.series, ctx.presc.porTempo)}</div>
+        <div className="proximo-motivo">{c.sugestao.motivo}</div>
         {c.sugestao.alertas.map((al) => (
-          <div key={al} class="proximo-aviso pequeno">
+          <div key={al} className="proximo-aviso pequeno">
             ! {al}
           </div>
         ))}
@@ -65,39 +65,39 @@ export function Resumo({ a }: { a: TreinoAtivo }) {
   };
 
   return (
-    <div class="resumo">
+    <div className="resumo">
       <h1>Treino concluído</h1>
       {/* A atualização espera o fim do treino (BRIEFING 11): o banner aparece no Início */}
       {atualizacaoDisponivel.value && (
-        <p class="aviso-atualizacao pequeno" role="status">
+        <p className="aviso-atualizacao pequeno" role="status">
           Atualização disponível. Ela fica no Início depois que você fechar o treino.
         </p>
       )}
-      <div class="kpis">
-        <div class="kpi">
-          <span class="kpi-valor numero">{duracaoTxt(fim - Date.parse(a.treino.inicio))}</span>
-          <span class="kpi-rotulo">duração</span>
+      <div className="kpis">
+        <div className="kpi">
+          <span className="kpi-valor numero">{duracaoTxt(fim - Date.parse(a.treino.inicio))}</span>
+          <span className="kpi-rotulo">duração</span>
         </div>
-        <div class="kpi">
-          <span class="kpi-valor numero">{trabalho.length}</span>
-          <span class="kpi-rotulo">séries</span>
+        <div className="kpi">
+          <span className="kpi-valor numero">{trabalho.length}</span>
+          <span className="kpi-rotulo">séries</span>
         </div>
-        <div class="kpi">
-          <span class="kpi-valor numero">{formatarDecimal(Math.round(vol))} kg</span>
-          <span class="kpi-rotulo">volume</span>
+        <div className="kpi">
+          <span className="kpi-valor numero">{formatarDecimal(Math.round(vol))} kg</span>
+          <span className="kpi-rotulo">volume</span>
         </div>
       </div>
 
       {recordes.length > 0 && (
-        <section class="cartao recordes" aria-labelledby="titulo-recordes">
-          <h2 id="titulo-recordes" class="cartao-titulo">
+        <section className="cartao recordes" aria-labelledby="titulo-recordes">
+          <h2 id="titulo-recordes" className="cartao-titulo">
             Recordes
           </h2>
-          <ul class="lista-resumo">
+          <ul className="lista-resumo">
             {recordes.map((c) => (
               <li key={`${c.item}-${c.variante}`}>
                 <span>{a.itens[c.item]!.ex.variantes[c.variante]}</span>
-                <span class="recorde numero pequeno">{recordeTxt(c.recorde!)}</span>
+                <span className="recorde numero pequeno">{recordeTxt(c.recorde!)}</span>
               </li>
             ))}
           </ul>
@@ -105,30 +105,30 @@ export function Resumo({ a }: { a: TreinoAtivo }) {
       )}
 
       <section aria-labelledby="titulo-proximo">
-        <h2 id="titulo-proximo" class="secao">
+        <h2 id="titulo-proximo" className="secao">
           Para o próximo treino
         </h2>
         {cartoes.length ? (
-          <ul class="lista-proximo" aria-label="Para o próximo treino">
+          <ul className="lista-proximo" aria-label="Para o próximo treino">
             {cartoes.map((c) => (
               <CartaoSugestao key={`${c.item}-${c.variante}`} a={a} c={c} />
             ))}
           </ul>
         ) : (
-          <p class="muted">Nenhuma série registrada.</p>
+          <p className="muted">Nenhuma série registrada.</p>
         )}
         {naoFeitos.length > 0 && (
-          <p class="muted pequeno">Não feitos: {naoFeitos.map((c) => c.ex.nome).join(', ')}.</p>
+          <p className="muted pequeno">Não feitos: {naoFeitos.map((c) => c.ex.nome).join(', ')}.</p>
         )}
       </section>
 
-      <div class="rodape-acao pilha">
+      <div className="rodape-acao pilha">
         {pendentes && (
           <Botao bloco variante="secundario" onClick={() => void despachar({ tipo: 'RETOMAR' })}>
             Voltar ao treino
           </Botao>
         )}
-        <div class="acoes-lado">
+        <div className="acoes-lado">
           <Botao variante="secundario" disabled={ocupado} onClick={() => void fechar('treino/cardio')}>
             Cardio
           </Botao>

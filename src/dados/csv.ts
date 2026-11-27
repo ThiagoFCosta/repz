@@ -2,6 +2,7 @@
 // vírgula decimal, aspas quando a célula tem ';', aspas ou quebra de linha, linhas com CRLF.
 // Só entram treinos não descartados (D6: o descarte fica no banco, fora dos dados do usuário).
 
+import { porFeitaEm } from './ordem';
 import { formatarDecimal } from '../dominio/numeros';
 import { faseDaSemana } from '../dominio/periodizacao/prescricao';
 import type { RepzDb } from './db';
@@ -62,8 +63,7 @@ export function linhasSeries(
     .filter((s) => porId.has(s.treinoId))
     .sort(
       (a, b) =>
-        porId.get(a.treinoId)!.inicio.localeCompare(porId.get(b.treinoId)!.inicio) ||
-        a.feitaEm.localeCompare(b.feitaEm),
+        porId.get(a.treinoId)!.inicio.localeCompare(porId.get(b.treinoId)!.inicio) || porFeitaEm(a, b),
     )
     .map((s) => {
       const t = porId.get(s.treinoId)!;

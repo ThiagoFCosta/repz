@@ -1,6 +1,6 @@
 // Fluxo de importação: arquivo/texto → parser → revisão → salvar (BRIEFING 9.1 e 9.2).
 
-import { signal } from '@preact/signals';
+import { signal } from './sinal';
 import { agoraISO } from '../dominio/datas';
 import { parse, type ResultadoParse } from '../dominio/formato/parser';
 import { salvarPlano, TreinoEmAndamentoError } from '../dados/repos/planos';

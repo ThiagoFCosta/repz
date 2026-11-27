@@ -1,6 +1,6 @@
 // Estado global da aplicação (signals) e as ações que o alteram, sempre passando por dados/.
 
-import { computed, signal } from '@preact/signals';
+import { computed, signal } from './sinal';
 import { progressoDaSemana } from '../dominio/cardio';
 import { hojeLocal } from '../dominio/datas';
 import { rotuloSemana, semanaDoBloco } from '../dominio/periodizacao/semana';

@@ -1,7 +1,7 @@
 // Visão Treinos (BRIEFING 9.8): lista cronológica de treinos e cardio; treino completo com
 // edição e exclusão de séries; exclusão do treino com confirmação.
 
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'react';
 import { avaliar, prescricaoDoRegistro } from '../../../dominio/cardio';
 import { dataBR, diaDaSemana, NOMES_DIAS } from '../../../dominio/datas';
 import { formatarDecimal, lerDecimal } from '../../../dominio/numeros';
@@ -40,22 +40,22 @@ function LinhaCardio({ c }: { c: CardioRealizado }) {
   ].filter(Boolean);
   return (
     <a href={`#/historico/cardio/${c.id}`}>
-      <span class="lista-treinos-data numero">{dataBR(c.data, true)}</span>
-      <span class="lista-treinos-corpo">
+      <span className="lista-treinos-data numero">{dataBR(c.data, true)}</span>
+      <span className="lista-treinos-corpo">
         <span>
-          <span class="etiqueta etiqueta-cardio">Cardio</span> {c.tipo}
+          <span className="etiqueta etiqueta-cardio">Cardio</span> {c.tipo}
         </span>
-        <span class="muted pequeno numero">
+        <span className="muted pequeno numero">
           {detalhes.join(' · ')}
           {a && (
-            <span class={`comparacao-curta comparacao-${a.duracao}`}>
+            <span className={`comparacao-curta comparacao-${a.duracao}`}>
               {' '}
               · {a.duracao === 'dentro' ? '✓' : '!'} {COMPARACAO_TXT[a.duracao]}
             </span>
           )}
         </span>
       </span>
-      <span class="lista-treinos-seta" aria-hidden="true">
+      <span className="lista-treinos-seta" aria-hidden="true">
         ›
       </span>
     </a>
@@ -79,20 +79,20 @@ export function VisaoTreinos() {
       <h1>Histórico</h1>
       <Segmentos atual="treinos" />
       {itens.length ? (
-        <ul class="lista-treinos" aria-label="Treinos e cardio">
+        <ul className="lista-treinos" aria-label="Treinos e cardio">
           {itens.map((i) =>
             i.tipo === 'treino' ? (
               <li key={i.t.id}>
                 <a href={`#/historico/treino/${i.t.id}`}>
-                  <span class="lista-treinos-data numero">{dataBR(i.t.data, true)}</span>
-                  <span class="lista-treinos-corpo">
+                  <span className="lista-treinos-data numero">{dataBR(i.t.data, true)}</span>
+                  <span className="lista-treinos-corpo">
                     <span>{i.t.sessaoNome}</span>
-                    <span class="muted pequeno numero">
+                    <span className="muted pequeno numero">
                       {i.t.inicio.slice(11, 16)}
                       {i.t.fim && ` · ${duracaoTxt(Date.parse(i.t.fim) - Date.parse(i.t.inicio))}`}
                     </span>
                   </span>
-                  <span class="lista-treinos-seta" aria-hidden="true">
+                  <span className="lista-treinos-seta" aria-hidden="true">
                     ›
                   </span>
                 </a>
@@ -140,12 +140,12 @@ function LinhaSerie({
       <li>
         <button
           type="button"
-          class={`serie-feita numero${s.aquecimento ? ' serie-aquecimento' : ''}`}
+          className={`serie-feita numero${s.aquecimento ? ' serie-aquecimento' : ''}`}
           onClick={() => setEditando(true)}
         >
           {/* o nome acessível inclui o texto visível (WCAG 2.5.3) */}
-          <span class="oculto-visual">Editar {s.aquecimento ? 'aquecimento' : 'série'} </span>
-          <span class="serie-n">{n}</span>
+          <span className="oculto-visual">Editar {s.aquecimento ? 'aquecimento' : 'série'} </span>
+          <span className="serie-n">{n}</span>
           <span>{formatarDecimal(s.kg)} kg</span>
           <span>
             {s.reps}
@@ -166,29 +166,29 @@ function LinhaSerie({
     setOcupado(false);
   };
   return (
-    <li class="serie-edicao">
-      <div class="serie-edicao-campos">
+    <li className="serie-edicao">
+      <div className="serie-edicao-campos">
         <label>
-          <span class="rotulo">kg</span>
+          <span className="rotulo">kg</span>
           <input
-            class="campo numero"
+            className="campo numero"
             inputMode="decimal"
             value={kg}
-            onInput={(e) => setKg(e.currentTarget.value)}
+            onChange={(e) => setKg(e.currentTarget.value)}
           />
         </label>
         <label>
-          <span class="rotulo">{porTempo ? 'segundos' : 'reps'}</span>
+          <span className="rotulo">{porTempo ? 'segundos' : 'reps'}</span>
           <input
-            class="campo numero"
+            className="campo numero"
             inputMode="numeric"
             value={reps}
-            onInput={(e) => setReps(e.currentTarget.value)}
+            onChange={(e) => setReps(e.currentTarget.value)}
           />
         </label>
       </div>
       {!s.aquecimento && <BotoesRir valor={rir} aoMudar={setRir} rotulo={`RIR da ${rotulo}`} />}
-      <div class="acoes-lado">
+      <div className="acoes-lado">
         <Botao variante="secundario" onClick={() => setEditando(false)}>
           Cancelar
         </Botao>
@@ -196,7 +196,7 @@ function LinhaSerie({
           Salvar {rotulo}
         </Botao>
       </div>
-      <Botao variante="texto" class="botao-excluir-serie" onClick={() => aoExcluir(s)}>
+      <Botao variante="texto" className="botao-excluir-serie" onClick={() => aoExcluir(s)}>
         Excluir {rotulo}
       </Botao>
     </li>
@@ -254,27 +254,27 @@ export function DetalheTreino({ id }: { id: string }) {
   return (
     <section>
       <Cabecalho titulo={t.sessaoNome} voltar="#/historico/treinos" />
-      <p class="muted">
+      <p className="muted">
         {diaTxt(t.data)} · {t.inicio.slice(11, 16)}
         {t.semanaBloco != null && ` · semana ${t.semanaBloco}`}
       </p>
-      <div class="kpis">
-        <div class="kpi">
-          <span class="kpi-valor numero">
+      <div className="kpis">
+        <div className="kpi">
+          <span className="kpi-valor numero">
             {t.fim ? duracaoTxt(Date.parse(t.fim) - Date.parse(t.inicio)) : '–'}
           </span>
-          <span class="kpi-rotulo">duração</span>
+          <span className="kpi-rotulo">duração</span>
         </div>
-        <div class="kpi">
-          <span class="kpi-valor numero">{trabalho.length}</span>
-          <span class="kpi-rotulo">séries</span>
+        <div className="kpi">
+          <span className="kpi-valor numero">{trabalho.length}</span>
+          <span className="kpi-rotulo">séries</span>
         </div>
-        <div class="kpi">
-          <span class="kpi-valor numero">{formatarDecimal(Math.round(vol))} kg</span>
-          <span class="kpi-rotulo">volume</span>
+        <div className="kpi">
+          <span className="kpi-valor numero">{formatarDecimal(Math.round(vol))} kg</span>
+          <span className="kpi-rotulo">volume</span>
         </div>
       </div>
-      <p class="muted pequeno">
+      <p className="muted pequeno">
         Toque numa série para corrigir. A correção vale para o gráfico e as próximas sugestões.
       </p>
 
@@ -283,10 +283,10 @@ export function DetalheTreino({ id }: { id: string }) {
         let nTr = 0;
         const exId = ss[0]!.exercicioPrescritoId;
         return (
-          <section key={k} class="cartao" aria-label={ss[0]!.variante}>
-            <h2 class="cartao-titulo">{ss[0]!.variante}</h2>
-            {nota(exId) && <p class="pequeno">Nota: {nota(exId)}</p>}
-            <ul class="series-feitas">
+          <section key={k} className="cartao" aria-label={ss[0]!.variante}>
+            <h2 className="cartao-titulo">{ss[0]!.variante}</h2>
+            {nota(exId) && <p className="pequeno">Nota: {nota(exId)}</p>}
+            <ul className="series-feitas">
               {ss.map((s) => (
                 <LinhaSerie
                   key={`${s.id}-${s.kg}-${s.reps}-${s.rir}`}
@@ -300,9 +300,9 @@ export function DetalheTreino({ id }: { id: string }) {
           </section>
         );
       })}
-      {!series.length && <p class="muted">Este treino ficou sem séries.</p>}
+      {!series.length && <p className="muted">Este treino ficou sem séries.</p>}
 
-      <div class="pilha">
+      <div className="pilha">
         <Botao bloco variante="perigo" onClick={() => setConfirmar({ tipo: 'treino' })}>
           Excluir treino
         </Botao>
@@ -318,7 +318,7 @@ export function DetalheTreino({ id }: { id: string }) {
               ? `${t.sessaoNome} de ${dataBR(t.data)} e as ${series.length} séries dele. Não dá para desfazer.`
               : `${confirmar.s.variante}: ${formatarDecimal(confirmar.s.kg)} kg × ${confirmar.s.reps}. Não dá para desfazer.`}
           </p>
-          <div class="acoes-lado">
+          <div className="acoes-lado">
             <Botao variante="secundario" onClick={() => setConfirmar(null)}>
               Cancelar
             </Botao>

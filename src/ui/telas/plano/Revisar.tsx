@@ -1,6 +1,6 @@
 // Tela Revisar plano (BRIEFING 9.2): conferir sessões, definir início do bloco, vincular exercícios e salvar.
 
-import { useMemo, useState } from 'preact/hooks';
+import { useMemo, useState } from 'react';
 import { NOMES_DIAS, proximaSegunda } from '../../../dominio/datas';
 import { candidatosVinculo } from '../../../dominio/similaridade';
 import type { ExercicioImportado } from '../../../dominio/tipos';
@@ -26,14 +26,14 @@ function LinhaExercicio({
   vincular: (chave: string, alvo: string | null) => void;
 }) {
   return (
-    <li class="ex-revisao">
-      <div class="ex-revisao-topo">
-        <span class="ex-nome">
+    <li className="ex-revisao">
+      <div className="ex-revisao-topo">
+        <span className="ex-nome">
           {ex.grupo != null && <Etiqueta tipo="ss">SS{ex.grupo}</Etiqueta>} {ex.nome}
         </span>
-        <span class="ex-series numero">{seriesReps(ex.series, ex.reps, ex.porTempo)}</span>
+        <span className="ex-series numero">{seriesReps(ex.series, ex.reps, ex.porTempo)}</span>
       </div>
-      <ul class="ex-variantes">
+      <ul className="ex-variantes">
         {ex.variantes.map((v, i) => {
           const chave = ex.chaves[i]!;
           const historico = temHistorico(chave);
@@ -56,7 +56,7 @@ function LinhaExercicio({
                 chavesHistorico.value.size > 0 && <Etiqueta tipo="novo">novo</Etiqueta>
               )}
               {candidatos.length > 0 && (
-                <label class="vinculo">
+                <label className="vinculo">
                   <span>Mesmo exercício que:</span>
                   <select
                     value={vinculado ?? ''}
@@ -118,43 +118,43 @@ export function TelaRevisar() {
     <section>
       <Cabecalho titulo="Revisar plano" voltar="#/plano/importar" />
       <Cartao>
-        <h2 class="plano-nome">{plano.nome || 'Plano sem nome'}</h2>
-        <p class="muted">
+        <h2 className="plano-nome">{plano.nome || 'Plano sem nome'}</h2>
+        <p className="muted">
           {plano.autor && <>{plano.autor} · </>}
           {plano.sessoes.length} sessões · {nEx} exercícios
         </p>
         {plano.bloco ? (
           <>
-            <label class="rotulo" for="inicio-bloco">
+            <label className="rotulo" htmlFor="inicio-bloco">
               Início do bloco
             </label>
             <input
               id="inicio-bloco"
-              class="campo"
+              className="campo"
               type="date"
               value={inicio}
-              onInput={(e) => e.currentTarget.value && setInicio(e.currentTarget.value)}
+              onChange={(e) => e.currentTarget.value && setInicio(e.currentTarget.value)}
             />
-            <p class="muted pequeno">
+            <p className="muted pequeno">
               Duração: {plano.bloco.semanas} semanas · {plano.bloco.fases.length} fases. A data define a
               semana do bloco.
             </p>
           </>
         ) : (
-          <p class="muted pequeno">Plano sem periodização: vale o RIR da progressão.</p>
+          <p className="muted pequeno">Plano sem periodização: vale o RIR da progressão.</p>
         )}
       </Cartao>
 
       {plano.sessoes.map((s, i) => (
-        <details class="acordeao" key={i} open={i === 0}>
+        <details className="acordeao" key={i} open={i === 0}>
           <summary>
             <span>
               {s.nome}
-              {s.dia != null && <span class="muted pequeno"> · {NOMES_DIAS[s.dia]}</span>}
+              {s.dia != null && <span className="muted pequeno"> · {NOMES_DIAS[s.dia]}</span>}
             </span>
-            <span class="muted numero">{s.itens.length}</span>
+            <span className="muted numero">{s.itens.length}</span>
           </summary>
-          <ul class="lista-ex">
+          <ul className="lista-ex">
             {s.itens.map((ex, j) => (
               <LinhaExercicio key={j} ex={ex} vinculos={vinculos} vincular={vincular} />
             ))}
@@ -164,7 +164,7 @@ export function TelaRevisar() {
 
       {plano.cardio.length > 0 && (
         <Cartao titulo="Cardio">
-          <ul class="lista-simples">
+          <ul className="lista-simples">
             {plano.cardio.map((c, i) => (
               <li key={i}>
                 {c.tipos.join(' / ')} · {c.frequencia} · {c.minutos.min}-{c.minutos.max} min
@@ -177,13 +177,13 @@ export function TelaRevisar() {
       )}
 
       {treinoAberto.value && (
-        <Cartao class="cartao-aviso">
+        <Cartao className="cartao-aviso">
           Há um treino em andamento. Conclua ou descarte o treino antes de trocar o plano.
         </Cartao>
       )}
-      {erro && <Cartao class="cartao-erro">{erro}</Cartao>}
+      {erro && <Cartao className="cartao-erro">{erro}</Cartao>}
 
-      <div class="rodape-acao">
+      <div className="rodape-acao">
         <Botao bloco onClick={() => void salvar()} disabled={salvando || !!treinoAberto.value}>
           {salvando ? 'Salvando…' : 'Salvar e ativar plano'}
         </Botao>

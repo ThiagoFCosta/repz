@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'react';
 
 // Hora atual para desenhar cronômetros: só redesenha; a fonte da verdade são os timestamps
 export function useRelogio(intervaloMs: number): number {

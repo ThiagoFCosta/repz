@@ -2,7 +2,7 @@
 
 export function Segmentos({ atual }: { atual: 'ex' | 'treinos' }) {
   return (
-    <nav class="segmentos" aria-label="Visão do histórico">
+    <nav className="segmentos" aria-label="Visão do histórico">
       <a href="#/historico" aria-current={atual === 'ex' ? 'page' : undefined}>
         Exercícios
       </a>

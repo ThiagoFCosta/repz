@@ -1,6 +1,6 @@
 // Início (aba Treino, BRIEFING 9.3): pílula da semana, Próximo treino ou Continuar treino, Cardio.
 
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import { diasEntre, NOMES_DIAS } from '../../../dominio/datas';
 import {
   hoje,
@@ -52,15 +52,15 @@ function CartaoTreinoAberto() {
     setOcupado(false);
   };
   return (
-    <Cartao class={esquecido || erroTreino.value ? 'cartao-aviso' : ''} titulo="Treino em andamento">
-      <h2 class="plano-nome">{t.sessaoNome}</h2>
-      <p class="muted pequeno">
+    <Cartao className={esquecido || erroTreino.value ? 'cartao-aviso' : ''} titulo="Treino em andamento">
+      <h2 className="plano-nome">{t.sessaoNome}</h2>
+      <p className="muted pequeno">
         começou às {t.inicio.slice(11, 16)} · {series} {series === 1 ? 'série' : 'séries'}
         {a && !esquecido && <> · {decorrido(Date.now() - Date.parse(t.inicio))}</>}
       </p>
       {erroTreino.value && <p>{erroTreino.value}</p>}
       {esquecido && !erroTreino.value && <p>Este treino está aberto há mais de 4 horas. Quer encerrar?</p>}
-      <div class="pilha">
+      <div className="pilha">
         {a && (
           <Botao
             bloco
@@ -101,18 +101,18 @@ function CartaoProximoTreino() {
   };
   return (
     <Cartao titulo={sugerida ? 'Próximo treino' : 'Treino escolhido'}>
-      <h2 class="plano-nome">{sessao.nome}</h2>
-      <p class="muted pequeno">
+      <h2 className="plano-nome">{sessao.nome}</h2>
+      <p className="muted pequeno">
         {sessao.itens.length} exercícios · ~{duracaoDaSessao(plano, sessao)} min
         {sessao.dia != null && <> · planejado para {NOMES_DIAS[sessao.dia]}</>}
       </p>
-      <ul class="lista-simples pequeno">
+      <ul className="lista-simples pequeno">
         {sessao.itens.slice(0, 3).map((ex) => (
           <li key={ex.id}>{ex.nome}</li>
         ))}
-        {sessao.itens.length > 3 && <li class="muted">e mais {sessao.itens.length - 3}</li>}
+        {sessao.itens.length > 3 && <li className="muted">e mais {sessao.itens.length - 3}</li>}
       </ul>
-      <div class="pilha">
+      <div className="pilha">
         <Botao bloco disabled={ocupado} onClick={() => void iniciar()}>
           Iniciar treino
         </Botao>
@@ -134,18 +134,18 @@ function CartaoCardio() {
   const p = progressoCardio.value;
   return (
     <Cartao titulo="Cardio">
-      <p class="cardio-progresso">
+      <p className="cardio-progresso">
         {p.meta == null ? (
           <>
-            <strong class="numero">{p.total}</strong> nesta semana
-            <span class="muted pequeno"> · sem meta semanal no plano</span>
+            <strong className="numero">{p.total}</strong> nesta semana
+            <span className="muted pequeno"> · sem meta semanal no plano</span>
           </>
         ) : (
           <>
-            <strong class="numero">
+            <strong className="numero">
               {p.feitos} de {p.meta}
             </strong>{' '}
-            nesta semana {p.feitos >= p.meta && <span class="ok">✓</span>}
+            nesta semana {p.feitos >= p.meta && <span className="ok">✓</span>}
           </>
         )}
       </p>
@@ -173,8 +173,8 @@ function LembreteBackup() {
   };
   const ultimo = preferencias.value.ultimoBackup;
   return (
-    <aside class="lembrete-backup pequeno" aria-label="Lembrete de backup">
-      <span class="muted">
+    <aside className="lembrete-backup pequeno" aria-label="Lembrete de backup">
+      <span className="muted">
         {ultimo
           ? `Último backup há ${diasEntre(ultimo.slice(0, 10), hoje.value)} dias.`
           : 'Você ainda não fez backup dos seus treinos.'}
@@ -190,8 +190,8 @@ function LembreteBackup() {
 function LembreteInstalacao() {
   if (!mostrarLembreteInstalacao.value) return null;
   return (
-    <aside class="lembrete-instalacao pequeno" aria-label="Lembrete de instalação">
-      <span class="muted">Instale o app para usar offline e proteger seus dados.</span>
+    <aside className="lembrete-instalacao pequeno" aria-label="Lembrete de instalação">
+      <span className="muted">Instale o app para usar offline e proteger seus dados.</span>
       {promptInstalacao.value ? (
         <Botao variante="texto" onClick={() => void instalar()}>
           Instalar
@@ -237,13 +237,13 @@ export function TelaInicio() {
           <Pilula tom={semana?.fase?.deload ? 'aviso' : 'neutro'}>{pilulaSemana.value}</Pilula>
         </p>
       )}
-      {semana?.antesDoInicio && <p class="muted pequeno">O bloco ainda não começou.</p>}
+      {semana?.antesDoInicio && <p className="muted pequeno">O bloco ainda não começou.</p>}
 
       {treinoAberto.value ? <CartaoTreinoAberto /> : <CartaoProximoTreino />}
       <CartaoCardio />
 
       {semana?.concluido && (
-        <Cartao class="cartao-aviso" titulo="Bloco concluído">
+        <Cartao className="cartao-aviso" titulo="Bloco concluído">
           <p>
             Você terminou as semanas do plano. Peça um plano novo à sua IA e importe aqui; o histórico
             continua.

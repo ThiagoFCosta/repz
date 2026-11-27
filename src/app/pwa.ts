@@ -1,4 +1,4 @@
-import { signal } from '@preact/signals';
+import { signal } from './sinal';
 import { registerSW } from 'virtual:pwa-register';
 
 // Nunca recarrega sozinho: a UI mostra o aviso e o usuário decide (BRIEFING seção 11).

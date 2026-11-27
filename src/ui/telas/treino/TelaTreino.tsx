@@ -14,20 +14,20 @@ function Topo({ a, item }: { a: TreinoAtivo; item: number | null }) {
   const total = e.itens.reduce((s, _, i) => s + totalSeries(e, i), 0);
   const feitas = e.feitas.reduce((s, x) => s + x, 0);
   return (
-    <header class="treino-topo">
-      <div class="treino-topo-linha">
-        <span class="treino-sessao">{a.sessao.nome}</span>
+    <header className="treino-topo">
+      <div className="treino-topo-linha">
+        <span className="treino-sessao">{a.sessao.nome}</span>
         {item != null && (
-          <span class="muted numero">
+          <span className="muted numero">
             {item + 1} de {e.itens.length}
           </span>
         )}
-        <span class="treino-tempo numero" aria-label="Tempo de treino">
+        <span className="treino-tempo numero" aria-label="Tempo de treino">
           {decorrido(agora - Date.parse(a.treino.inicio))}
         </span>
       </div>
       <div
-        class="barra"
+        className="barra"
         role="progressbar"
         aria-label="Séries concluídas"
         aria-valuemin={0}
@@ -45,10 +45,10 @@ export function TelaTreino() {
   const etapa = a.estado.etapa;
   const item = etapa.tipo === 'registrando' ? etapa.item : etapa.tipo === 'descanso' ? etapa.proximo : null;
   return (
-    <section class="treino">
+    <section className="treino">
       <Topo a={a} item={item} />
       {erroTreino.value && (
-        <div class="cartao cartao-erro" role="alert">
+        <div className="cartao cartao-erro" role="alert">
           {erroTreino.value}
         </div>
       )}

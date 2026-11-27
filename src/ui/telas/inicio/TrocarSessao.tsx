@@ -21,19 +21,19 @@ export function TrocarSessao() {
   return (
     <section>
       <Cabecalho titulo="Trocar sessão" voltar="#/treino" />
-      <ul class="lista-sessoes">
+      <ul className="lista-sessoes">
         {plano.sessoes.map((s) => (
           <li key={s.id}>
             <button
               type="button"
-              class="cartao sessao-opcao"
+              className="cartao sessao-opcao"
               aria-current={s.id === proximaSessaoTreino.value?.id ? 'true' : undefined}
               onClick={() => escolher(s.id)}
             >
-              <span class="sessao-opcao-nome">
+              <span className="sessao-opcao-nome">
                 {s.nome} {s.id === sessaoSugerida.value?.id && <Etiqueta tipo="historico">sugerida</Etiqueta>}
               </span>
-              <span class="muted pequeno">
+              <span className="muted pequeno">
                 {s.itens.length} exercícios · ~{duracaoDaSessao(plano, s)} min
                 {s.dia != null && <> · planejado para {NOMES_DIAS[s.dia]}</>}
               </span>

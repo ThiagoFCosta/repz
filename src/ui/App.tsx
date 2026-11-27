@@ -1,4 +1,5 @@
 import { carregado, erroFatal } from '../app/estado';
+import { useSinais } from '../app/sinal';
 import { rota } from '../app/roteador';
 import { mostrarBoasVindas } from '../app/instalacao';
 import { Cartao } from './componentes/basicos';
@@ -11,10 +12,12 @@ import { BoasVindas } from './telas/boas-vindas/BoasVindas';
 const TELAS = { treino: AbaTreino, historico: TelaHistorico, plano: TelaPlano };
 
 export function App() {
+  // Qualquer sinal alterado redesenha a árvore (D34)
+  useSinais();
   if (erroFatal.value)
     return (
-      <main class="shell-conteudo">
-        <Cartao class="cartao-erro">{erroFatal.value}</Cartao>
+      <main className="shell-conteudo">
+        <Cartao className="cartao-erro">{erroFatal.value}</Cartao>
       </main>
     );
   if (!carregado.value) return null;

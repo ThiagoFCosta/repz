@@ -1,6 +1,6 @@
 // Tela Importar plano (BRIEFING 9.1): PDF ou texto colado → checklist → erro ou "Revisar plano".
 
-import { useRef, useState } from 'preact/hooks';
+import { useRef, useState, type ChangeEvent } from 'react';
 import type { ResultadoParse } from '../../../dominio/formato/parser';
 import { importacao, importarPdf, importarTexto, limparImportacao } from '../../../app/importacao';
 import { navegar } from '../../../app/roteador';
@@ -16,7 +16,7 @@ function Checklist({ r, origem }: { r: ResultadoParse; origem: 'pdf' | 'texto' }
   const totalErrado = r.erros.some((e) => e.msg.startsWith('TOTAL diz'));
   const semTotal = r.avisos.some((a) => a.msg.startsWith('Sem linha TOTAL'));
   return (
-    <ul class="checklist">
+    <ul className="checklist">
       <ItemChecklist estado="ok">
         {origem === 'pdf' ? 'Texto lido no celular, sem internet' : 'Texto recebido'}
       </ItemChecklist>
@@ -39,7 +39,7 @@ function Checklist({ r, origem }: { r: ResultadoParse; origem: 'pdf' | 'texto' }
           )}
           {r.avisos.length > 0 && (
             <ItemChecklist estado="aviso">
-              <details class="avisos">
+              <details className="avisos">
                 <summary>{plural(r.avisos.length, 'aviso', 'avisos')}</summary>
                 <ul>
                   {r.avisos.map((a, i) => (
@@ -60,13 +60,13 @@ function Checklist({ r, origem }: { r: ResultadoParse; origem: 'pdf' | 'texto' }
 
 function CartaoErro({ r }: { r: ResultadoParse }) {
   return (
-    <Cartao class="cartao-erro" titulo="Algo está errado no anexo">
-      <ul class="lista-erros">
+    <Cartao className="cartao-erro" titulo="Algo está errado no anexo">
+      <ul className="lista-erros">
         {r.erros.map((e, i) => (
           <li key={i}>
             {e.linha > 0 && <strong>Linha {e.linha}: </strong>}
             {e.msg}
-            {e.texto && <code class="linha-codigo">{e.texto}</code>}
+            {e.texto && <code className="linha-codigo">{e.texto}</code>}
           </li>
         ))}
       </ul>
@@ -82,7 +82,7 @@ export function TelaImportar({ voltar }: { voltar?: string }) {
   const imp = importacao.value;
   const r = imp?.resultado;
 
-  const escolherArquivo = (e: Event) => {
+  const escolherArquivo = (e: ChangeEvent<HTMLInputElement>) => {
     const arq = (e.currentTarget as HTMLInputElement).files?.[0];
     (e.currentTarget as HTMLInputElement).value = '';
     if (arq) {
@@ -94,12 +94,12 @@ export function TelaImportar({ voltar }: { voltar?: string }) {
   return (
     <section>
       <Cabecalho titulo="Importar plano" voltar={voltar} />
-      <p class="muted">
+      <p className="muted">
         Selecione o PDF que a sua IA gerou. O app lê só o anexo final (de #TREINO-INICIO a #TREINO-FIM), tudo
         no celular.
       </p>
 
-      <div class="acoes-lado">
+      <div className="acoes-lado">
         <Botao onClick={() => entrada.current?.click()} disabled={imp?.etapa === 'lendo'}>
           Selecionar PDF
         </Botao>
@@ -111,24 +111,24 @@ export function TelaImportar({ voltar }: { voltar?: string }) {
         ref={entrada}
         type="file"
         accept="application/pdf,.pdf"
-        class="oculto"
+        className="oculto"
         aria-label="Arquivo PDF do plano"
         onChange={escolherArquivo}
       />
 
       {colando && (
         <Cartao>
-          <label class="rotulo" for="texto-anexo">
+          <label className="rotulo" htmlFor="texto-anexo">
             Cole o anexo do plano
           </label>
           <textarea
             id="texto-anexo"
-            class="campo-texto"
+            className="campo-texto"
             rows={10}
-            spellcheck={false}
+            spellCheck={false}
             placeholder={'#TREINO-INICIO v1\nPLANO: …\n…\n#TREINO-FIM'}
             value={texto}
-            onInput={(e) => setTexto(e.currentTarget.value)}
+            onChange={(e) => setTexto(e.currentTarget.value)}
           />
           <Botao bloco disabled={!texto.trim()} onClick={() => importarTexto(texto)}>
             Ler texto
@@ -138,14 +138,14 @@ export function TelaImportar({ voltar }: { voltar?: string }) {
 
       {imp && (
         <Cartao>
-          <p class="arquivo-nome">{imp.arquivoNome ?? 'Texto colado'}</p>
+          <p className="arquivo-nome">{imp.arquivoNome ?? 'Texto colado'}</p>
           {imp.etapa === 'lendo' && (
-            <ul class="checklist">
+            <ul className="checklist">
               <ItemChecklist estado="pendente">Lendo o PDF…</ItemChecklist>
             </ul>
           )}
           {imp.erroLeitura && (
-            <ul class="checklist">
+            <ul className="checklist">
               <ItemChecklist estado="erro">{imp.erroLeitura}</ItemChecklist>
             </ul>
           )}
@@ -158,7 +158,7 @@ export function TelaImportar({ voltar }: { voltar?: string }) {
       {!voltar && !imp && <CartaoRestaurar titulo="Já usou o REPZ? Restaurar backup" />}
 
       {r?.plano && (
-        <div class="rodape-acao">
+        <div className="rodape-acao">
           <Botao bloco onClick={() => navegar('plano/revisar')}>
             Revisar plano
           </Botao>

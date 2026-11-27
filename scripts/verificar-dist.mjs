@@ -20,6 +20,8 @@ const PERMITIDAS = [
   /^http:\/\/bit\.ly\/2kdckMn$/,
   /^https:\/\/tinyurl\.com\/y2uuvskb$/,
   /^https:\/\/dexie\.org$/,
+  // React: prefixo do link montado nas mensagens de erro minificadas; nunca é requisitado (v2, D49)
+  /^https:\/\/reactjs\.org\/docs\/error-decoder\.html/,
   // pdf.js: namespaces XML de formulários XFA/XMP e o prefixo que ele põe em links "www." de
   // anotações do PDF. São identificadores, não requisições.
   /^http:\/\/www\.xfa\.org\/schema\//,

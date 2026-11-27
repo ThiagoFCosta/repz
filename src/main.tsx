@@ -1,4 +1,4 @@
-import { render } from 'preact';
+import { createRoot } from 'react-dom/client';
 import './estilo/tokens.css';
 import './estilo/base.css';
 import './estilo/componentes.css';
@@ -11,6 +11,6 @@ import { restaurarTreino } from './app/controlador-treino';
 
 iniciarRoteador();
 iniciarInstalacao();
-render(<App />, document.getElementById('app')!);
+createRoot(document.getElementById('app')!).render(<App />);
 void iniciarEstado(restaurarTreino);
 registrarServiceWorker();

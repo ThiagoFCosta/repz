@@ -1,5 +1,6 @@
 // Treinos e séries. Toda mudança do treino em andamento passa por persistirTransicao (ARCHITECTURE 7.4).
 
+import { porFeitaEm } from '../ordem';
 import type { RepzDb } from '../db';
 import type { SerieRealizada, Treino } from '../tipos';
 
@@ -25,7 +26,7 @@ export async function ultimoConcluido(db: RepzDb, planoId: string): Promise<Trei
 
 export async function seriesDoTreino(db: RepzDb, treinoId: string): Promise<SerieRealizada[]> {
   const s = await db.series.where('treinoId').equals(treinoId).toArray();
-  return s.sort((a, b) => a.feitaEm.localeCompare(b.feitaEm));
+  return s.sort(porFeitaEm);
 }
 
 export async function criarTreino(db: RepzDb, treino: Treino): Promise<void> {

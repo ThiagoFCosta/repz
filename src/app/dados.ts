@@ -1,7 +1,7 @@
 // Exportar (PDF, CSV, backup) e restaurar backup (BRIEFING 9.9 e 10). O backup só conta como feito
 // (ultimoBackup) depois de o arquivo ser compartilhado ou baixado; cancelar o compartilhamento não conta.
 
-import { signal } from '@preact/signals';
+import { signal } from './sinal';
 import { agoraISO } from '../dominio/datas';
 import {
   gerarBackup,

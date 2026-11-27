@@ -1,6 +1,6 @@
 // Tela Plano e dados (BRIEFING 9.9): plano ativo, exercícios, exportar e restaurar backup.
 
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import { dataBR, ehDataValida } from '../../../dominio/datas';
 import { formatarDecimal, lerDecimal } from '../../../dominio/numeros';
 import { incrementoPadrao } from '../../../dominio/progressao/incremento';
@@ -40,17 +40,17 @@ function CampoSalto({ chave, nome }: { chave: string; nome: string }) {
     }
   };
   return (
-    <label class="campo-salto">
-      <span class="oculto-visual">Salto de carga de {nome} em kg</span>
+    <label className="campo-salto">
+      <span className="oculto-visual">Salto de carga de {nome} em kg</span>
       <input
-        class="campo campo-numero numero"
+        className="campo campo-numero numero"
         inputMode="decimal"
         placeholder={formatarDecimal(incrementoPadrao(nome))}
         value={txt}
-        onInput={(e) => setTxt(e.currentTarget.value)}
+        onChange={(e) => setTxt(e.currentTarget.value)}
         onBlur={() => void confirmar()}
       />
-      <span class="muted pequeno">kg</span>
+      <span className="muted pequeno">kg</span>
     </label>
   );
 }
@@ -69,32 +69,32 @@ function ListaExercicios({ plano }: { plano: Plano }) {
   return (
     <>
       {plano.sessoes.map((s) => (
-        <details class="acordeao" key={s.id}>
+        <details className="acordeao" key={s.id}>
           <summary>
             <span>{s.nome}</span>
-            <span class="muted numero">{s.itens.length}</span>
+            <span className="muted numero">{s.itens.length}</span>
           </summary>
-          <ul class="lista-ex">
+          <ul className="lista-ex">
             {s.itens.map((ex) => (
-              <li key={ex.id} class="ex-config">
-                <div class="ex-revisao-topo">
-                  <span class="ex-nome">
+              <li key={ex.id} className="ex-config">
+                <div className="ex-revisao-topo">
+                  <span className="ex-nome">
                     {ex.grupo != null && <Etiqueta tipo="ss">SS{ex.grupo}</Etiqueta>} {ex.nome}
                   </span>
-                  <span class="ex-series numero">{seriesReps(ex.series, ex.reps, ex.porTempo)}</span>
+                  <span className="ex-series numero">{seriesReps(ex.series, ex.reps, ex.porTempo)}</span>
                 </div>
                 {!ex.porTempo &&
                   ex.variantes.map((v, i) => (
-                    <div class="ex-config-linha" key={v}>
-                      <span class="pequeno">{ex.variantes.length > 1 ? v : 'Salto de carga'}</span>
+                    <div className="ex-config-linha" key={v}>
+                      <span className="pequeno">{ex.variantes.length > 1 ? v : 'Salto de carga'}</span>
                       <CampoSalto chave={ex.chaves[i]!} nome={v} />
                     </div>
                   ))}
-                <label class="ex-config-linha">
-                  <span class="pequeno">Foco (ponto fraco)</span>
+                <label className="ex-config-linha">
+                  <span className="pequeno">Foco (ponto fraco)</span>
                   <input
                     type="checkbox"
-                    class="interruptor"
+                    className="interruptor"
                     checked={focoEfetivo(ex)}
                     onChange={() => void alternarFoco(ex)}
                   />
@@ -123,17 +123,17 @@ function CartaoPreferencias() {
   return (
     <Cartao titulo="Durante o treino">
       {OPCOES_TREINO.map((o) => (
-        <label class="ex-config-linha" key={o.chave}>
+        <label className="ex-config-linha" key={o.chave}>
           <span>{o.rotulo}</span>
           <input
             type="checkbox"
-            class="interruptor"
+            className="interruptor"
             checked={preferencias.value[o.chave]}
             onChange={(e) => void alternar(o.chave, e.currentTarget.checked)}
           />
         </label>
       ))}
-      <p class="muted pequeno">Vale a partir do próximo treino ou descanso.</p>
+      <p className="muted pequeno">Vale a partir do próximo treino ou descanso.</p>
     </Cartao>
   );
 }
@@ -163,29 +163,29 @@ export function TelaPlanoDados() {
     <section>
       <Cabecalho titulo="Plano e dados" />
       <Cartao titulo="Plano ativo">
-        <h2 class="plano-nome">{plano.nome || 'Plano sem nome'}</h2>
-        <p class="muted pequeno">
+        <h2 className="plano-nome">{plano.nome || 'Plano sem nome'}</h2>
+        <p className="muted pequeno">
           {plano.autor && <>{plano.autor} · </>}importado em {dataBR(plano.importadoEm.slice(0, 10))}
           {plano.arquivoNome && <> · {plano.arquivoNome}</>}
         </p>
         {plano.bloco && plano.inicioBloco && semana && (
           <>
-            <label class="rotulo" for="inicio-bloco">
+            <label className="rotulo" htmlFor="inicio-bloco">
               Início do bloco
             </label>
             <input
               id="inicio-bloco"
-              class="campo"
+              className="campo"
               type="date"
               value={plano.inicioBloco}
               onChange={(e) => void mudarInicio(e.currentTarget.value)}
             />
-            <div class="semana-ajuste">
+            <div className="semana-ajuste">
               <div>
-                <div class="rotulo">Semana atual</div>
+                <div className="rotulo">Semana atual</div>
                 {pilulaSemana.value && <Pilula>{pilulaSemana.value}</Pilula>}
               </div>
-              <div class="passo">
+              <div className="passo">
                 <Botao
                   variante="secundario"
                   aria-label="Semana anterior"
@@ -194,7 +194,7 @@ export function TelaPlanoDados() {
                 >
                   −
                 </Botao>
-                <span class="passo-valor numero">{semana.semana}</span>
+                <span className="passo-valor numero">{semana.semana}</span>
                 <Botao
                   variante="secundario"
                   aria-label="Próxima semana"
@@ -205,7 +205,7 @@ export function TelaPlanoDados() {
                 </Botao>
               </div>
             </div>
-            <p class="muted pequeno">
+            <p className="muted pequeno">
               {semana.antesDoInicio
                 ? `O bloco começa em ${dataBR(plano.inicioBloco, true)}.`
                 : 'Ajuste se perdeu ou repetiu uma semana.'}
@@ -214,14 +214,14 @@ export function TelaPlanoDados() {
         )}
       </Cartao>
 
-      <h2 class="secao">Exercícios</h2>
-      <p class="muted pequeno">
+      <h2 className="secao">Exercícios</h2>
+      <p className="muted pequeno">
         Salto de carga: o menor aumento possível no equipamento. Foco: recebe as séries extras das fases com
         "series +N foco".
       </p>
       <ListaExercicios plano={plano} />
 
-      <div class="pilha">
+      <div className="pilha">
         <Botao variante="secundario" bloco onClick={() => navegar('plano/importar')}>
           Importar novo plano
         </Botao>
@@ -229,11 +229,11 @@ export function TelaPlanoDados() {
 
       {anteriores.length > 0 && (
         <Cartao titulo="Planos anteriores">
-          <ul class="lista-simples">
+          <ul className="lista-simples">
             {anteriores.map((p) => (
               <li key={p.id}>
                 {p.nome}{' '}
-                <span class="muted pequeno">· importado em {dataBR(p.importadoEm.slice(0, 10))}</span>
+                <span className="muted pequeno">· importado em {dataBR(p.importadoEm.slice(0, 10))}</span>
               </li>
             ))}
           </ul>
@@ -244,8 +244,8 @@ export function TelaPlanoDados() {
 
       <Cartao titulo="Seus dados">
         <p>Seus dados ficam só neste celular. Sem conta, sem internet, sem nuvem.</p>
-        <p class="muted pequeno">{TEXTO_PERSISTENCIA[persistencia.value]}</p>
-        <p class="muted pequeno">
+        <p className="muted pequeno">{TEXTO_PERSISTENCIA[persistencia.value]}</p>
+        <p className="muted pequeno">
           {preferencias.value.ultimoBackup
             ? `Último backup: ${dataBR(preferencias.value.ultimoBackup.slice(0, 10))}.`
             : 'Nenhum backup feito ainda.'}
