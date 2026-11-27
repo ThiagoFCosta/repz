@@ -9,3 +9,13 @@ test-results/
 
 # Dados reais (PDF do NutriDiet, backups, prints): NUNCA versionar
 dados-reais/
+
+# Segredos (Supabase, contas de teste)
+.env
+.env.*
+!.env.example
+*.local
+
+# Supabase local
+supabase/.temp/
+supabase/.branches/
