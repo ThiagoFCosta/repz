@@ -1,0 +1,28 @@
+# Keep-alive do Supabase (docs/v2/ARCHITECTURE.md, seção 13): o projeto gratuito pausa depois de 7 dias sem uso.
+# Secrets (Settings → Secrets and variables → Actions): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+# O backup diário cifrado (padrão do Prisma) entra no marco V9.
+name: Diário
+
+on:
+  schedule:
+    - cron: '23 9 * * *' # 06:23 em São Paulo
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manter-ativo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - name: Consulta mínima ao banco
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then echo "::error::Faltam os secrets"; exit 1; fi
+          codigo=$(curl -s -o /dev/null -w '%{http_code}' "$SUPABASE_URL/rest/v1/alimentos?select=id&limit=1" \
+            -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY")
+          echo "HTTP $codigo"
+          [ "$codigo" = "200" ]

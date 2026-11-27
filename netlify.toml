@@ -1,0 +1,30 @@
+# Netlify (docs/v2/ARCHITECTURE.md, seção 13). Publicar SOMENTE quando o Thiago pedir: cada deploy consome créditos
+# do plano gratuito. No painel: Deploy Previews = off, Branch deploys = none.
+# Variáveis de ambiente: VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (a chave pública sb_publishable_…).
+[build]
+  command = "npm run build && npm run check:dist"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# SPA: o React Router resolve as rotas (D33)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers do Prisma. A CSP vai no <meta> do index.html (montada no build com a URL do Supabase).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# O service worker precisa ser revalidado a cada visita para o aviso de atualização funcionar
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

@@ -2,7 +2,7 @@
   "name": "repz",
   "private": true,
   "version": "0.0.0",
-  "description": "REPZ · diário de treino. PWA offline para registrar treinos e sugerir cargas.",
+  "description": "Repz · treino, corpo, dieta e coach. PWA offline-first com Supabase.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,7 +14,10 @@
     "test": "vitest run",
     "test:cobertura": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "check:dist": "node scripts/verificar-dist.mjs"
+    "check:dist": "node scripts/verificar-dist.mjs",
+    "test:rls": "vitest run tests/rls",
+    "db:push": "supabase db push --linked",
+    "db:seeds": "node scripts/gerar-seeds.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",

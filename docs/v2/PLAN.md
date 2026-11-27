@@ -46,12 +46,24 @@ V0 Fase 0 ─► V1 Base ─► V2 Sync ─► V3 Treino+ ─► V4 Motor v2 ─
 11. Testes de RLS (`tests/rls/`) com dois usuários de teste; `.env.example`.
 12. CI: lint → typecheck → unit → build → privacidade/bundle → E2E (remoto em memória); keep-alive diário do Supabase.
 
+**Feito no V1 (26-27/11/2026)**
+- Projeto Supabase `repz` (`ltyhmmqdkenhntalegrt`, São Paulo); o `Prisma-restore` foi pausado para liberar a vaga.
+- v1 congelada no Pages (tag `v1.0`, D32); imports do domínio com `.ts` (D35).
+- Preact → React 18.3 (D34, D36); bug de ordem das séries no mesmo segundo corrigido (D50).
+- Design system do Prisma, moldura do mockup, React Router 7 por caminhos (D33); logo provisório (16.4).
+- Esquema completo com RLS, base TACO, RPCs; cadastro fechado (D37); login, Perfil, Sair; banco local por usuário.
+- `remoto/` (Supabase sob demanda e memória para os E2E); CSP e teste de privacidade só com o Supabase (D46, D49).
+- `netlify.toml` (sem deploy) e keep-alive diário (`.github/workflows/diario.yml`, secrets já configurados).
+- Ficam para depois, sem bloquear o V1: Configurações separadas de "Plano e dados" (V2, junto com a tela de
+  sincronização), galeria `/design-system` (quando houver componente próprio), TanStack Query (entra no V2/V7 com
+  os dados online) e a semente de `referencias` (V4, depois de conferir cada citação).
+
 **Aceite**
-- [ ] Todos os E2E da v1 passam no app React (passos de navegação ajustados e listados em `DECISOES.md`, D36).
-- [ ] Login e "Sair" funcionam contra o projeto real.
-- [ ] Testes de RLS verdes: usuário A não lê, não cria nem altera dados de B em nenhuma tabela; `referencias` e alimentos globais são só leitura.
-- [ ] Axe sem violações nos dois temas; JS inicial ≤ 200 KB gzip; Início < 2 s com CPU 4×.
-- [ ] Revisão no celular: shell, tema seguindo o sistema, um treino completo (ainda só local).
+- [x] Todos os E2E da v1 passam no app React (21/21, com o novo de login; só a navegação mudou, D36).
+- [x] Login e "Sair" funcionam contra o projeto real (conferido no navegador com a conta de teste; o E2E usa o remoto em memória).
+- [x] Testes de RLS verdes: 11 testes contra o projeto real (A × B em todas as tabelas, sem delete, base global e referências só leitura, last-write-wins, compartilhar plano).
+- [x] Axe sem violações; JS inicial 151 KB gzip (limite 200); Início < 2 s com CPU 4× (E2E de desempenho).
+- [ ] Revisão no celular (`docs/v2/VALIDACAO.md`, V1): depende do deploy na Netlify e da conta do Thiago.
 
 ---
 
