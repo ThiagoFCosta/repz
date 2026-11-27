@@ -10,6 +10,9 @@ import type {
   CheckinLocal,
   ConfigExercicio,
   Meta,
+  BioLocal,
+  FitaLocal,
+  PesoLocal,
   Plano,
   RegistroSugestao,
   SerieRealizada,
@@ -28,6 +31,9 @@ export class RepzDb extends Dexie {
   sincronia!: EntityTable<MarcaSincronia, 'chave'>;
   checkins!: EntityTable<CheckinLocal, 'data'>;
   sugestoes!: EntityTable<RegistroSugestao, 'id'>;
+  pesos!: EntityTable<PesoLocal, 'id'>;
+  bio!: EntityTable<BioLocal, 'id'>;
+  fita!: EntityTable<FitaLocal, 'id'>;
 
   constructor(nome = NOME_DB) {
     super(nome);
@@ -67,6 +73,8 @@ export class RepzDb extends Dexie {
     this.version(3).stores({ checkins: 'data' });
     // v4 (V4 · motor v2): log de cada sugestão (BRIEFING-v2 8.2, D39)
     this.version(4).stores({ sugestoes: 'id, treinoId' });
+    // v5 (V5 · corpo): peso, bioimpedância e medidas com fita
+    this.version(5).stores({ pesos: 'id, data', bio: 'id, data', fita: 'id, data, local' });
     this.use(middlewareSincronia);
   }
 }

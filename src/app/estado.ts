@@ -8,6 +8,7 @@ import { precisaLembrete } from '../dados/backup';
 import { RepzDb } from '../dados/db';
 import { listarCardio } from '../dados/repos/cardio';
 import { listarCheckins } from '../dados/repos/checkins';
+import { listarBio, listarFita, listarPesos } from '../dados/repos/corpo';
 import { lerConfigs, type MapaConfig } from '../dados/repos/config';
 import { gravarMeta, lerMeta, lerPreferencias } from '../dados/repos/meta';
 import { listarPlanos, planoAtivo as lerPlanoAtivo } from '../dados/repos/planos';
@@ -15,7 +16,10 @@ import { chavesComHistorico, treinoEmAndamento, ultimoConcluido } from '../dados
 import {
   PREFERENCIAS_PADRAO,
   type CardioRealizado,
+  type BioLocal,
   type CheckinLocal,
+  type FitaLocal,
+  type PesoLocal,
   type Persistencia,
   type Plano,
   type Preferencias,
@@ -40,6 +44,10 @@ export const preferencias = signal<Preferencias>(PREFERENCIAS_PADRAO);
 export const cardios = signal<CardioRealizado[]>([]);
 // Esta semana (segunda a domingo) no Início do mockup: treinos concluídos e séries de trabalho
 export const semanaResumo = signal({ treinos: 0, series: 0 });
+// Corpo (V5), em ordem cronológica
+export const pesos = signal<PesoLocal[]>([]);
+export const bios = signal<BioLocal[]>([]);
+export const fitas = signal<FitaLocal[]>([]);
 // Check-ins de prontidão, do mais recente ao mais antigo (V3)
 export const checkins = signal<CheckinLocal[]>([]);
 // Treinos concluídos (lembrete de backup no Início, 9.9)
@@ -82,6 +90,11 @@ export async function recarregar(): Promise<void> {
     db.treinos.where('status').equals('concluido').count(),
   ]);
   checkins.value = await listarCheckins(db);
+  [pesos.value, bios.value, fitas.value] = await Promise.all([
+    listarPesos(db),
+    listarBio(db),
+    listarFita(db),
+  ]);
   const daSemana = await db.treinos
     .where('data')
     .aboveOrEqual(inicioDaSemana(hoje.value))

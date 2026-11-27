@@ -12,6 +12,7 @@ import {
   progressoCardio,
   semanaAtual,
   semanaResumo,
+  pesos,
   treinoAberto,
 } from '../../../app/estado';
 import {
@@ -37,6 +38,8 @@ import { Botao, Cartao, Pilula } from '../../componentes/basicos';
 import { decorrido } from '../treino/formatos';
 import { Button, Card } from '@ds';
 import { FolhaCheckin } from './FolhaCheckin';
+import { mediaMovel7, tendencia } from '../../../dominio/corpo/corpo';
+import { formatarDecimal } from '../../../dominio/numeros';
 
 function saudacao(): string {
   const h = new Date().getHours();
@@ -139,6 +142,8 @@ function CartaoSemana() {
   const plano = planoAtivo.value;
   const s = semanaResumo.value;
   const metaTreinos = plano?.sessoes.length ?? 0;
+  const peso = mediaMovel7(pesos.value, hoje.value);
+  const ritmo = tendencia(pesos.value, hoje.value)?.kgSemana ?? null;
   return (
     <Card title="Esta semana" className="esta-semana">
       <div className="esta-semana-tiles">
@@ -153,6 +158,20 @@ function CartaoSemana() {
           <span className="tile-rotulo">Séries</span>
           <strong className="tile-valor numero">{s.series}</strong>
         </div>
+        {peso != null && (
+          <button type="button" className="tile tile-botao" onClick={() => navegar('corpo')}>
+            <span className="tile-rotulo">Peso (média 7d)</span>
+            <strong className="tile-valor numero">
+              {formatarDecimal(peso)} <span className="tile-meta">kg</span>
+            </strong>
+            {ritmo != null && (
+              <span className="muted pequeno">
+                {ritmo > 0 ? '+' : ritmo < 0 ? '−' : ''}
+                {formatarDecimal(Math.abs(ritmo))} kg/semana
+              </span>
+            )}
+          </button>
+        )}
       </div>
     </Card>
   );

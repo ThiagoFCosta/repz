@@ -9,6 +9,9 @@ export const ORDEM_ENVIO = [
   'sugestoes',
   'series',
   'cardio',
+  'medicoes_peso',
+  'medicoes_bio',
+  'medicoes_fita',
   'preferencias',
 ] as const;
 export type TabelaRemota = (typeof ORDEM_ENVIO)[number];

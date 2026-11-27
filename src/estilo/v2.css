@@ -261,3 +261,162 @@ body,
   text-decoration: underline;
   white-space: nowrap;
 }
+
+/* ---- Corpo (V5) ---- */
+.corpo .pr-card {
+  margin-bottom: var(--space-4);
+}
+
+.corpo-heroi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.corpo-heroi-rotulo,
+.corpo-heroi-info,
+.corpo-heroi-vazio {
+  margin: 0;
+  color: var(--text-on-brand);
+  font-size: var(--text-sm);
+}
+
+.corpo-heroi-valor {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-on-brand);
+}
+
+.corpo-heroi-valor span {
+  font-size: var(--text-xl);
+  font-weight: 500;
+}
+
+.corpo-heroi-acoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.corpo-alerta {
+  background: var(--surface-warning);
+  color: var(--text-warning);
+}
+
+.corpo-alerta p {
+  margin: 0;
+}
+
+.corpo-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.tile-discreto {
+  background: var(--surface-subtle);
+}
+
+.tile-botao {
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.esta-semana-tiles .tile-botao {
+  grid-column: 1 / -1;
+}
+
+.corpo-lembrete {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--surface-brand-soft);
+}
+
+.link-botao {
+  min-height: var(--touch-target);
+  padding: 0 var(--space-1);
+  border: 0;
+  background: transparent;
+  color: var(--text-link);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.corpo-aviso {
+  margin: 0 0 var(--space-2);
+}
+
+.campos-medidas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.linha-opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+}
+
+.linha-opcao input {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.grafico-peso {
+  margin: 0;
+}
+
+.grafico-peso svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grafico-peso-media {
+  stroke: var(--text-primary);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.grafico-peso-ponto {
+  fill: var(--surface-brand);
+  stroke: var(--text-success-strong);
+  stroke-width: 1;
+}
+
+.grafico-peso-legenda {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+}
+
+.legenda-ponto {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--surface-brand);
+}
+
+.legenda-linha {
+  width: 1rem;
+  height: 0.2rem;
+  margin-left: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--text-primary);
+}

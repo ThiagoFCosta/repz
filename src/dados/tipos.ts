@@ -3,6 +3,7 @@
 import type { ISODate, ISODateTime } from '../dominio/datas';
 import type { CardioPrescrito, ExercicioImportado, Fase, Mensagem, Progressao } from '../dominio/tipos';
 import type { EstadoTreino } from '../dominio/treino/maquina';
+import type { MedicaoBio, MedicaoFita, Pesagem } from '../dominio/corpo/corpo';
 export type { RegistroSugestao } from '../dominio/motor/snapshot';
 
 export interface ExercicioPrescrito extends ExercicioImportado {
@@ -79,6 +80,19 @@ export interface CardioRealizado {
   kcalRelogio?: number | null;
   nota?: string | null;
   origem?: 'manual' | 'print';
+}
+
+// Corpo (BRIEFING-v2 9)
+export interface PesoLocal extends Pesagem {
+  id: string;
+  origem: 'manual' | 'print';
+}
+export interface BioLocal extends MedicaoBio {
+  id: string;
+  origem: 'relogio' | 'print' | 'manual';
+}
+export interface FitaLocal extends MedicaoFita {
+  id: string;
 }
 
 // Check-in de prontidão (BRIEFING-v2 7.3): um por dia

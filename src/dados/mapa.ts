@@ -8,7 +8,10 @@ import type { LinhaRemota } from '../remoto/tipos';
 import {
   PREFERENCIAS_PADRAO,
   type CardioRealizado,
+  type BioLocal,
   type CheckinLocal,
+  type FitaLocal,
+  type PesoLocal,
   type RegistroSugestao,
   type ConfigExercicio,
   type Plano,
@@ -18,7 +21,17 @@ import {
 } from './tipos';
 
 export type StoreSync =
-  'planos' | 'treinos' | 'series' | 'cardio' | 'configExercicios' | 'meta' | 'checkins' | 'sugestoes';
+  | 'planos'
+  | 'treinos'
+  | 'series'
+  | 'cardio'
+  | 'configExercicios'
+  | 'meta'
+  | 'checkins'
+  | 'sugestoes'
+  | 'pesos'
+  | 'bio'
+  | 'fita';
 
 // Tabela remota de cada store (em meta, só as preferências viram linha; o plano ativo é planos_treino.ativo)
 export const TABELA_DA_STORE: Record<StoreSync, string> = {
@@ -30,6 +43,9 @@ export const TABELA_DA_STORE: Record<StoreSync, string> = {
   meta: 'preferencias',
   checkins: 'checkins',
   sugestoes: 'sugestoes',
+  pesos: 'medicoes_peso',
+  bio: 'medicoes_bio',
+  fita: 'medicoes_fita',
 };
 
 export const idConfig = (usuarioId: string, chave: string) =>
@@ -151,6 +167,35 @@ export function paraRemoto(store: StoreSync, r: unknown, usuarioId: string, em: 
         desfecho: g.desfecho,
         resultado: g.resultado,
       };
+    }
+    case 'pesos': {
+      const m = r as PesoLocal;
+      return {
+        ...base,
+        id: m.id,
+        data: m.data,
+        hora: m.hora,
+        kg: m.kg,
+        condicao: m.condicao,
+        origem: m.origem,
+      };
+    }
+    case 'bio': {
+      const m = r as BioLocal;
+      return {
+        ...base,
+        id: m.id,
+        data: m.data,
+        gordura_pct: m.gorduraPct,
+        massa_gorda_kg: m.massaGordaKg,
+        musculo_esq_kg: m.musculoEsqKg,
+        agua_pct: m.aguaPct,
+        origem: m.origem,
+      };
+    }
+    case 'fita': {
+      const m = r as FitaLocal;
+      return { ...base, id: m.id, data: m.data, local: m.local, cm: m.cm };
     }
     case 'checkins': {
       const c = r as CheckinLocal;
@@ -292,6 +337,33 @@ export function doRemoto(tabela: string, l: LinhaRemota): RegistroLocal | null {
         criadoEm: local(l.criado_em)!,
       };
       return { store: 'sugestoes', id: g.id, registro: g };
+    }
+    case 'medicoes_peso': {
+      const m: PesoLocal = {
+        id: l.id,
+        data: String(l.data),
+        hora: l.hora ? String(l.hora).slice(0, 5) : null,
+        kg: Number(l.kg),
+        condicao: l.condicao === 'jejum' ? 'jejum' : 'outra',
+        origem: l.origem === 'print' ? 'print' : 'manual',
+      };
+      return { store: 'pesos', id: m.id, registro: m };
+    }
+    case 'medicoes_bio': {
+      const m: BioLocal = {
+        id: l.id,
+        data: String(l.data),
+        gorduraPct: num(l.gordura_pct),
+        massaGordaKg: num(l.massa_gorda_kg),
+        musculoEsqKg: num(l.musculo_esq_kg),
+        aguaPct: num(l.agua_pct),
+        origem: l.origem === 'print' ? 'print' : l.origem === 'manual' ? 'manual' : 'relogio',
+      };
+      return { store: 'bio', id: m.id, registro: m };
+    }
+    case 'medicoes_fita': {
+      const m: FitaLocal = { id: l.id, data: String(l.data), local: String(l.local), cm: Number(l.cm) };
+      return { store: 'fita', id: m.id, registro: m };
     }
     case 'checkins': {
       const c: CheckinLocal = {

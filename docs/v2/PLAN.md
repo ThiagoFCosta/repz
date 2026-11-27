@@ -160,9 +160,19 @@ V0 Fase 0 ─► V1 Base ─► V2 Sync ─► V3 Treino+ ─► V4 Motor v2 ─
 5. Insight "Peso (média 7d)" no Início.
 6. Testes: média e tendência com valores calculados à mão; bordas (pesagens duplicadas no dia, buracos); P5 disparando só com 2 semanas seguidas.
 
+**Feito no V5 (27/11/2026)**
+- `dominio/corpo/`: pesagem por dia, média de 7 dias, tendência por regressão, P5, bioimpedância como tendência,
+  resumo da fita e lembrete de medidas (9 testes com valores calculados à mão). D55.
+- Dexie v5 (pesos, bio, fita) sincronizado com `medicoes_peso`, `medicoes_bio` e `medicoes_fita`.
+- Tela **Corpo** do mockup: herói lime com a média, tendência de 4 semanas, gráfico (pesagens + média), medidas e
+  bioimpedância com aviso de precisão e "Por quê?", alerta P5, lembrete de medidas; registro de peso, fita e bio.
+- Início: tile "Peso (média 7d)" em "Esta semana".
+- E2E do Corpo (média, tendência, fita, bio e sincronização).
+- Fica para o V7: "Print do relógio" (o print vai para o Claude, que grava com confirmação).
+
 **Aceite**
-- [ ] Tendência correta com os dados de teste.
-- [ ] Irmão (sem relógio) vê só peso e fita.
+- [x] Tendência correta com os dados de teste.
+- [x] Sem relógio, só peso e fita (os cards do relógio só aparecem com bioimpedância registrada).
 
 ---
 
