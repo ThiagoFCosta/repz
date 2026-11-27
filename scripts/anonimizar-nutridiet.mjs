@@ -25,9 +25,12 @@ const anonimas = linhas.map((l) => ({
 }));
 
 const texto = anonimas.map((l) => l.texto).join('\n');
-const sobras = [nome, ...(nome ?? '').split(/\s+/).filter((p) => p.length > 3)].filter((p) => p && texto.includes(p));
+const sobras = [nome, ...(nome ?? '').split(/\s+/).filter((p) => p.length > 3)].filter(
+  (p) => p && texto.includes(p),
+);
 if (sobras.length) throw new Error(`Dados pessoais sobraram na fixture: ${sobras.length} trecho(s)`);
-if (/12\/05\/2026|90\.8|169\.0/.test(texto)) throw new Error('Data, peso ou altura originais sobraram na fixture');
+if (/12\/05\/2026|90\.8|169\.0/.test(texto))
+  throw new Error('Data, peso ou altura originais sobraram na fixture');
 
 fs.writeFileSync(saida, JSON.stringify(anonimas, null, 1) + '\n');
 console.log(`${anonimas.length} linhas anonimizadas → ${saida}`);

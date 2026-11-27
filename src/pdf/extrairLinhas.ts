@@ -39,7 +39,7 @@ export function linhasComColunas(itens: ItemTexto[], pagina: number): LinhaPdf[]
       t += pt.s;
       fim = pt.x + pt.w;
     }
-    return { pagina, texto: t.replace(/[  ]+/g, ' ').trim(), x: l.partes[0]!.x };
+    return { pagina, texto: t.replace(/[ \u00a0]+/g, ' ').trim(), x: l.partes[0]!.x };
   });
 }
 
